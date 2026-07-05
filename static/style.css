@@ -1,0 +1,192 @@
+ /* ==============================
+   AI Smart Bug Analyzer
+   ============================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#0d6efd,#6ea8fe);
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+.container{
+
+    width:850px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:15px;
+
+    box-shadow:0px 10px 30px rgba(0,0,0,0.25);
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:#0d6efd;
+
+    margin-bottom:15px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:35px;
+
+    font-size:17px;
+
+}
+
+.card{
+
+    background:#f8f9fa;
+
+    border-left:6px solid #0d6efd;
+
+    padding:20px;
+
+    margin-bottom:25px;
+
+    border-radius:10px;
+
+}
+
+label{
+
+    font-size:18px;
+
+    color:#222;
+
+}
+
+textarea{
+
+    width:100%;
+
+    height:220px;
+
+    margin-top:15px;
+
+    padding:15px;
+
+    border:1px solid #ced4da;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    resize:vertical;
+
+}
+
+textarea:focus{
+
+    outline:none;
+
+    border:2px solid #0d6efd;
+
+}
+
+input[type=file]{
+
+    width:100%;
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border:1px solid #ced4da;
+
+    border-radius:8px;
+
+    background:white;
+
+}
+
+.center{
+
+    text-align:center;
+
+}
+
+button{
+
+    background:#0d6efd;
+
+    color:white;
+
+    font-size:18px;
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+button:hover{
+
+    background:#084298;
+
+    transform:scale(1.03);
+
+}
+
+button:active{
+
+    transform:scale(0.98);
+
+}
+
+@media(max-width:768px){
+
+.container{
+
+    width:100%;
+
+    padding:25px;
+
+}
+
+textarea{
+
+    height:180px;
+
+}
+
+button{
+
+    width:100%;
+
+}
+
+}
