@@ -4,139 +4,330 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AI Smart Bug Analyzer - Result</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+    .bug{
+
+background:#ffffff;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+margin-top:25px;
+
+transition:.3s;
+
+}
+
+.bug:hover{
+
+transform:translateY(-5px);
+
+}
+
+.bug h3{
+
+color:#0d6efd;
+
+margin-bottom:12px;
+
+}
+
+.bug hr{
+
+margin:12px 0;
+
+border:none;
+
+height:2px;
+
+background:#e6e6e6;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
 body{
-    margin:0;
-    padding:0;
-    background:#f4f7fb;
-    font-family:Arial, Helvetica, sans-serif;
+
+background:#eef4fb;
+
 }
 
 .container{
 
-    width:85%;
-    max-width:1100px;
+width:92%;
 
-    margin:40px auto;
+max-width:1200px;
 
-    background:white;
-
-    padding:35px;
-
-    border-radius:12px;
-
-    box-shadow:0px 5px 20px rgba(0,0,0,0.15);
+margin:30px auto;
 
 }
 
-h1{
+.header{
 
-    text-align:center;
-    color:#0d6efd;
+background:linear-gradient(135deg,#0d6efd,#4f8cff);
+
+color:white;
+
+padding:35px;
+
+border-radius:18px;
+
+text-align:center;
+
+box-shadow:0 8px 20px rgba(0,0,0,.15);
 
 }
 
-.subtitle{
+.header h1{
 
-    text-align:center;
-    color:gray;
-    margin-bottom:30px;
+font-size:36px;
+
+margin-bottom:10px;
+
+}
+
+.header p{
+
+font-size:18px;
+
+opacity:.9;
+
+}
+
+.section{
+
+background:white;
+
+margin-top:25px;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+}
+
+.section h2{
+
+color:#0d6efd;
+
+margin-bottom:20px;
+
+}
+
+.summary{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+gap:18px;
+
+}
+
+.summary-card{
+
+background:#f8fbff;
+
+padding:20px;
+
+border-radius:12px;
+
+text-align:center;
+
+box-shadow:0 5px 12px rgba(0,0,0,.10);
+
+transition:.3s;
+
+}
+
+.summary-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.summary-card h3{
+
+color:#0d6efd;
+
+margin-bottom:10px;
+
+}
+
+.summary-card p{
+
+font-size:20px;
+
+font-weight:bold;
 
 }
 
 .card{
 
-    background:#eef4ff;
+background:#f8fbff;
 
-    padding:18px;
+padding:20px;
 
-    border-left:6px solid #0d6efd;
+border-left:6px solid #0d6efd;
 
-    border-radius:8px;
+border-radius:10px;
 
-    margin-bottom:20px;
+}
+
+.badge{
+
+display:inline-block;
+
+padding:6px 14px;
+
+border-radius:20px;
+
+color:white;
+
+font-weight:600;
+
+}
+
+.critical{
+
+background:#dc3545;
+
+}
+
+.major{
+
+background:#fd7e14;
+
+}
+
+.normal{
+
+background:#0d6efd;
+
+}
+
+.minor{
+
+background:#198754;
 
 }
 
 .bug{
 
-    background:#f8f9fa;
+background:white;
 
-    border-left:6px solid #28a745;
+padding:20px;
 
-    padding:20px;
+margin-top:20px;
 
-    margin-top:20px;
+border-radius:12px;
 
-    border-radius:8px;
+box-shadow:0 5px 12px rgba(0,0,0,.12);
 
 }
 
-.fix{
+.progress{
 
-    background:#fff8e6;
+height:14px;
 
-    border-left:6px solid orange;
+background:#ddd;
 
-    padding:20px;
+border-radius:20px;
 
-    border-radius:8px;
+overflow:hidden;
 
-    margin-top:25px;
+margin-top:10px;
 
-    white-space:pre-wrap;
+}
 
-    line-height:1.8;
+.progress-bar{
+
+height:100%;
+
+background:linear-gradient(90deg,#0d6efd,#20c997);
+
+}
+
+.analysis{
+
+background:#fffdf4;
+
+padding:20px;
+
+border-left:6px solid orange;
+
+border-radius:12px;
+
+margin-top:18px;
+
+}
+
+.analysis h3{
+
+color:#0d6efd;
+
+margin-bottom:12px;
+
+}
+
+.analysis ul{
+
+margin-left:22px;
+
+line-height:1.8;
 
 }
 
 .btn{
 
-    display:inline-block;
+display:inline-block;
 
-    margin-top:30px;
+margin-top:30px;
 
-    background:#0d6efd;
+padding:14px 25px;
 
-    color:white;
+background:#0d6efd;
 
-    padding:12px 22px;
+color:white;
 
-    text-decoration:none;
+text-decoration:none;
 
-    border-radius:6px;
+border-radius:10px;
+
+font-weight:600;
 
 }
 
 .btn:hover{
 
-    background:#084298;
+background:#084298;
 
 }
 
-.red{
-    color:red;
-    font-weight:bold;
-}
+.footer{
 
-.orange{
-    color:orange;
-    font-weight:bold;
-}
+text-align:center;
 
-.blue{
-    color:#0d6efd;
-    font-weight:bold;
-}
+margin-top:40px;
 
-.green{
-    color:green;
-    font-weight:bold;
+color:gray;
+
 }
 
 </style>
@@ -147,31 +338,102 @@ h1{
 
 <div class="container">
 
-<h1>🤖 AI Smart Bug Analyzer & Fix Advisor</h1>
+<div class="header">
 
-<p class="subtitle">
+<h1>🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor</h1>
 
-Powered by FAISS + Sentence Transformers + Gemini AI
+<p>
+
+Retrieval-Augmented Bug Analysis using FAISS + Sentence Transformers
 
 </p>
 
-<h2>Your Submitted Bug</h2>
+</div>
+<!-- ==========================================================
+     Bug Analysis Summary
+=========================================================== -->
 
-<div class="card">
+<div class="section">
 
-<p><b>🆔 Bug ID:</b> {{ bug_id }}</p>
+<h2>📊 Bug Analysis Summary</h2>
 
-<p><b>📄 Bug Report:</b></p>
+<div class="summary">
 
-<p>{{ user_bug }}</p>
+<div class="summary-card">
+<h3>🗂 Bug Category</h3>
+<p>{{ bug_category }}</p>
+</div>
 
-<p><b>📁 Uploaded File:</b> {{ filename }}</p>
+<div class="summary-card">
+<h3>⚠ Severity</h3>
+<p>{{ similar_bugs[0].severity }}</p>
+</div>
 
-<p><b>🕒 Submitted On:</b> {{ submission_date }}</p>
+<div class="summary-card">
+<h3>🔥 Priority</h3>
+<p>{{ priority }}</p>
+</div>
+
+<div class="summary-card">
+<h3>🎯 Confidence</h3>
+<p>{{ confidence }}</p>
+</div>
+
+<div class="summary-card">
+<h3>📈 Similarity</h3>
+<p>{{ similar_bugs[0].score }}%</p>
+</div>
+
+<div class="summary-card">
+<h3>🤖 AI Engine</h3>
+<p>Offline AI</p>
+</div>
 
 </div>
 
-<h2>Top 5 Similar Bugs</h2>
+</div>
+
+<!-- ==========================================================
+     Submitted Bug Report
+=========================================================== -->
+
+<div class="section">
+
+<h2>📝 Submitted Bug Report</h2>
+
+<div class="card">
+
+<p><strong>🆔 Bug ID :</strong> {{ bug_id }}</p>
+
+<br>
+
+<p><strong>📄 Bug Description</strong></p>
+
+<p>{{ user_bug }}</p>
+
+<br>
+
+<p><strong>📁 Uploaded File :</strong>
+{{ filename if filename else "No file uploaded" }}
+</p>
+
+<br>
+
+<p><strong>🕒 Submitted On :</strong>
+{{ submission_date }}
+</p>
+
+</div>
+
+</div>
+
+<!-- ==========================================================
+     Top Similar Bugs
+=========================================================== -->
+
+<div class="section">
+
+<h2>🔍 Top 5 Similar Bugs Retrieved using FAISS</h2>
 
 {% for bug in similar_bugs %}
 
@@ -179,45 +441,45 @@ Powered by FAISS + Sentence Transformers + Gemini AI
 
 <h3>🐞 Similar Bug {{ loop.index }}</h3>
 
-<p>
+<hr>
 
-<b>📄 Description</b>
+<p><strong>Description</strong></p>
 
-</p>
+<p style="min-height:90px;">
 
-<p>
-
-{{ bug.description }}
+{{ bug.description[:220] }}...
 
 </p>
 
 <p>
 
-<b>⚠ Severity:</b>
+<strong>Severity :</strong>
 
-{% if bug.severity|lower == "critical" %}
+{% if bug.severity|lower=="critical" %}
 
-<span class="red">{{ bug.severity }}</span>
+<span class="badge critical">{{ bug.severity }}</span>
 
-{% elif bug.severity|lower == "major" %}
+{% elif bug.severity|lower=="major" %}
 
-<span class="orange">{{ bug.severity }}</span>
+<span class="badge major">{{ bug.severity }}</span>
 
-{% elif bug.severity|lower == "normal" %}
+{% elif bug.severity|lower=="normal" %}
 
-<span class="blue">{{ bug.severity }}</span>
+<span class="badge normal">{{ bug.severity }}</span>
 
 {% else %}
 
-<span class="green">{{ bug.severity }}</span>
+<span class="badge minor">{{ bug.severity }}</span>
 
 {% endif %}
 
 </p>
 
+<br>
+
 <p>
 
-<b>📊 Similarity Score:</b>
+<strong>Similarity Score :</strong>
 
 {{ bug.score }} %
 
@@ -227,19 +489,161 @@ Powered by FAISS + Sentence Transformers + Gemini AI
 
 {% endfor %}
 
-<h2>🤖 AI Suggested Fix</h2>
+</div>
+<!-- ==========================================================
+     AI Smart Fix Advisor
+=========================================================== -->
 
-<div class="fix">
+<div class="section">
 
-{{ ai_fix }}
+<h2>🤖 AI Smart Fix Advisor</h2>
+
+<div class="analysis">
+
+<h3>🗂 Root Cause Analysis</h3>
+
+<ul>
+
+{% for item in ai_fix.root_cause %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
 
 </div>
 
+<div class="analysis">
+
+<h3>📈 Impact Analysis</h3>
+
+<ul>
+
+{% for item in ai_fix.impact %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div class="analysis">
+
+<h3>🛠 Recommended Fix</h3>
+
+<ul>
+
+{% for item in ai_fix.recommended_fix %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div class="analysis">
+
+<h3>🧪 Testing Checklist</h3>
+
+<ul>
+
+{% for item in ai_fix.testing %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div class="analysis">
+
+<h3>🛡 Prevention Tips</h3>
+
+<ul>
+
+{% for item in ai_fix.prevention %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- ==========================================================
+     Analyze Again Button
+=========================================================== -->
+
+<div style="text-align:center;">
+
 <a href="/" class="btn">
 
-⬅ Submit Another Bug
+🔄 Analyze Another Bug
 
 </a>
+
+</div>
+
+<!-- ==========================================================
+     Footer
+=========================================================== -->
+
+<div class="footer">
+
+<hr style="margin-top:40px;margin-bottom:20px;">
+
+<h3 style="color:#0d6efd;">
+
+🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor
+
+</h3>
+
+<br>
+
+<p>
+
+Built using <b>Flask</b> •
+<b>Sentence Transformers</b> •
+<b>FAISS</b> •
+<b>RAG (Retrieval-Augmented Generation)</b>
+
+</p>
+
+<br>
+
+<p>
+
+Offline AI Recommendation Engine
+
+</p>
+
+<br>
+
+<p>
+
+Mozilla Bug Dataset
+
+</p>
+
+<br>
+
+<p>
+
+© 2026 AI Smart Bug Analyzer. All Rights Reserved.
+
+</p>
+
+</div>
 
 </div>
 

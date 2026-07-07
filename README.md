@@ -1,91 +1,35 @@
-# 🤖 AI Smart Bug Analyzer & Fix Advisor
+# 🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor
 
 ## 📌 Project Overview
 
-AI Smart Bug Analyzer & Fix Advisor is an AI-powered web application that helps developers analyze software bug reports. It uses Retrieval-Augmented Generation (RAG) by combining Sentence Transformers, FAISS Vector Database, and Google Gemini AI to retrieve similar historical bugs and generate intelligent fix suggestions.
+AI Smart Bug Analyzer & Intelligent Fix Advisor is a Retrieval-Augmented Generation (RAG)-based web application that assists software developers in analyzing software bugs. The system retrieves similar historical bugs from the Mozilla Bug Dataset using FAISS vector search and generates intelligent offline fix recommendations without requiring any external API.
 
 ---
 
 ## 🚀 Features
 
-- 📝 Submit software bug reports
-- 📂 Upload bug report files (.txt, .log, .pdf)
-- 📊 Store submitted bugs in CSV format
-- 🧹 Clean Mozilla Bug Dataset
-- 🔍 Find Top 5 Similar Bugs using FAISS
-- 🤖 Generate AI-powered fix suggestions using Gemini AI
-- 🌐 User-friendly Flask web interface
-- ⚡ Retrieval-Augmented Generation (RAG) implementation
+- Submit software bug reports
+- Upload screenshots or log files
+- Store bug reports in CSV
+- Semantic search using Sentence Transformers
+- FAISS Vector Database for similarity search
+- Retrieve Top 3 Similar Bugs
+- Bug Category Prediction
+- Priority Prediction
+- Confidence Score
+- Offline AI Smart Fix Advisor
+- Root Cause Analysis
+- Impact Analysis
+- Recommended Fixes
+- Testing Checklist
+- Prevention Tips
+- Attractive Result Dashboard
 
 ---
 
-## 🛠️ Technologies Used
-
-- Python
-- Flask
-- HTML5
-- CSS3
-- JavaScript
-- Pandas
-- NumPy
-- Sentence Transformers
-- FAISS
-- Google Gemini AI
-- Git
-- GitHub
-
----
-
-## 🧠 AI Workflow
-
-1. User submits a bug report.
-2. Flask receives the request.
-3. The bug report is converted into embeddings using Sentence Transformers.
-4. FAISS retrieves the Top 5 similar bug reports.
-5. Retrieved bugs are sent to Gemini AI.
-6. Gemini generates intelligent fix suggestions.
-7. Results are displayed on the web page.
-
----
-
-## 📂 Project Structure
-
-```text
-AI-Smart-Bug-Analyzer/
-│
-├── dataset/
-│   └── mozilla/
-│       ├── mozilla_bugs.csv
-│       ├── clean_mozilla.csv
-│       └── bug_index.faiss
-│
-├── docs/
-│
-├── static/
-│   ├── style.css
-│   └── script.js
-│
-├── templates/
-│   ├── index.html
-│   └── result.html
-│
-├── uploads/
-│
-├── app.py
-├── preprocess.py
-├── build_vector_db.py
-├── search_bug.py
-├── bug_reports.csv
-├── requirements.txt
-└── README.md
-```
-
----
-
-## 🔄 System Architecture
+## 🏗️ System Architecture
 
 User
-
 ↓
 
 Flask Web Application
@@ -100,62 +44,135 @@ FAISS Vector Database
 
 ↓
 
-Top 5 Similar Bugs Retrieved
+Mozilla Bug Dataset
 
 ↓
 
-Gemini AI
+Offline AI Recommendation Engine
 
 ↓
 
-AI Suggested Fix
-
-↓
-
-Result Page
+Result Dashboard
 
 ---
 
-## 📊 Dataset
+## 🔄 Workflow
 
-- Mozilla Bug Reports Dataset
-- Cleaned using Pandas
-- Bug Descriptions
-- Severity Levels
+1. User enters a bug description.
+2. User optionally uploads a screenshot or log file.
+3. Bug report is stored in CSV.
+4. Sentence Transformer converts the bug report into vector embeddings.
+5. FAISS retrieves the Top 3 most similar bugs.
+6. Offline AI engine generates:
+   - Bug Category
+   - Priority
+   - Confidence
+   - Root Cause Analysis
+   - Impact Analysis
+   - Recommended Fix
+   - Testing Checklist
+   - Prevention Tips
+7. Results are displayed on the dashboard.
 
 ---
 
-## 🧠 RAG Pipeline
+## 💻 Technologies Used
 
-- User Query
-- Sentence Transformer Embedding
-- FAISS Similarity Search
-- Retrieve Relevant Bugs
-- Gemini AI Response Generation
+- Python 3.11
+- Flask
+- HTML
+- CSS
+- FAISS
+- Sentence Transformers
+- Pandas
+- NumPy
+- Mozilla Bug Dataset
 
 ---
 
-## ▶️ Installation
+## 📂 Project Structure
+
+AI-Smart-Bug-Analyzer
+
+│
+
+├── app.py
+
+├── requirements.txt
+
+├── bug_reports.csv
+
+├── preprocess.py
+
+├── build_vector_db.py
+
+├── search_bug.py
+
+│
+
+├── dataset/
+
+│ └── mozilla/
+
+│ ├── clean_mozilla.csv
+
+│ ├── mozilla_bugs.csv
+
+│ └── bug_index.faiss
+
+│
+
+├── templates/
+
+│ ├── index.html
+
+│ └── result.html
+
+│
+
+├── uploads/
+
+│
+
+└── README.md
+
+---
+
+## ⚙️ Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/vyshnavipolavarapuu/AI-Smart-Bug-Analyzer.git
+git clone https://github.com/YOUR_USERNAME/AI-Smart-Bug-Analyzer.git
 ```
 
-Open the project
+Move into the project
 
 ```bash
 cd AI-Smart-Bug-Analyzer
 ```
 
-Install dependencies
+Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install packages
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application
+Run
 
 ```bash
 python app.py
@@ -169,48 +186,31 @@ http://127.0.0.1:5000
 
 ---
 
-## 📷 Screenshots
+## 📸 Output
 
-### Home Page
+The application displays
 
-(Add screenshot here)
-
-### Result Page
-
-(Add screenshot here)
-
-### AI Suggested Fix
-
-(Add screenshot here)
+- Bug Category
+- Severity
+- Priority
+- Confidence Score
+- Top 3 Similar Bugs
+- Root Cause Analysis
+- Impact Analysis
+- Recommended Fix
+- Testing Checklist
+- Prevention Tips
 
 ---
 
-## 🎯 Future Enhancements
+## 📌 Future Scope
 
 - User Authentication
-- Bug Severity Prediction
-- Bug Classification
+- Bug Tracking Dashboard
+- Admin Panel
+- Email Notifications
 - PDF Report Generation
-- Dashboard Analytics
 - Cloud Deployment
-- Database Integration
+- Machine Learning-based Bug Classification
 
 ---
-
-## 👩‍💻 Developer
-
-**Vyshnavi Polavarapu**
-
-B.Tech CSE (AI & ML)
-
-AI Smart Bug Analyzer & Fix Advisor
-
----
-
-## ⭐ Acknowledgements
-
-- Mozilla Bug Dataset
-- Sentence Transformers
-- FAISS
-- Google Gemini AI
-- Flask
