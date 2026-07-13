@@ -754,7 +754,7 @@ def submit():
 
         query_embedding,
 
-        5
+        3
 
     )
 
