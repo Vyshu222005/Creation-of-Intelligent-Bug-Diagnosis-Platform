@@ -7,51 +7,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Smart Bug Analyzer - Result</title>
+<title>AI Smart Bug Analyzer Result</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    .bug{
-
-background:#ffffff;
-
-padding:25px;
-
-border-radius:15px;
-
-box-shadow:0 8px 20px rgba(0,0,0,.12);
-
-margin-top:25px;
-
-transition:.3s;
-
-}
-
-.bug:hover{
-
-transform:translateY(-5px);
-
-}
-
-.bug h3{
-
-color:#0d6efd;
-
-margin-bottom:12px;
-
-}
-
-.bug hr{
-
-margin:12px 0;
-
-border:none;
-
-height:2px;
-
-background:#e6e6e6;
-}
 
 *{
 margin:0;
@@ -62,131 +22,85 @@ font-family:'Poppins',sans-serif;
 
 body{
 
-background:#eef4fb;
+background:#f4f7fb;
+padding:30px;
 
 }
 
 .container{
 
-width:92%;
-
 max-width:1200px;
-
-margin:30px auto;
-
-}
-
-.header{
-
-background:linear-gradient(135deg,#0d6efd,#4f8cff);
-
-color:white;
-
-padding:35px;
-
-border-radius:18px;
-
-text-align:center;
-
-box-shadow:0 8px 20px rgba(0,0,0,.15);
-
-}
-
-.header h1{
-
-font-size:36px;
-
-margin-bottom:10px;
-
-}
-
-.header p{
-
-font-size:18px;
-
-opacity:.9;
-
-}
-
-.section{
-
-background:white;
-
-margin-top:25px;
-
-padding:25px;
-
-border-radius:15px;
-
-box-shadow:0 5px 15px rgba(0,0,0,.12);
-
-}
-
-.section h2{
-
-color:#0d6efd;
-
-margin-bottom:20px;
-
-}
-
-.summary{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-
-gap:18px;
-
-}
-
-.summary-card{
-
-background:#f8fbff;
-
-padding:20px;
-
-border-radius:12px;
-
-text-align:center;
-
-box-shadow:0 5px 12px rgba(0,0,0,.10);
-
-transition:.3s;
-
-}
-
-.summary-card:hover{
-
-transform:translateY(-5px);
-
-}
-
-.summary-card h3{
-
-color:#0d6efd;
-
-margin-bottom:10px;
-
-}
-
-.summary-card p{
-
-font-size:20px;
-
-font-weight:bold;
+margin:auto;
 
 }
 
 .card{
 
-background:#f8fbff;
+background:white;
 
-padding:20px;
+border-radius:12px;
 
-border-left:6px solid #0d6efd;
+padding:25px;
+
+margin-bottom:25px;
+
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+h1{
+
+text-align:center;
+
+color:#1e3a8a;
+
+margin-bottom:25px;
+
+}
+
+h2{
+
+color:#2563eb;
+
+margin-bottom:15px;
+
+}
+
+h3{
+
+color:#0f172a;
+
+margin-top:15px;
+
+margin-bottom:10px;
+
+}
+
+.info-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:15px;
+
+}
+
+.info-item{
+
+background:#eef4ff;
+
+padding:15px;
 
 border-radius:10px;
+
+}
+
+.label{
+
+font-weight:bold;
+
+color:#1e40af;
 
 }
 
@@ -194,129 +108,107 @@ border-radius:10px;
 
 display:inline-block;
 
-padding:6px 14px;
+padding:6px 12px;
 
 border-radius:20px;
 
-color:white;
+font-size:14px;
 
 font-weight:600;
 
-}
-
-.critical{
-
-background:#dc3545;
+color:white;
 
 }
 
-.major{
+.high{
 
-background:#fd7e14;
-
-}
-
-.normal{
-
-background:#0d6efd;
+background:#dc2626;
 
 }
 
-.minor{
+.medium{
 
-background:#198754;
+background:#f59e0b;
 
 }
 
-.bug{
+.low{
 
-background:white;
+background:#16a34a;
 
-padding:20px;
+}
 
-margin-top:20px;
+table{
 
-border-radius:12px;
+width:100%;
 
-box-shadow:0 5px 12px rgba(0,0,0,.12);
+border-collapse:collapse;
+
+margin-top:15px;
+
+}
+
+table th{
+
+background:#2563eb;
+
+color:white;
+
+padding:12px;
+
+}
+
+table td{
+
+padding:12px;
+
+border:1px solid #ddd;
+
+vertical-align:top;
 
 }
 
 .progress{
 
-height:14px;
+width:100%;
 
 background:#ddd;
 
-border-radius:20px;
+border-radius:30px;
 
 overflow:hidden;
 
-margin-top:10px;
+height:18px;
+
+margin-top:8px;
 
 }
 
 .progress-bar{
 
-height:100%;
+height:18px;
 
-background:linear-gradient(90deg,#0d6efd,#20c997);
+background:#22c55e;
 
-}
-
-.analysis{
-
-background:#fffdf4;
-
-padding:20px;
-
-border-left:6px solid orange;
-
-border-radius:12px;
-
-margin-top:18px;
-
-}
-
-.analysis h3{
-
-color:#0d6efd;
-
-margin-bottom:12px;
-
-}
-
-.analysis ul{
-
-margin-left:22px;
-
-line-height:1.8;
-
-}
-
-.btn{
-
-display:inline-block;
-
-margin-top:30px;
-
-padding:14px 25px;
-
-background:#0d6efd;
+text-align:center;
 
 color:white;
 
-text-decoration:none;
+font-size:12px;
 
-border-radius:10px;
-
-font-weight:600;
+line-height:18px;
 
 }
 
-.btn:hover{
+ul{
 
-background:#084298;
+padding-left:20px;
+
+}
+
+li{
+
+margin-bottom:6px;
 
 }
 
@@ -326,7 +218,45 @@ text-align:center;
 
 margin-top:40px;
 
-color:gray;
+font-size:14px;
+
+color:#555;
+
+}
+
+.btn{
+
+display:inline-block;
+
+margin-top:25px;
+
+padding:12px 25px;
+
+background:#2563eb;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:8px;
+
+font-weight:600;
+
+}
+
+.btn:hover{
+
+background:#1d4ed8;
+
+}
+
+.section-title{
+
+border-left:6px solid #2563eb;
+
+padding-left:12px;
+
+margin-bottom:18px;
 
 }
 
@@ -338,311 +268,387 @@ color:gray;
 
 <div class="container">
 
-<div class="header">
-
-<h1>🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor</h1>
-
-<p>
-
-Retrieval-Augmented Bug Analysis using FAISS + Sentence Transformers
-
-</p>
-
-</div>
-<!-- ==========================================================
-     Bug Analysis Summary
-=========================================================== -->
-
-<div class="section">
-
-<h2>📊 Bug Analysis Summary</h2>
-
-<div class="summary">
-
-<div class="summary-card">
-<h3>🗂 Bug Category</h3>
-<p>{{ bug_category }}</p>
-</div>
-
-<div class="summary-card">
-<h3>⚠ Severity</h3>
-<p>{{ similar_bugs[0].severity }}</p>
-</div>
-
-<div class="summary-card">
-<h3>🔥 Priority</h3>
-<p>{{ priority }}</p>
-</div>
-
-<div class="summary-card">
-<h3>🎯 Confidence</h3>
-<p>{{ confidence }}</p>
-</div>
-
-<div class="summary-card">
-<h3>📈 Similarity</h3>
-<p>{{ similar_bugs[0].score }}%</p>
-</div>
-
-<div class="summary-card">
-<h3>🤖 AI Engine</h3>
-<p>Offline AI</p>
-</div>
-
-</div>
-
-</div>
-
-<!-- ==========================================================
-     Submitted Bug Report
-=========================================================== -->
-
-<div class="section">
-
-<h2>📝 Submitted Bug Report</h2>
+<h1>🤖 AI Smart Bug Analyzer & Intelligent Fix Advisor</h1>
+<!-- ========================================================= -->
+<!-- Bug Analysis Summary -->
+<!-- ========================================================= -->
 
 <div class="card">
 
-<p><strong>🆔 Bug ID :</strong> {{ bug_id }}</p>
+    <h2 class="section-title">📋 Bug Analysis Summary</h2>
 
-<br>
+    <div class="info-grid">
 
-<p><strong>📄 Bug Description</strong></p>
+        <div class="info-item">
+            <div class="label">Bug ID</div>
+            <div>{{ bug_id }}</div>
+        </div>
 
-<p>{{ user_bug }}</p>
+        <div class="info-item">
+            <div class="label">Submission Date</div>
+            <div>{{ submission_date }}</div>
+        </div>
 
-<br>
+        <div class="info-item">
+            <div class="label">Uploaded File</div>
+            <div>
+                {% if filename %}
+                    {{ filename }}
+                {% else %}
+                    No file uploaded
+                {% endif %}
+            </div>
+        </div>
 
-<p><strong>📁 Uploaded File :</strong>
-{{ filename if filename else "No file uploaded" }}
-</p>
+        <div class="info-item">
+            <div class="label">AI Category</div>
+            <div>{{ bug_category }}</div>
+        </div>
 
-<br>
+        <div class="info-item">
+            <div class="label">Priority</div>
 
-<p><strong>🕒 Submitted On :</strong>
-{{ submission_date }}
-</p>
+            {% if priority=="High" %}
+                <span class="badge high">{{ priority }}</span>
 
-</div>
+            {% elif priority=="Medium" %}
+                <span class="badge medium">{{ priority }}</span>
 
-</div>
+            {% else %}
+                <span class="badge low">{{ priority }}</span>
 
-<!-- ==========================================================
-     Top Similar Bugs
-=========================================================== -->
+            {% endif %}
+        </div>
 
-<div class="section">
+        <div class="info-item">
+            <div class="label">Similarity Confidence</div>
+            <div>{{ confidence }}</div>
+        </div>
 
-<h2>🔍 Top 5 Similar Bugs Retrieved using FAISS</h2>
-
-{% for bug in similar_bugs %}
-
-<div class="bug">
-
-<h3>🐞 Similar Bug {{ loop.index }}</h3>
-
-<hr>
-
-<p><strong>Description</strong></p>
-
-<p style="min-height:90px;">
-
-{{ bug.description[:220] }}...
-
-</p>
-
-<p>
-
-<strong>Severity :</strong>
-
-{% if bug.severity|lower=="critical" %}
-
-<span class="badge critical">{{ bug.severity }}</span>
-
-{% elif bug.severity|lower=="major" %}
-
-<span class="badge major">{{ bug.severity }}</span>
-
-{% elif bug.severity|lower=="normal" %}
-
-<span class="badge normal">{{ bug.severity }}</span>
-
-{% else %}
-
-<span class="badge minor">{{ bug.severity }}</span>
-
-{% endif %}
-
-</p>
-
-<br>
-
-<p>
-
-<strong>Similarity Score :</strong>
-
-{{ bug.score }} %
-
-</p>
+    </div>
 
 </div>
 
-{% endfor %}
 
-</div>
-<!-- ==========================================================
-     AI Smart Fix Advisor
-=========================================================== -->
+<!-- ========================================================= -->
+<!-- Submitted Bug Report -->
+<!-- ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-<h2>🤖 AI Smart Fix Advisor</h2>
+    <h2 class="section-title">📝 Submitted Bug Report</h2>
 
-<div class="analysis">
-
-<h3>🗂 Root Cause Analysis</h3>
-
-<ul>
-
-{% for item in ai_fix.root_cause %}
-
-<li>{{ item }}</li>
-
-{% endfor %}
-
-</ul>
+    <p>{{ user_bug }}</p>
 
 </div>
 
-<div class="analysis">
 
-<h3>📈 Impact Analysis</h3>
+<!-- ========================================================= -->
+<!-- Triage Agent -->
+<!-- ========================================================= -->
 
-<ul>
+<div class="card">
 
-{% for item in ai_fix.impact %}
+    <h2 class="section-title">🤖 Triage Agent</h2>
 
-<li>{{ item }}</li>
+    <table>
 
-{% endfor %}
+        <tr>
 
-</ul>
+            <th>Field</th>
+
+            <th>Prediction</th>
+
+        </tr>
+
+        <tr>
+
+            <td><b>Severity</b></td>
+
+            <td>{{ triage.severity }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><b>Priority</b></td>
+
+            <td>{{ triage.priority }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><b>Affected Component</b></td>
+
+            <td>{{ triage.component }}</td>
+
+        </tr>
+
+        <tr>
+
+            <td><b>Confidence Score</b></td>
+
+            <td>{{ triage.confidence }}%</td>
+
+        </tr>
+
+        <tr>
+
+            <td><b>Reasoning</b></td>
+
+            <td>{{ triage.reasoning }}</td>
+
+        </tr>
+
+    </table>
+
+</div>
+<!-- ========================================================= -->
+<!-- Log Analysis Agent -->
+<!-- ========================================================= -->
+
+<div class="card">
+
+    <h2 class="section-title">📄 Log Analysis Agent</h2>
+
+    <table>
+
+        <tr>
+            <th>Analysis</th>
+            <th>Result</th>
+        </tr>
+
+        <tr>
+            <td><b>Exception Type</b></td>
+            <td>{{ log_analysis.exception_type }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Failure Point</b></td>
+            <td>{{ log_analysis.failure_point }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Line Number</b></td>
+            <td>{{ log_analysis.line_number }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Code Path</b></td>
+            <td>{{ log_analysis.code_path }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Error Message</b></td>
+            <td>{{ log_analysis.error_message }}</td>
+        </tr>
+
+    </table>
 
 </div>
 
-<div class="analysis">
 
-<h3>🛠 Recommended Fix</h3>
+<!-- ========================================================= -->
+<!-- Similar Historical Bugs -->
+<!-- ========================================================= -->
 
-<ul>
+<div class="card">
 
-{% for item in ai_fix.recommended_fix %}
+    <h2 class="section-title">🔍 Similar Historical Bugs</h2>
 
-<li>{{ item }}</li>
+    {% if similar_bugs %}
 
-{% endfor %}
+    <table>
 
-</ul>
+        <tr>
+
+            <th>Description</th>
+
+            <th>Severity</th>
+
+            <th>Similarity</th>
+
+        </tr>
+
+        {% for bug in similar_bugs %}
+
+        <tr>
+
+            <td>
+
+                {{ bug.description }}
+
+            </td>
+
+            <td>
+
+                {{ bug.severity }}
+
+            </td>
+
+            <td>
+
+                <strong>{{ bug.score }}%</strong>
+                <div class="progress">
+                <div class="progress-bar"
+                style="width: {{ bug.score }}%">
+                {{ bug.score }}%
+               </div>
+               </div>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <p>No similar historical bugs found.</p>
+
+    {% endif %}
+
+</div>
+<!-- ========================================================= -->
+<!-- AI Smart Fix Advisor -->
+<!-- ========================================================= -->
+
+<div class="card">
+
+    <h2 class="section-title">🧠 AI Smart Fix Advisor</h2>
+
+    <div class="info-grid">
+
+        <div class="info-item">
+
+            <div class="label">Bug Category</div>
+
+            <div>{{ ai_fix.category }}</div>
+
+        </div>
+
+        <div class="info-item">
+
+            <div class="label">Priority</div>
+
+            {% if ai_fix.priority == "High" %}
+                <span class="badge high">{{ ai_fix.priority }}</span>
+
+            {% elif ai_fix.priority == "Medium" %}
+                <span class="badge medium">{{ ai_fix.priority }}</span>
+
+            {% else %}
+                <span class="badge low">{{ ai_fix.priority }}</span>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <hr style="margin:20px 0;">
+
+    <h3>🔍 Root Cause Analysis</h3>
+
+    <ul>
+
+        {% for item in ai_fix.root_cause %}
+
+        <li>{{ item }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <h3>⚠️ Impact</h3>
+
+    <ul>
+
+        {% for item in ai_fix.impact %}
+
+        <li>{{ item }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <h3>🛠 Recommended Fix</h3>
+
+    <ul>
+
+        {% for item in ai_fix.recommended_fix %}
+
+        <li>{{ item }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <h3>🧪 Testing Recommendations</h3>
+
+    <ul>
+
+        {% for item in ai_fix.testing %}
+
+        <li>{{ item }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    <h3>🛡 Prevention</h3>
+
+    <ul>
+
+        {% for item in ai_fix.prevention %}
+
+        <li>{{ item }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+<!-- ========================================================= -->
+<!-- Analyze Another Bug Button -->
+<!-- ========================================================= -->
+
+<div style="text-align:center; margin:30px 0;">
+
+    <a href="/" class="btn">
+
+        🔄 Analyze Another Bug
+
+    </a>
 
 </div>
 
-<div class="analysis">
-
-<h3>🧪 Testing Checklist</h3>
-
-<ul>
-
-{% for item in ai_fix.testing %}
-
-<li>{{ item }}</li>
-
-{% endfor %}
-
-</ul>
-
-</div>
-
-<div class="analysis">
-
-<h3>🛡 Prevention Tips</h3>
-
-<ul>
-
-{% for item in ai_fix.prevention %}
-
-<li>{{ item }}</li>
-
-{% endfor %}
-
-</ul>
-
-</div>
-
-</div>
-
-<!-- ==========================================================
-     Analyze Again Button
-=========================================================== -->
-
-<div style="text-align:center;">
-
-<a href="/" class="btn">
-
-🔄 Analyze Another Bug
-
-</a>
-
-</div>
-
-<!-- ==========================================================
-     Footer
-=========================================================== -->
+    <!-- ========================================================= -->
+<!-- Footer -->
+<!-- ========================================================= -->
 
 <div class="footer">
 
-<hr style="margin-top:40px;margin-bottom:20px;">
+    <hr style="margin-bottom:15px;">
 
-<h3 style="color:#0d6efd;">
+    <p>
 
-🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor
+        <strong>AI Smart Bug Analyzer & Intelligent Fix Advisor</strong>
 
-</h3>
+    </p>
 
-<br>
+    <p>
 
-<p>
+        <p>Infosys Springboard Internship | Milestone 2</p>
 
-Built using <b>Flask</b> •
-<b>Sentence Transformers</b> •
-<b>FAISS</b> •
-<b>RAG (Retrieval-Augmented Generation)</b>
+    </p>
 
-</p>
-
-<br>
-
-<p>
-
-Offline AI Recommendation Engine
-
-</p>
-
-<br>
-
-<p>
-
-Mozilla Bug Dataset
-
-</p>
-
-<br>
-
-<p>
-
-© 2026 AI Smart Bug Analyzer. All Rights Reserved.
-
-</p>
-
+   
 </div>
 
 </div>

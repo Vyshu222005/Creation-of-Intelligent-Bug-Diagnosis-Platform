@@ -24,3 +24,75 @@ application crashes",WhatsApp Image 2026-07-06 at 7.53.06 PM.jpeg,06-07-2026 09:
 ","ChatGPT Image Jul 9, 2026, 10_25_25 PM.png",10-07-2026 06:11 PM
 24,"
 Aplication crashes when user try to login",,10-07-2026 07:15 PM
+26,"
+login page crashes after creating the wrong password three times.",,13-07-2026 05:08 PM
+28,"
+file upload failed ",,13-07-2026 05:09 PM
+30,"Login page crashes after entering the wrong password three times.
+
+NullPointerException at LoginService.java line 45",,13-07-2026 06:20 PM
+33,"
+",,17-07-2026 06:23 PM
+35,"
+",,17-07-2026 06:23 PM
+37,"
+",,17-07-2026 06:24 PM
+39,email,,17-07-2026 06:35 PM
+40,email,,17-07-2026 07:16 PM
+41,email,,17-07-2026 07:16 PM
+42,"Application crashes while uploading a PDF.
+
+Traceback (most recent call last):
+File ""app.py"", line 45
+ValueError: Invalid file format",,17-07-2026 07:16 PM
+47,"Application crashes after clicking Login.
+
+Traceback (most recent call last):
+File ""login.py"", line 55
+ValueError",,17-07-2026 07:32 PM
+52,,THRIVENI.pdf,17-07-2026 07:51 PM
+53,,THRIVENI.pdf,17-07-2026 08:09 PM
+54,"Login page throws AttributeError: 'NoneType' object has no attribute 'username'
+Stack Trace:
+Traceback (most recent call last):
+File ""login.py"", line 52
+AttributeError: 'NoneType' object has no attribute 'username'",,17-07-2026 08:12 PM
+59,"Login page throws AttributeError: 'NoneType' object has no attribute 'username'
+Stack Trace:
+Traceback (most recent call last):
+File ""login.py"", line 52
+AttributeError: 'NoneType' object has no attribute 'username'",,17-07-2026 08:25 PM
+64,"Login page throws AttributeError: 'NoneType' object has no attribute 'username'
+
+Stack Trace:
+Traceback (most recent call last):
+File ""login.py"", line 52
+AttributeError: 'NoneType' object has no attribute 'username'",,17-07-2026 08:26 PM
+70,"Login page throws AttributeError: 'NoneType' object has no attribute 'username'
+
+Stack Trace:
+Traceback (most recent call last):
+File ""login.py"", line 52
+AttributeError: 'NoneType' object has no attribute 'username'",,17-07-2026 08:33 PM
+76,"Login page throws AttributeError: 'NoneType' object has no attribute 'username'
+
+Stack Trace:
+Traceback (most recent call last):
+File ""login.py"", line 52
+AttributeError: 'NoneType' object has no attribute 'username'",,17-07-2026 08:34 PM
+82,"Login page throws AttributeError: 'NoneType' object has no attribute 'username'
+
+Stack Trace:
+Traceback (most recent call last):
+File ""login.py"", line 52
+AttributeError: 'NoneType' object has no attribute 'username'",,17-07-2026 08:35 PM
+88,,aws_certificate.jpg.jpeg,18-07-2026 10:31 AM
+89,,aws_certificate.jpg.jpeg,18-07-2026 10:36 AM
+90,"Database connection failed.
+SQL query timeout.",,18-07-2026 10:36 AM
+92,"Database connection failed.
+SQL query timeout.",,18-07-2026 10:37 AM
+94,"Login failed.
+Invalid password.",,18-07-2026 10:37 AM
+96,,Aws_certification.pdf,18-07-2026 11:39 AM
+97,,THRIVENI.pdf,20-07-2026 06:33 PM

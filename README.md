@@ -1,184 +1,250 @@
-# 🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor
+# 🤖 AI Smart Bug Analyzer & Intelligent Fix Advisor
 
 ## 📌 Project Overview
 
-AI Smart Bug Analyzer & Intelligent Fix Advisor is a Retrieval-Augmented Generation (RAG)-based web application that assists software developers in analyzing software bugs. The system retrieves similar historical bugs from the Mozilla Bug Dataset using FAISS vector search and generates intelligent offline fix recommendations without requiring any external API.
+AI Smart Bug Analyzer & Intelligent Fix Advisor is an intelligent web application developed using Flask and Artificial Intelligence techniques to automate bug analysis. The system accepts bug reports, retrieves similar historical bugs using a Retrieval-Augmented Generation (RAG) approach, classifies the bug using AI agents, analyzes stack traces, and provides intelligent fix recommendations.
+
+This project was developed as part of the **Infosys Springboard Internship - Milestone 2**.
 
 ---
 
-## 🚀 Features
+# 🎯 Objectives
 
-- Submit software bug reports
-- Upload screenshots or log files
-- Store bug reports in CSV
-- Semantic search using Sentence Transformers
-- FAISS Vector Database for similarity search
-- Retrieve Top 3 Similar Bugs
-- Bug Category Prediction
-- Priority Prediction
-- Confidence Score
-- Offline AI Smart Fix Advisor
+- Automate software bug analysis.
+- Reduce manual bug triaging effort.
+- Retrieve similar historical bugs.
+- Classify bug severity and priority.
+- Analyze stack traces and log files.
+- Suggest intelligent fixes based on bug type.
+- Generate structured analysis reports.
+
+---
+
+# 🚀 Features
+
+## ✅ Bug Submission Module
+
+- Submit bug descriptions.
+- Upload bug report files.
+- Store bug reports in CSV.
+
+---
+
+## ✅ Historical Bug Retrieval (RAG)
+
+- Mozilla Bug Dataset
+- Sentence Transformers
+- FAISS Vector Search
+- Top similar bug retrieval
+
+---
+
+## ✅ AI Smart Fix Advisor
+
+Provides:
+
+- Bug Category
+- Priority
 - Root Cause Analysis
 - Impact Analysis
 - Recommended Fixes
-- Testing Checklist
+- Testing Recommendations
 - Prevention Tips
-- Attractive Result Dashboard
 
 ---
 
-## 🏗️ System Architecture
+## ✅ Triage Agent (Milestone 2)
 
-User
-↓
+Automatically predicts:
 
-Flask Web Application
-
-↓
-
-Sentence Transformer (all-MiniLM-L6-v2)
-
-↓
-
-FAISS Vector Database
-
-↓
-
-Mozilla Bug Dataset
-
-↓
-
-Offline AI Recommendation Engine
-
-↓
-
-Result Dashboard
+- Severity
+- Priority
+- Affected Component
+- Confidence Score
+- Reasoning
 
 ---
 
-## 🔄 Workflow
+## ✅ Log Analysis Agent (Milestone 2)
 
-1. User enters a bug description.
-2. User optionally uploads a screenshot or log file.
-3. Bug report is stored in CSV.
-4. Sentence Transformer converts the bug report into vector embeddings.
-5. FAISS retrieves the Top 3 most similar bugs.
-6. Offline AI engine generates:
-   - Bug Category
-   - Priority
-   - Confidence
-   - Root Cause Analysis
-   - Impact Analysis
-   - Recommended Fix
-   - Testing Checklist
-   - Prevention Tips
-7. Results are displayed on the dashboard.
+Analyzes stack traces and error logs.
+
+Extracts:
+
+- Exception Type
+- Failure Point
+- Line Number
+- Code Path
+- Error Message
 
 ---
 
-## 💻 Technologies Used
+## ✅ Multi-Agent Orchestration (Milestone 2)
 
-- Python 3.11
+After bug submission:
+
+1. Bug is submitted.
+2. Triage Agent analyzes the bug.
+3. Log Analysis Agent parses logs.
+4. Historical bugs are retrieved.
+5. AI Fix Advisor generates recommendations.
+6. JSON analysis report is generated.
+
+---
+
+# 🛠 Technology Stack
+
+## Frontend
+
+- HTML5
+- CSS3
+
+## Backend
+
+- Python
 - Flask
-- HTML
-- CSS
-- FAISS
+
+## AI / ML
+
 - Sentence Transformers
-- Pandas
-- NumPy
+- FAISS
+
+## Dataset
+
 - Mozilla Bug Dataset
 
+## Storage
+
+- CSV
+- JSON
+
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-AI-Smart-Bug-Analyzer
+```text
+AI-SMART-BUG-ANALYZER/
 
-│
-
-├── app.py
-
-├── requirements.txt
-
-├── bug_reports.csv
-
-├── preprocess.py
-
-├── build_vector_db.py
-
-├── search_bug.py
+│── app.py
+│── preprocess.py
+│── build_vector_db.py
+│── search_bug.py
+│── requirements.txt
+│── README.md
+│── bug_reports.csv
 
 │
-
 ├── dataset/
-
-│ └── mozilla/
-
-│ ├── clean_mozilla.csv
-
-│ ├── mozilla_bugs.csv
-
-│ └── bug_index.faiss
-
+│   └── mozilla/
+│       ├── clean_mozilla.csv
+│       ├── mozilla_bugs.csv
+│       └── bug_index.faiss
 │
-
 ├── templates/
-
-│ ├── index.html
-
-│ └── result.html
-
+│   ├── index.html
+│   └── result.html
 │
-
+├── static/
+│
 ├── uploads/
-
 │
-
-└── README.md
+├── analysis_results/
+│
+└── utils/
+    ├── triage_agent.py
+    └── log_analysis.py
+```
 
 ---
 
-## ⚙️ Installation
+# 🔄 Workflow
+
+```text
+User
+   │
+   ▼
+Bug Submission
+   │
+   ▼
+Triage Agent
+   │
+   ▼
+Log Analysis Agent
+   │
+   ▼
+FAISS Similar Bug Retrieval
+   │
+   ▼
+AI Smart Fix Advisor
+   │
+   ▼
+JSON Report Generation
+   │
+   ▼
+Result Dashboard
+```
+
+---
+
+# 📊 Outputs
+
+The application generates:
+
+- Bug Analysis Summary
+- Submitted Bug Report
+- Triage Agent Results
+- Log Analysis Results
+- Similar Historical Bugs
+- AI Smart Fix Recommendations
+- JSON Analysis Report
+
+---
+
+# 📁 JSON Output
+
+Every bug analysis is stored inside:
+
+```
+analysis_results/
+```
+
+Example:
+
+```
+bug_1.json
+bug_2.json
+bug_3.json
+```
+
+---
+
+# ▶️ Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AI-Smart-Bug-Analyzer.git
+git clone <repository_url>
 ```
 
-Move into the project
+Move into project folder
 
 ```bash
-cd AI-Smart-Bug-Analyzer
+cd AI-SMART-BUG-ANALYZER
 ```
 
-Create Virtual Environment
-
-```bash
-python -m venv venv
-```
-
-Activate
-
-Windows
-
-```bash
-venv\Scripts\activate
-```
-
-Install packages
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run
+Run the application
 
 ```bash
 python app.py
 ```
 
-Open
+Open browser
 
 ```
 http://127.0.0.1:5000
@@ -186,31 +252,42 @@ http://127.0.0.1:5000
 
 ---
 
-## 📸 Output
+# 📸 Application Modules
 
-The application displays
-
-- Bug Category
-- Severity
-- Priority
-- Confidence Score
-- Top 3 Similar Bugs
-- Root Cause Analysis
-- Impact Analysis
-- Recommended Fix
-- Testing Checklist
-- Prevention Tips
+- Home Page
+- Bug Submission
+- Bug Analysis Summary
+- Triage Agent
+- Log Analysis Agent
+- Similar Historical Bugs
+- AI Smart Fix Advisor
 
 ---
 
-## 📌 Future Scope
+# 🎯 Milestone 2 Deliverables Completed
 
-- User Authentication
-- Bug Tracking Dashboard
-- Admin Panel
-- Email Notifications
-- PDF Report Generation
-- Cloud Deployment
-- Machine Learning-based Bug Classification
+✅ Triage Agent
+
+✅ Log Analysis Agent
+
+✅ Multi-Agent Orchestration
+
+✅ Structured JSON Output
 
 ---
+
+# 👩‍💻 Developed By
+
+**Vyshnavi Polavarapu**
+
+B.Tech CSE (AI & ML)
+
+Narayana Engineering College, Nellore
+
+---
+
+# 📜 Internship
+
+**Infosys Springboard Internship**
+
+**Milestone 2 Project**

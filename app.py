@@ -2,9 +2,16 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import os
 import csv
+import json
 import pandas as pd
 import faiss
 from sentence_transformers import SentenceTransformer
+
+# ===============================
+# Milestone 2 Agents
+# ===============================
+from utils.triage_agent import triage_bug
+from utils.log_analysis import analyze_log
 
 app = Flask(__name__)
 
@@ -13,18 +20,23 @@ app = Flask(__name__)
 # ============================================================
 
 UPLOAD_FOLDER = "uploads"
-
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# ============================================================
+# Analysis Results Folder
+# ============================================================
+
+ANALYSIS_FOLDER = "analysis_results"
+os.makedirs(ANALYSIS_FOLDER, exist_ok=True)
 
 # ============================================================
 # Load AI Model
 # ============================================================
 
-print("="*60)
+print("=" * 60)
 print("Loading AI Smart Bug Analyzer...")
-print("="*60)
+print("=" * 60)
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
@@ -40,7 +52,7 @@ print("Sentence Transformer Loaded Successfully")
 print("FAISS Index Loaded Successfully")
 print("Mozilla Dataset Loaded Successfully")
 print("AI Smart Bug Analyzer Ready!")
-print("="*60)
+print("=" * 60)
 
 # ============================================================
 # Offline Intelligent Fix Suggestion Engine
@@ -55,15 +67,15 @@ def generate_fix_suggestion(bug_text, severity):
     # ------------------------------------
 
     if any(word in bug for word in
-           ["login","password","authentication","signin"]):
+           ["login", "password", "authentication", "signin"]):
 
         return {
 
-            "category":"Authentication",
+            "category": "Authentication",
 
-            "priority":"High",
+            "priority": "High",
 
-            "root_cause":[
+            "root_cause": [
 
                 "Authentication service failure.",
 
@@ -73,7 +85,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "User cannot access the system.",
 
@@ -81,7 +93,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Verify username and password.",
 
@@ -93,7 +105,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Test valid login.",
 
@@ -103,7 +115,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Enable authentication logging.",
 
@@ -120,15 +132,15 @@ def generate_fix_suggestion(bug_text, severity):
     # ------------------------------------
 
     elif any(word in bug for word in
-             ["database","sql","mysql","query"]):
+             ["database", "sql", "mysql", "query"]):
 
         return {
 
-            "category":"Database",
+            "category": "Database",
 
-            "priority":"High",
+            "priority": "High",
 
-            "root_cause":[
+            "root_cause": [
 
                 "Database connection failure.",
 
@@ -138,7 +150,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "Unable to retrieve data.",
 
@@ -146,7 +158,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Verify database connection.",
 
@@ -158,7 +170,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Test database connection.",
 
@@ -168,7 +180,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Monitor database health.",
 
@@ -179,21 +191,20 @@ def generate_fix_suggestion(bug_text, severity):
             ]
 
         }
-
-    # ------------------------------------
+        # ------------------------------------
     # API Bugs
     # ------------------------------------
 
     elif any(word in bug for word in
-             ["api","endpoint","request","response"]):
+             ["api", "endpoint", "request", "response"]):
 
         return {
 
-            "category":"API",
+            "category": "API",
 
-            "priority":"Medium",
+            "priority": "Medium",
 
-            "root_cause":[
+            "root_cause": [
 
                 "API communication failed.",
 
@@ -203,7 +214,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "External service unavailable.",
 
@@ -211,7 +222,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Verify API endpoint.",
 
@@ -223,7 +234,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Test API response.",
 
@@ -233,7 +244,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Implement retry mechanism.",
 
@@ -242,20 +253,21 @@ def generate_fix_suggestion(bug_text, severity):
             ]
 
         }
-        # ------------------------------------
+
+    # ------------------------------------
     # File Upload Bugs
     # ------------------------------------
 
     elif any(word in bug for word in
-             ["upload","file","pdf","image","attachment"]):
+             ["upload", "file", "pdf", "image", "attachment"]):
 
         return {
 
-            "category":"File Upload",
+            "category": "File Upload",
 
-            "priority":"Medium",
+            "priority": "Medium",
 
-            "root_cause":[
+            "root_cause": [
 
                 "Invalid file format.",
 
@@ -265,7 +277,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "User cannot upload files.",
 
@@ -273,7 +285,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Verify upload folder exists.",
 
@@ -285,7 +297,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Upload PDF.",
 
@@ -295,7 +307,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Restrict unsupported formats.",
 
@@ -310,15 +322,15 @@ def generate_fix_suggestion(bug_text, severity):
     # ------------------------------------
 
     elif any(word in bug for word in
-             ["network","connection","timeout","internet","server"]):
+             ["network", "connection", "timeout", "internet", "server"]):
 
         return {
 
-            "category":"Network",
+            "category": "Network",
 
-            "priority":"Medium",
+            "priority": "Medium",
 
-            "root_cause":[
+            "root_cause": [
 
                 "Network interruption.",
 
@@ -328,7 +340,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "Application cannot communicate with server.",
 
@@ -336,7 +348,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Check internet connection.",
 
@@ -348,7 +360,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Test internet connectivity.",
 
@@ -358,7 +370,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Monitor network.",
 
@@ -367,21 +379,20 @@ def generate_fix_suggestion(bug_text, severity):
             ]
 
         }
-
-    # ------------------------------------
-    # Null Pointer Bugs
+        # ------------------------------------
+    # Null Reference Bugs
     # ------------------------------------
 
     elif any(word in bug for word in
-             ["null","none","attributeerror","nullpointer"]):
+             ["null", "none", "attributeerror", "nullpointer"]):
 
         return {
 
-            "category":"Null Reference",
+            "category": "Null Reference",
 
-            "priority":"High",
+            "priority": "High",
 
-            "root_cause":[
+            "root_cause": [
 
                 "Object is None.",
 
@@ -391,7 +402,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "Application crash.",
 
@@ -399,7 +410,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Check for None before accessing object.",
 
@@ -411,7 +422,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Test null values.",
 
@@ -421,7 +432,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Perform null checking.",
 
@@ -436,15 +447,15 @@ def generate_fix_suggestion(bug_text, severity):
     # ------------------------------------
 
     elif any(word in bug for word in
-             ["slow","performance","memory","cpu","lag"]):
+             ["slow", "performance", "memory", "cpu", "lag"]):
 
         return {
 
-            "category":"Performance",
+            "category": "Performance",
 
-            "priority":"Medium",
+            "priority": "Medium",
 
-            "root_cause":[
+            "root_cause": [
 
                 "High memory usage.",
 
@@ -454,7 +465,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "Application becomes slow.",
 
@@ -462,7 +473,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Optimize code.",
 
@@ -474,7 +485,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Stress testing.",
 
@@ -484,7 +495,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Optimize algorithms.",
 
@@ -499,15 +510,15 @@ def generate_fix_suggestion(bug_text, severity):
     # ------------------------------------
 
     elif any(word in bug for word in
-             ["button","ui","screen","layout","display","css"]):
+             ["button", "ui", "screen", "layout", "display", "css"]):
 
         return {
 
-            "category":"User Interface",
+            "category": "User Interface",
 
-            "priority":"Low",
+            "priority": "Low",
 
-            "root_cause":[
+            "root_cause": [
 
                 "Incorrect CSS styling.",
 
@@ -517,7 +528,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "Poor user experience.",
 
@@ -525,7 +536,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Verify HTML layout.",
 
@@ -537,7 +548,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Desktop testing.",
 
@@ -547,7 +558,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Responsive design.",
 
@@ -556,8 +567,7 @@ def generate_fix_suggestion(bug_text, severity):
             ]
 
         }
-
-    # ------------------------------------
+        # ------------------------------------
     # Default AI Suggestion
     # ------------------------------------
 
@@ -565,11 +575,11 @@ def generate_fix_suggestion(bug_text, severity):
 
         return {
 
-            "category":"General Software Bug",
+            "category": "General Software Bug",
 
-            "priority":"Medium",
+            "priority": "Medium",
 
-            "root_cause":[
+            "root_cause": [
 
                 "Unexpected application behavior.",
 
@@ -577,7 +587,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "impact":[
+            "impact": [
 
                 "Feature not working correctly.",
 
@@ -585,7 +595,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "recommended_fix":[
+            "recommended_fix": [
 
                 "Review application logs.",
 
@@ -599,7 +609,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "testing":[
+            "testing": [
 
                 "Functional testing.",
 
@@ -609,7 +619,7 @@ def generate_fix_suggestion(bug_text, severity):
 
             ],
 
-            "prevention":[
+            "prevention": [
 
                 "Regular code reviews.",
 
@@ -620,7 +630,9 @@ def generate_fix_suggestion(bug_text, severity):
             ]
 
         }
-    # ============================================================
+
+
+# ============================================================
 # Home Page
 # ============================================================
 
@@ -645,6 +657,36 @@ def submit():
     bug_file = request.files["bug_file"]
 
     filename = ""
+
+    # --------------------------------------------------------
+    # Milestone 2
+    # Run Triage Agent
+    # --------------------------------------------------------
+
+    triage_result = triage_bug(bug_report)
+
+    # --------------------------------------------------------
+    # Milestone 2
+    # Run Log Analysis Agent
+    # --------------------------------------------------------
+
+    log_result = analyze_log(bug_report)
+
+    # --------------------------------------------------------
+    # Validate User Input
+    # --------------------------------------------------------
+
+    bug_report = bug_report.strip()
+
+    if bug_report == "" and bug_file.filename == "":
+
+        return render_template(
+
+            "index.html",
+
+            error="Please enter a bug description or upload a bug report."
+
+        )
 
     # --------------------------------------------------------
     # Save Uploaded File
@@ -733,8 +775,7 @@ def submit():
             submission_date
 
         ])
-
-    # --------------------------------------------------------
+            # --------------------------------------------------------
     # Generate Embedding
     # --------------------------------------------------------
 
@@ -819,7 +860,66 @@ def submit():
     bug_category = ai_fix["category"]
 
     priority = ai_fix["priority"]
-        # ============================================================
+
+    # ============================================================
+    # Milestone 2
+    # Combine Triage + Log Analysis + RAG Results
+    # ============================================================
+
+    combined_analysis = {
+
+        "bug_id": bug_id,
+
+        "submission_date": submission_date,
+
+        "bug_report": bug_report,
+
+        "uploaded_file": filename,
+
+        "triage": triage_result,
+
+        "log_analysis": log_result,
+
+        "similar_bugs": similar_bugs,
+
+        "ai_fix": ai_fix
+
+    }
+
+    # ============================================================
+    # Save Analysis as JSON
+    # ============================================================
+
+    json_filename = f"bug_{bug_id}.json"
+
+    json_path = os.path.join(
+
+        ANALYSIS_FOLDER,
+
+        json_filename
+
+    )
+
+    with open(
+
+        json_path,
+
+        "w",
+
+        encoding="utf-8"
+
+    ) as json_file:
+
+        json.dump(
+
+            combined_analysis,
+
+            json_file,
+
+            indent=4
+
+        )
+            # ============================================================
     # Display Result Page
     # ============================================================
 
@@ -827,9 +927,29 @@ def submit():
 
         "result.html",
 
+        # -----------------------------
+        # User Details
+        # -----------------------------
+
         user_bug=bug_report,
 
+        filename=filename,
+
+        submission_date=submission_date,
+
+        bug_id=bug_id,
+
+        # -----------------------------
+        # RAG Results
+        # -----------------------------
+
         similar_bugs=similar_bugs,
+
+        confidence=confidence,
+
+        # -----------------------------
+        # AI Fix Suggestion
+        # -----------------------------
 
         ai_fix=ai_fix,
 
@@ -837,15 +957,47 @@ def submit():
 
         priority=priority,
 
-        confidence=confidence,
+        # -----------------------------
+        # Milestone 2
+        # Triage Agent Output
+        # -----------------------------
 
-        filename=filename,
+        triage=triage_result,
 
-        submission_date=submission_date,
+        # -----------------------------
+        # Milestone 2
+        # Log Analysis Output
+        # -----------------------------
 
-        bug_id=bug_id
+        log_analysis=log_result
 
     )
+
+
+# ============================================================
+# Health Check (Optional)
+# ============================================================
+
+@app.route("/health")
+def health():
+
+    return {
+
+        "status": "running",
+
+        "project": "AI Smart Bug Analyzer",
+
+        "milestone": "Milestone 2",
+
+        "agents": [
+
+            "Triage Agent",
+
+            "Log Analysis Agent"
+
+        ]
+
+    }
 
 
 # ============================================================
@@ -855,7 +1007,11 @@ def submit():
 if __name__ == "__main__":
 
     app.run(
+
         debug=True,
+
         host="0.0.0.0",
+
         port=5000
+
     )
