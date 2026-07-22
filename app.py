@@ -655,6 +655,9 @@ def submit():
     bug_report = request.form["bug_report"]
 
     bug_file = request.files["bug_file"]
+    bug_title = request.form.get("bug_title")
+    severity = request.form.get("severity")
+    bug_report = request.form.get("bug_report")
 
     filename = ""
 

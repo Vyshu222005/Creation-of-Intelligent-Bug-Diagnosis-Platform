@@ -96,3 +96,4 @@ SQL query timeout.",,18-07-2026 10:37 AM
 Invalid password.",,18-07-2026 10:37 AM
 96,,Aws_certification.pdf,18-07-2026 11:39 AM
 97,,THRIVENI.pdf,20-07-2026 06:33 PM
+98,The application crashes immediately after entering valid username and password. The login page closes unexpectedly and displays a NullPointerException in the server logs. This issue occurs every time after the latest update.,THRIVENI.pdf,22-07-2026 05:48 PM

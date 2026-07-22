@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AI Smart Bug Analyzer & Intelligent Fix Advisor</title>
 
@@ -22,229 +19,154 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-
 background:#eef4fb;
-
 }
 
 .container{
-
 width:92%;
 max-width:1100px;
-
 margin:30px auto;
-
 }
 
 .header{
-
 background:linear-gradient(135deg,#0d6efd,#4f8cff);
-
 padding:40px;
-
 border-radius:18px;
-
 color:white;
-
 text-align:center;
-
 box-shadow:0 10px 25px rgba(0,0,0,.15);
-
 }
 
 .header h1{
-
 font-size:38px;
-
 margin-bottom:10px;
-
 }
 
 .header p{
-
 font-size:18px;
-
 opacity:.95;
-
 }
 
 .main{
-
 margin-top:30px;
-
 background:white;
-
 padding:35px;
-
 border-radius:18px;
-
 box-shadow:0 8px 20px rgba(0,0,0,.12);
-
 }
 
 .main h2{
-
 color:#0d6efd;
-
 margin-bottom:20px;
+}
 
+label{
+font-size:17px;
+font-weight:600;
+}
+
+input[type=text],
+select{
+width:100%;
+padding:15px;
+font-size:16px;
+border-radius:12px;
+border:2px solid #d8e5ff;
+outline:none;
+margin-top:10px;
+margin-bottom:20px;
+transition:.3s;
+}
+
+input[type=text]:focus,
+select:focus,
+textarea:focus{
+border-color:#0d6efd;
+box-shadow:0 0 10px rgba(13,110,253,.25);
 }
 
 textarea{
-
 width:100%;
-
 height:180px;
-
 padding:18px;
-
 font-size:16px;
-
 border-radius:12px;
-
 border:2px solid #d8e5ff;
-
 resize:none;
-
 outline:none;
-
+margin-top:10px;
 transition:.3s;
-
-}
-
-textarea:focus{
-
-border-color:#0d6efd;
-
-box-shadow:0 0 10px rgba(13,110,253,.25);
-
 }
 
 .file-box{
-
 margin-top:25px;
-
 padding:25px;
-
 border:2px dashed #0d6efd;
-
 border-radius:15px;
-
 background:#f8fbff;
-
 text-align:center;
-
 }
 
 .file-box h3{
-
 color:#0d6efd;
-
 margin-bottom:15px;
-
 }
 
-input[type=file]{
-
-margin-top:10px;
-
-}
 .btn{
-
 width:100%;
-
 margin-top:30px;
-
 padding:16px;
-
 border:none;
-
 border-radius:12px;
-
 background:linear-gradient(135deg,#0d6efd,#4f8cff);
-
 color:white;
-
 font-size:18px;
-
 font-weight:600;
-
 cursor:pointer;
-
 transition:.3s;
-
 }
 
 .btn:hover{
-
 transform:translateY(-3px);
-
 box-shadow:0 8px 20px rgba(13,110,253,.35);
-
 }
 
 .features{
-
 display:grid;
-
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
 gap:18px;
-
 margin-top:30px;
-
 }
 
 .feature{
-
 background:#f8fbff;
-
 padding:20px;
-
 border-radius:12px;
-
 text-align:center;
-
 box-shadow:0 5px 12px rgba(0,0,0,.10);
-
 transition:.3s;
-
 }
 
 .feature:hover{
-
 transform:translateY(-6px);
-
 }
 
 .feature h3{
-
 color:#0d6efd;
-
 margin-bottom:10px;
-
 }
 
 .feature p{
-
 color:#555;
-
 font-size:15px;
-
 line-height:1.6;
-
 }
 
 .footer{
-
 margin:40px 0;
-
 text-align:center;
-
 color:#666;
-
 font-size:15px;
-
 }
 
 </style>
@@ -260,11 +182,8 @@ font-size:15px;
 <h1>🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor</h1>
 
 <p>
-
-Analyze software bugs intelligently using
-Retrieval-Augmented Generation (RAG),
+Analyze software bugs intelligently using Retrieval-Augmented Generation (RAG),
 Sentence Transformers and FAISS.
-
 </p>
 
 </div>
@@ -272,61 +191,51 @@ Sentence Transformers and FAISS.
 <div class="main">
 
 <h2>📝 Submit a Bug Report</h2>
+
 {% if error %}
-<div style="background:#ffe5e5;
-            color:#d32f2f;
-            border:1px solid #d32f2f;
-            padding:12px;
-            border-radius:8px;
-            margin-bottom:20px;
-            text-align:center;
-            font-weight:bold;">
-    {{ error }}
+<div style="background:#ffe5e5;color:#d32f2f;border:1px solid #d32f2f;padding:12px;border-radius:8px;margin-bottom:20px;text-align:center;font-weight:bold;">
+{{ error }}
 </div>
 {% endif %}
 
-<form action="/submit"
+<form action="/submit" method="POST" enctype="multipart/form-data">
 
-method="POST"
-
-enctype="multipart/form-data">
-
-<label>
-
-<strong>Bug Description</strong>
-
-</label>
-
-<br><br>
-
-<textarea
-
-name="bug_report"
-
-placeholder="Describe the software bug in detail..."
-
+<label>Bug Title</label>
+<input type="text"
+name="bug_title"
+placeholder="Enter Bug Title"
 required>
 
-</textarea>
+<label>Severity</label>
+
+<select name="severity" required>
+<option value="">Select Severity</option>
+<option value="Low">🟢 Low</option>
+<option value="Medium">🟡 Medium</option>
+<option value="High">🟠 High</option>
+<option value="Critical">🔴 Critical</option>
+</select>
+
+<label>Bug Description</label>
+
+<textarea
+name="bug_report"
+placeholder="Describe the software bug in detail..."
+required></textarea>
 
 <div class="file-box">
 
 <h3>📎 Upload Screenshot or Log File (Optional)</h3>
 
 <input
-
 type="file"
-
 name="bug_file"
-
 accept=".png,.jpg,.jpeg,.pdf,.txt,.log">
 
 </div>
 
 <button
-
 type="submit"
-
 class="btn">
 
 🚀 Analyze Bug
@@ -334,94 +243,37 @@ class="btn">
 </button>
 
 </form>
-<!-- ==========================================================
-     AI Features
-=========================================================== -->
 
 <div class="features">
 
 <div class="feature">
-
 <h3>🔍 Similar Bug Retrieval</h3>
-
-<p>
-
-Retrieves the Top 5 most similar historical bugs
-from the Mozilla dataset using FAISS vector search.
-
-</p>
-
+<p>Retrieves the Top 5 most similar historical bugs from the Mozilla dataset using FAISS vector search.</p>
 </div>
 
 <div class="feature">
-
 <h3>🧠 AI Embedding Model</h3>
-
-<p>
-
-Uses the Sentence Transformer
-<strong>all-MiniLM-L6-v2</strong>
-to convert bug reports into vector embeddings.
-
-</p>
-
+<p>Uses Sentence Transformer all-MiniLM-L6-v2 to generate vector embeddings.</p>
 </div>
 
 <div class="feature">
-
 <h3>🤖 Intelligent Fix Advisor</h3>
-
-<p>
-
-Generates structured recommendations including
-root cause analysis, impact, testing checklist,
-and prevention tips.
-
-</p>
-
+<p>Generates AI-based bug fixes, root cause analysis and testing recommendations.</p>
 </div>
 
 <div class="feature">
-
 <h3>⚡ Fast Similarity Search</h3>
-
-<p>
-
-Performs semantic similarity search using
-Facebook AI Similarity Search (FAISS)
-for fast and accurate bug retrieval.
-
-</p>
-
+<p>Performs semantic similarity search using Facebook AI Similarity Search (FAISS).</p>
 </div>
 
 <div class="feature">
-
 <h3>📊 Bug Analysis Dashboard</h3>
-
-<p>
-
-Displays severity, priority,
-confidence level,
-and similarity score
-for every submitted bug.
-
-</p>
-
+<p>Displays bug priority, severity, confidence score and retrieved similar bugs.</p>
 </div>
 
 <div class="feature">
-
 <h3>🗂 Mozilla Bug Dataset</h3>
-
-<p>
-
-Uses real-world Mozilla bug reports
-to improve similarity matching
-and bug analysis.
-
-</p>
-
+<p>Uses real Mozilla bug reports for intelligent similarity matching.</p>
 </div>
 
 </div>
@@ -433,47 +285,30 @@ and bug analysis.
 <hr style="margin-bottom:20px;">
 
 <h3 style="color:#0d6efd;">
-
 🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor
-
 </h3>
 
 <br>
 
 <p>
-
 Powered by
-
 <strong>Flask</strong> •
-
 <strong>Sentence Transformers</strong> •
-
 <strong>FAISS</strong> •
-
 <strong>Retrieval-Augmented Generation (RAG)</strong>
-
 </p>
 
 <br>
 
-<p>
-
-Offline AI Recommendation Engine
-
-</p>
+<p>Offline AI Recommendation Engine</p>
 
 <br>
 
-<p>
-
-© 2026 AI Smart Bug Analyzer
-
-</p>
+<p>© 2026 AI Smart Bug Analyzer</p>
 
 </div>
 
 </div>
 
 </body>
-
 </html>
