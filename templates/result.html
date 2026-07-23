@@ -273,74 +273,6 @@ margin-bottom:18px;
 <!-- Bug Analysis Summary -->
 <!-- ========================================================= -->
 
-<div class="card">
-
-    <h2 class="section-title">📋 Bug Analysis Summary</h2>
-
-    <div class="info-grid">
-
-        <div class="info-item">
-            <div class="label">Bug ID</div>
-            <div>{{ bug_id }}</div>
-        </div>
-
-        <div class="info-item">
-            <div class="label">Submission Date</div>
-            <div>{{ submission_date }}</div>
-        </div>
-
-        <div class="info-item">
-            <div class="label">Uploaded File</div>
-            <div>
-                {% if filename %}
-                    {{ filename }}
-                {% else %}
-                    No file uploaded
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="info-item">
-            <div class="label">AI Category</div>
-            <div>{{ bug_category }}</div>
-        </div>
-
-        <div class="info-item">
-            <div class="label">Priority</div>
-
-            {% if priority=="High" %}
-                <span class="badge high">{{ priority }}</span>
-
-            {% elif priority=="Medium" %}
-                <span class="badge medium">{{ priority }}</span>
-
-            {% else %}
-                <span class="badge low">{{ priority }}</span>
-
-            {% endif %}
-        </div>
-
-        <div class="info-item">
-            <div class="label">Similarity Confidence</div>
-            <div>{{ confidence }}</div>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ========================================================= -->
-<!-- Submitted Bug Report -->
-<!-- ========================================================= -->
-
-<div class="card">
-
-    <h2 class="section-title">📝 Submitted Bug Report</h2>
-
-    <p>{{ user_bug }}</p>
-
-</div>
 
 
 <!-- ========================================================= -->
@@ -410,7 +342,13 @@ margin-bottom:18px;
 
 <div class="card">
 
-    <h2 class="section-title">📄 Log Analysis Agent</h2>
+   <h2 class="section-title">📄 Log Analysis Agent</h2>
+
+<div class="card">
+
+{% if log_analysis.issues %}
+
+    {% for issue in log_analysis.issues %}
 
     <table>
 
@@ -421,99 +359,57 @@ margin-bottom:18px;
 
         <tr>
             <td><b>Exception Type</b></td>
-            <td>{{ log_analysis.exception_type }}</td>
+            <td>{{ issue.exception_type }}</td>
         </tr>
 
         <tr>
             <td><b>Failure Point</b></td>
-            <td>{{ log_analysis.failure_point }}</td>
+            <td>{{ issue.failure_point }}</td>
         </tr>
 
         <tr>
             <td><b>Line Number</b></td>
-            <td>{{ log_analysis.line_number }}</td>
+            <td>{{ issue.line_number }}</td>
         </tr>
 
         <tr>
             <td><b>Code Path</b></td>
-            <td>{{ log_analysis.code_path }}</td>
+            <td>{{ issue.code_path }}</td>
         </tr>
 
         <tr>
             <td><b>Error Message</b></td>
-            <td>{{ log_analysis.error_message }}</td>
+            <td>{{ issue.error_message }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Root Cause</b></td>
+            <td>{{ issue.root_cause }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Severity</b></td>
+            <td>{{ issue.severity }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Suggested Fix</b></td>
+            <td>{{ issue.suggested_fix }}</td>
         </tr>
 
     </table>
 
-</div>
+    <br>
+
+    {% endfor %}
+
+{% else %}
+
+<p>No log analysis available.</p>
+
+{% endif %}
 
 
-<!-- ========================================================= -->
-<!-- Similar Historical Bugs -->
-<!-- ========================================================= -->
-
-<div class="card">
-
-    <h2 class="section-title">🔍 Similar Historical Bugs</h2>
-
-    {% if similar_bugs %}
-
-    <table>
-
-        <tr>
-
-            <th>Description</th>
-
-            <th>Severity</th>
-
-            <th>Similarity</th>
-
-        </tr>
-
-        {% for bug in similar_bugs %}
-
-        <tr>
-
-            <td>
-
-                {{ bug.description }}
-
-            </td>
-
-            <td>
-
-                {{ bug.severity }}
-
-            </td>
-
-            <td>
-
-                <strong>{{ bug.score }}%</strong>
-                <div class="progress">
-                <div class="progress-bar"
-                style="width: {{ bug.score }}%">
-                {{ bug.score }}%
-               </div>
-               </div>
-
-                </div>
-
-            </td>
-
-        </tr>
-
-        {% endfor %}
-
-    </table>
-
-    {% else %}
-
-    <p>No similar historical bugs found.</p>
-
-    {% endif %}
-
-</div>
 <!-- ========================================================= -->
 <!-- AI Smart Fix Advisor -->
 <!-- ========================================================= -->

@@ -97,3 +97,22 @@ Invalid password.",,18-07-2026 10:37 AM
 96,,Aws_certification.pdf,18-07-2026 11:39 AM
 97,,THRIVENI.pdf,20-07-2026 06:33 PM
 98,The application crashes immediately after entering valid username and password. The login page closes unexpectedly and displays a NullPointerException in the server logs. This issue occurs every time after the latest update.,THRIVENI.pdf,22-07-2026 05:48 PM
+99,The application crashes when the user enters an incorrect password.,logfile.txt,22-07-2026 06:02 PM
+100,The application crashes when the user enters an incorrect password.,logfile.txt,22-07-2026 06:04 PM
+101,Application crashes on login,logfile.txt,22-07-2026 06:15 PM
+102,The application crashes when the user enters an incorrect password.,logfile.txt,22-07-2026 06:36 PM
+103,application crashes when user try to login,logfile.txt,22-07-2026 06:49 PM
+104,Application Crashes while login,logfile.txt,22-07-2026 07:45 PM
+105,Application Crashes while login,logfile.txt,22-07-2026 07:46 PM
+106,Application Crashes while login,logfile.txt,22-07-2026 07:50 PM
+107,Application crashes on login,logfile.txt,22-07-2026 07:51 PM
+108,Application crashes on login,logfile.txt,22-07-2026 08:35 PM
+109,Application crashes on login,logfile.txt,22-07-2026 08:36 PM
+110,Application crashes on login,logfile.txt,22-07-2026 08:37 PM
+111,Application crashes on login,logfile.txt,22-07-2026 08:48 PM
+112,Application crashes on login,logfile.txt,22-07-2026 08:48 PM
+113,Application crashes on login,logfile.txt,22-07-2026 08:48 PM
+114,Application crashes on login,logfile.txt,22-07-2026 08:59 PM
+115,Application crashes on login,logfile.txt,22-07-2026 08:59 PM
+116,Application crashes on login,logfile.txt,22-07-2026 09:03 PM
+117,Application crashes on login,logfile.txt,22-07-2026 09:06 PM

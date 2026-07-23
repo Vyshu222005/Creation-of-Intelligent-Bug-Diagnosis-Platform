@@ -1,78 +1,82 @@
+from ollama import chat
+import json
 import re
+
 
 def analyze_log(log_text):
 
-    result = {
-        "exception_type": "Unknown",
-        "failure_point": "Unknown",
-        "line_number": "Unknown",
-        "code_path": "General",
-        "error_message": "Unknown"
-    }
+    prompt = f"""
+You are an expert Software Log Analysis Agent.
 
-    # Convert multiple spaces/newlines into a single space
-    text = re.sub(r'\s+', ' ', log_text)
+Analyze the following log.
 
-    # ----------------------------
-    # Exception Type
-    # ----------------------------
+Identify all errors, exceptions, warnings and failures.
 
-    exception = re.search(
-        r'([A-Za-z]+(?:Error|Exception))',
-        text
+For every issue, fill all fields.
+Never leave any field empty.
+If information is not explicitly available, infer the most likely answer.
+
+Return ONLY valid JSON in this format:
+
+{{
+  "issues": [
+    {{
+      "exception_type": "NullPointerException",
+      "failure_point": "LoginService.validateUser()",
+      "line_number": "42",
+      "code_path": "com.app.service.LoginService.java",
+      "error_message": "User login failed",
+      "root_cause": "The user object is null before validation.",
+      "severity": "High",
+      "suggested_fix": "Check for null before accessing the user object and initialize it properly."
+    }}
+  ]
+}}
+
+Log:
+{log_text}
+"""
+
+    response = chat(
+        model="llama3.2",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
     )
 
-    if exception:
-        result["exception_type"] = exception.group(1)
+    result = response["message"]["content"]
 
-    # ----------------------------
-    # File and Line Number
-    # ----------------------------
+    print("\n===== OLLAMA RESPONSE =====")
+    print(result)
+    print("===========================\n")
 
-    file_match = re.search(
-        r'File\s+"([^"]+)"\s*,\s*line\s+(\d+)',
-        text,
-        re.IGNORECASE
-    )
+    try:
+        return json.loads(result)
 
-    if file_match:
+    except json.JSONDecodeError:
 
-        result["failure_point"] = file_match.group(1)
+        match = re.search(r"\{.*\}", result, re.DOTALL)
 
-        result["line_number"] = file_match.group(2)
+        if match:
+            try:
+                return json.loads(match.group())
+            except Exception:
+                pass
 
-    # ----------------------------
-    # Error Message
-    # ----------------------------
-
-    if exception:
-
-        result["error_message"] = text[text.find(exception.group(1)):]
-
-    # ----------------------------
-    # Code Path Detection
-    # ----------------------------
-
-    lower = text.lower()
-
-    if any(x in lower for x in ["login","signin","password","authentication"]):
-
-        result["code_path"] = "Authentication"
-
-    elif any(x in lower for x in ["database","mysql","sql"]):
-
-        result["code_path"] = "Database"
-
-    elif any(x in lower for x in ["upload","file","pdf","image"]):
-
-        result["code_path"] = "File Upload"
-
-    elif any(x in lower for x in ["api","endpoint","request"]):
-
-        result["code_path"] = "API"
-
-    elif any(x in lower for x in ["network","timeout","server"]):
-
-        result["code_path"] = "Network"
-
-    return result
+        return {
+            "issues": [
+                {
+                    "exception_type": "Unknown",
+                    "failure_point": "Unknown",
+                    "line_number": "Unknown",
+                    "code_path": "Unknown",
+                    "error_message": result,
+                    "root_cause": "LLM did not return valid JSON.",
+                    "severity": "Unknown",
+                    "suggested_fix": "Review the LLM response."
+                }
+            ]
+        }

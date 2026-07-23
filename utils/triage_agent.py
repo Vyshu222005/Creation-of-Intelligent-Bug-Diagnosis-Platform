@@ -1,74 +1,59 @@
-import re
+from ollama import chat
+import json
+
 
 def triage_bug(bug_report):
-    """
-    Analyze a bug report and predict:
-    - Severity
-    - Priority
-    - Component
-    - Confidence
-    - Reasoning
-    """
+    prompt = f"""
+You are an expert Software Bug Triage Agent.
 
-    text = bug_report.lower()
+Analyze the following bug report.
 
-    # Default values
-    severity = "Low"
-    priority = "P4"
-    component = "General"
-    confidence = 0.70
-    reason = "No major issue detected."
+Predict:
+1. Severity (Critical/High/Medium/Low)
+2. Priority (P1/P2/P3/P4)
+3. Affected Component
+4. Confidence Score (0-100)
+5. Reasoning
 
-    # -------- Severity Rules --------
-    if any(word in text for word in ["crash", "fatal", "critical", "data loss"]):
-        severity = "Critical"
-        priority = "P1"
-        confidence = 0.98
-        reason = "Bug causes application crash or critical failure."
+Return ONLY valid JSON in this format:
 
-    elif any(word in text for word in ["exception", "error", "failed", "failure"]):
-        severity = "High"
-        priority = "P2"
-        confidence = 0.94
-        reason = "Bug affects core functionality."
+{{
+  "severity": "",
+  "priority": "",
+  "component": "",
+  "confidence": 0,
+  "reasoning": ""
+}}
 
-    elif any(word in text for word in ["slow", "delay", "timeout"]):
-        severity = "Medium"
-        priority = "P3"
-        confidence = 0.88
-        reason = "Performance issue detected."
+Bug Report:
+{bug_report}
+"""
 
-    # -------- Component Detection --------
-    if any(word in text for word in ["login", "password", "authentication", "signin"]):
-        component = "Authentication"
+    response = chat(
+        model="llama3.2",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
 
-    elif any(word in text for word in ["database", "sql", "mysql"]):
-        component = "Database"
+    result = response["message"]["content"]
 
-    elif any(word in text for word in ["api", "endpoint"]):
-        component = "API"
-
-    elif any(word in text for word in ["upload", "file"]):
-        component = "File Upload"
-
-    elif any(word in text for word in ["button", "ui", "screen", "page"]):
-        component = "User Interface"
-
-    result = {
-        "severity": severity,
-        "priority": priority,
-        "component": component,
-        "confidence": confidence,
-        "reasoning": reason
-    }
-
-    return result
+    try:
+        return json.loads(result)
+    except:
+        return {
+            "severity": "Unknown",
+            "priority": "Unknown",
+            "component": "Unknown",
+            "confidence": 0,
+            "reasoning": result
+        }
 
 
-# Test the file
 if __name__ == "__main__":
-    sample = "Application crashes when user clicks login button."
+    sample = "Application crashes when user clicks Login button"
 
-    result = triage_bug(sample)
-
-    print(result)
+    print(triage_bug(sample))

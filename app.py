@@ -663,17 +663,18 @@ def submit():
 
     # --------------------------------------------------------
     # Milestone 2
-    # Run Triage Agent
+    # Run Triage + Log Analysis
     # --------------------------------------------------------
 
     triage_result = triage_bug(bug_report)
 
-    # --------------------------------------------------------
-    # Milestone 2
-    # Run Log Analysis Agent
-    # --------------------------------------------------------
+    log_text = bug_report
 
-    log_result = analyze_log(bug_report)
+    if bug_file.filename != "":
+        log_text = bug_file.read().decode("utf-8", errors="ignore")
+        bug_file.seek(0)
+
+    log_result = analyze_log(log_text)
 
     # --------------------------------------------------------
     # Validate User Input
@@ -684,11 +685,8 @@ def submit():
     if bug_report == "" and bug_file.filename == "":
 
         return render_template(
-
             "index.html",
-
             error="Please enter a bug description or upload a bug report."
-
         )
 
     # --------------------------------------------------------
@@ -700,11 +698,8 @@ def submit():
         filename = bug_file.filename
 
         filepath = os.path.join(
-
             app.config["UPLOAD_FOLDER"],
-
             filename
-
         )
 
         bug_file.save(filepath)
@@ -722,33 +717,22 @@ def submit():
     if file_exists:
 
         with open(
-
             csv_file,
-
             "r",
-
             encoding="utf-8"
-
         ) as file:
 
             bug_id = max(sum(1 for _ in file), 1)
 
     submission_date = datetime.now().strftime(
-
         "%d-%m-%Y %I:%M %p"
-
     )
 
     with open(
-
         csv_file,
-
         "a",
-
         newline="",
-
         encoding="utf-8"
-
     ) as file:
 
         writer = csv.writer(file)
@@ -756,38 +740,25 @@ def submit():
         if not file_exists or os.path.getsize(csv_file) == 0:
 
             writer.writerow([
-
                 "Bug ID",
-
                 "Bug Report",
-
                 "Uploaded File",
-
                 "Submission Date"
-
             ])
 
         writer.writerow([
-
             bug_id,
-
             bug_report,
-
             filename,
-
             submission_date
-
         ])
             # --------------------------------------------------------
     # Generate Embedding
     # --------------------------------------------------------
 
     query_embedding = model.encode(
-
         [bug_report],
-
         convert_to_numpy=True
-
     ).astype("float32")
 
     # --------------------------------------------------------
@@ -795,11 +766,8 @@ def submit():
     # --------------------------------------------------------
 
     distances, indices = index.search(
-
         query_embedding,
-
         3
-
     )
 
     similar_bugs = []
@@ -809,41 +777,28 @@ def submit():
     for rank, i in enumerate(indices[0]):
 
         similarity = round(
-
             (1 / (1 + distances[0][rank])) * 100,
-
             2
-
         )
 
         if similarity >= 90:
-
             confidence = "Very High"
-
         elif similarity >= 80:
-
             confidence = "High"
-
         elif similarity >= 70:
-
             confidence = "Medium"
-
         else:
-
             confidence = "Low"
 
         similar_bugs.append({
 
             "description":
-
             bug_data.iloc[i]["Description"][:350] + "...",
 
             "severity":
-
             bug_data.iloc[i]["Severity"],
 
             "score":
-
             similarity
 
         })
@@ -853,15 +808,11 @@ def submit():
     # --------------------------------------------------------
 
     ai_fix = generate_fix_suggestion(
-
         bug_report,
-
         similar_bugs[0]["severity"]
-
     )
 
     bug_category = ai_fix["category"]
-
     priority = ai_fix["priority"]
 
     # ============================================================
@@ -872,19 +823,14 @@ def submit():
     combined_analysis = {
 
         "bug_id": bug_id,
-
         "submission_date": submission_date,
-
         "bug_report": bug_report,
-
         "uploaded_file": filename,
 
         "triage": triage_result,
-
         "log_analysis": log_result,
 
         "similar_bugs": similar_bugs,
-
         "ai_fix": ai_fix
 
     }
@@ -896,31 +842,20 @@ def submit():
     json_filename = f"bug_{bug_id}.json"
 
     json_path = os.path.join(
-
         ANALYSIS_FOLDER,
-
         json_filename
-
     )
 
     with open(
-
         json_path,
-
         "w",
-
         encoding="utf-8"
-
     ) as json_file:
 
         json.dump(
-
             combined_analysis,
-
             json_file,
-
             indent=4
-
         )
             # ============================================================
     # Display Result Page
@@ -930,53 +865,22 @@ def submit():
 
         "result.html",
 
-        # -----------------------------
-        # User Details
-        # -----------------------------
-
         user_bug=bug_report,
-
         filename=filename,
-
         submission_date=submission_date,
-
         bug_id=bug_id,
 
-        # -----------------------------
-        # RAG Results
-        # -----------------------------
-
         similar_bugs=similar_bugs,
-
         confidence=confidence,
 
-        # -----------------------------
-        # AI Fix Suggestion
-        # -----------------------------
-
         ai_fix=ai_fix,
-
         bug_category=bug_category,
-
         priority=priority,
 
-        # -----------------------------
-        # Milestone 2
-        # Triage Agent Output
-        # -----------------------------
-
         triage=triage_result,
-
-        # -----------------------------
-        # Milestone 2
-        # Log Analysis Output
-        # -----------------------------
-
         log_analysis=log_result
 
     )
-
-
 # ============================================================
 # Health Check (Optional)
 # ============================================================
@@ -1018,3 +922,4 @@ if __name__ == "__main__":
         port=5000
 
     )
+    
