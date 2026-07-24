@@ -652,38 +652,18 @@ def submit():
     # Get User Input
     # --------------------------------------------------------
 
-    bug_report = request.form["bug_report"]
-
-    bug_file = request.files["bug_file"]
+    bug_report = request.form.get("bug_report", "").strip()
     bug_title = request.form.get("bug_title")
     severity = request.form.get("severity")
-    bug_report = request.form.get("bug_report")
+    bug_file = request.files["bug_file"]
 
     filename = ""
 
     # --------------------------------------------------------
-    # Milestone 2
-    # Run Triage + Log Analysis
+    # Validate Input
     # --------------------------------------------------------
-
-    triage_result = triage_bug(bug_report)
-
-    log_text = bug_report
-
-    if bug_file.filename != "":
-        log_text = bug_file.read().decode("utf-8", errors="ignore")
-        bug_file.seek(0)
-
-    log_result = analyze_log(log_text)
-
-    # --------------------------------------------------------
-    # Validate User Input
-    # --------------------------------------------------------
-
-    bug_report = bug_report.strip()
 
     if bug_report == "" and bug_file.filename == "":
-
         return render_template(
             "index.html",
             error="Please enter a bug description or upload a bug report."
@@ -705,6 +685,40 @@ def submit():
         bug_file.save(filepath)
 
     # --------------------------------------------------------
+    # Run Triage Agent
+    # --------------------------------------------------------
+
+    triage_result = triage_bug(bug_report)
+
+    # --------------------------------------------------------
+    # Run Log Analysis Agent ONLY if log uploaded
+    # --------------------------------------------------------
+
+    if bug_file.filename != "":
+
+        with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+            log_text = f.read()
+
+        log_result = analyze_log(log_text)
+
+    else:
+
+        log_result = {
+            "issues": [
+                {
+                    "exception_type": "No Log Uploaded",
+                    "failure_point": "-",
+                    "line_number": "-",
+                    "code_path": "-",
+                    "error_message": "-",
+                    "root_cause": "-",
+                    "severity": "-",
+                    "suggested_fix": "Upload a log file to analyze stack traces."
+                }
+            ]
+        }
+
+    # --------------------------------------------------------
     # Save Bug Report to CSV
     # --------------------------------------------------------
 
@@ -716,29 +730,16 @@ def submit():
 
     if file_exists:
 
-        with open(
-            csv_file,
-            "r",
-            encoding="utf-8"
-        ) as file:
-
+        with open(csv_file, "r", encoding="utf-8") as file:
             bug_id = max(sum(1 for _ in file), 1)
 
-    submission_date = datetime.now().strftime(
-        "%d-%m-%Y %I:%M %p"
-    )
+    submission_date = datetime.now().strftime("%d-%m-%Y %I:%M %p")
 
-    with open(
-        csv_file,
-        "a",
-        newline="",
-        encoding="utf-8"
-    ) as file:
+    with open(csv_file, "a", newline="", encoding="utf-8") as file:
 
         writer = csv.writer(file)
 
         if not file_exists or os.path.getsize(csv_file) == 0:
-
             writer.writerow([
                 "Bug ID",
                 "Bug Report",
@@ -752,7 +753,8 @@ def submit():
             filename,
             submission_date
         ])
-            # --------------------------------------------------------
+
+    # --------------------------------------------------------
     # Generate Embedding
     # --------------------------------------------------------
 
@@ -765,10 +767,7 @@ def submit():
     # FAISS Search
     # --------------------------------------------------------
 
-    distances, indices = index.search(
-        query_embedding,
-        3
-    )
+    distances, indices = index.search(query_embedding, 3)
 
     similar_bugs = []
 
@@ -804,7 +803,7 @@ def submit():
         })
 
     # --------------------------------------------------------
-    # Generate Offline AI Fix
+    # AI Fix Recommendation
     # --------------------------------------------------------
 
     ai_fix = generate_fix_suggestion(
@@ -815,10 +814,9 @@ def submit():
     bug_category = ai_fix["category"]
     priority = ai_fix["priority"]
 
-    # ============================================================
-    # Milestone 2
-    # Combine Triage + Log Analysis + RAG Results
-    # ============================================================
+    # --------------------------------------------------------
+    # Save JSON Report
+    # --------------------------------------------------------
 
     combined_analysis = {
 
@@ -826,18 +824,12 @@ def submit():
         "submission_date": submission_date,
         "bug_report": bug_report,
         "uploaded_file": filename,
-
         "triage": triage_result,
         "log_analysis": log_result,
-
         "similar_bugs": similar_bugs,
         "ai_fix": ai_fix
 
     }
-
-    # ============================================================
-    # Save Analysis as JSON
-    # ============================================================
 
     json_filename = f"bug_{bug_id}.json"
 
@@ -846,20 +838,17 @@ def submit():
         json_filename
     )
 
-    with open(
-        json_path,
-        "w",
-        encoding="utf-8"
-    ) as json_file:
+    with open(json_path, "w", encoding="utf-8") as json_file:
 
         json.dump(
             combined_analysis,
             json_file,
             indent=4
         )
-            # ============================================================
-    # Display Result Page
-    # ============================================================
+
+    # --------------------------------------------------------
+    # Display Result
+    # --------------------------------------------------------
 
     return render_template(
 
