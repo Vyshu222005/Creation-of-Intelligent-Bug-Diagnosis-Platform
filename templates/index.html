@@ -5,9 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Smart Bug Analyzer & Intelligent Fix Advisor</title>
+<title>AI Smart Bug Analyzer</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -15,158 +15,307 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:'Inter',sans-serif;
 }
 
 body{
-background:#eef4fb;
+background:#0B1220;
+color:#F8FAFC;
 }
 
 .container{
 width:92%;
-max-width:1100px;
+max-width:1200px;
 margin:30px auto;
 }
 
+/* ================= HEADER ================= */
+
 .header{
-background:linear-gradient(135deg,#0d6efd,#4f8cff);
-padding:40px;
-border-radius:18px;
-color:white;
-text-align:center;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
+background:#111827;
+border:1px solid #334155;
+border-radius:15px;
+padding:30px;
+box-shadow:0 8px 20px rgba(0,0,0,.35);
 }
 
 .header h1{
-font-size:38px;
-margin-bottom:10px;
+font-size:34px;
+font-weight:700;
 }
 
 .header p{
-font-size:18px;
-opacity:.95;
+margin-top:10px;
+color:#94A3B8;
+font-size:16px;
+line-height:1.7;
 }
+
+.tech{
+margin-top:15px;
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.tech span{
+background:#1E293B;
+padding:8px 14px;
+border-radius:8px;
+font-size:14px;
+border:1px solid #334155;
+color:#CBD5E1;
+}
+
+/* ================= MAIN CARD ================= */
 
 .main{
 margin-top:30px;
-background:white;
+background:#111827;
+border:1px solid #334155;
 padding:35px;
-border-radius:18px;
-box-shadow:0 8px 20px rgba(0,0,0,.12);
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,.35);
 }
 
 .main h2{
-color:#0d6efd;
-margin-bottom:20px;
+margin-bottom:25px;
+font-size:26px;
 }
 
+/* ================= FORM ================= */
+
 label{
-font-size:17px;
+display:block;
+margin-bottom:8px;
 font-weight:600;
+font-size:15px;
 }
 
 input[type=text],
-select{
-width:100%;
-padding:15px;
-font-size:16px;
-border-radius:12px;
-border:2px solid #d8e5ff;
-outline:none;
-margin-top:10px;
-margin-bottom:20px;
-transition:.3s;
-}
+select,
+textarea{
 
-input[type=text]:focus,
-select:focus,
-textarea:focus{
-border-color:#0d6efd;
-box-shadow:0 0 10px rgba(13,110,253,.25);
+width:100%;
+padding:14px;
+
+background:#0F172A;
+
+border:1px solid #334155;
+
+border-radius:10px;
+
+color:white;
+
+font-size:15px;
+
+margin-bottom:22px;
+
+transition:.25s;
+
 }
 
 textarea{
-width:100%;
 height:180px;
-padding:18px;
-font-size:16px;
-border-radius:12px;
-border:2px solid #d8e5ff;
 resize:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
 outline:none;
-margin-top:10px;
-transition:.3s;
+
+border-color:#2563EB;
+
+box-shadow:0 0 10px rgba(37,99,235,.25);
+
 }
 
-.file-box{
-margin-top:25px;
-padding:25px;
-border:2px dashed #0d6efd;
-border-radius:15px;
-background:#f8fbff;
-text-align:center;
+/* Upload */
+
+.upload-box{
+
+background:#0F172A;
+
+border:1px solid #334155;
+
+border-radius:10px;
+
+padding:20px;
+
+margin-bottom:25px;
+
 }
 
-.file-box h3{
-color:#0d6efd;
+.upload-box h3{
+
+font-size:17px;
+
 margin-bottom:15px;
+
+color:#CBD5E1;
+
 }
+
+input[type=file]{
+
+color:#CBD5E1;
+
+}
+
+/* Button */
 
 .btn{
+
 width:100%;
-margin-top:30px;
-padding:16px;
+
+padding:15px;
+
+background:#2563EB;
+
 border:none;
-border-radius:12px;
-background:linear-gradient(135deg,#0d6efd,#4f8cff);
+
+border-radius:10px;
+
 color:white;
-font-size:18px;
+
+font-size:17px;
+
 font-weight:600;
+
 cursor:pointer;
+
 transition:.3s;
+
 }
 
 .btn:hover{
-transform:translateY(-3px);
-box-shadow:0 8px 20px rgba(13,110,253,.35);
+
+background:#1D4ED8;
+
+}
+
+/* ================= CAPABILITIES ================= */
+
+.section-title{
+
+margin-top:40px;
+
+margin-bottom:20px;
+
+font-size:24px;
+
 }
 
 .features{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
 gap:18px;
-margin-top:30px;
+
 }
 
 .feature{
-background:#f8fbff;
-padding:20px;
+
+background:#1E293B;
+
+border:1px solid #334155;
+
 border-radius:12px;
-text-align:center;
-box-shadow:0 5px 12px rgba(0,0,0,.10);
+
+padding:22px;
+
 transition:.3s;
+
 }
 
 .feature:hover{
-transform:translateY(-6px);
+
+transform:translateY(-4px);
+
+border-color:#2563EB;
+
 }
 
 .feature h3{
-color:#0d6efd;
+
 margin-bottom:10px;
+
+font-size:18px;
+
 }
 
 .feature p{
-color:#555;
-font-size:15px;
+
+color:#CBD5E1;
+
 line-height:1.6;
+
+font-size:15px;
+
 }
 
+/* Footer */
+
 .footer{
-margin:40px 0;
+
+margin-top:40px;
+
+padding:25px;
+
 text-align:center;
-color:#666;
-font-size:15px;
+
+background:#111827;
+
+border-radius:12px;
+
+border:1px solid #334155;
+
+color:#94A3B8;
+
+}
+
+.footer h3{
+
+color:white;
+
+margin-bottom:15px;
+
+}
+
+.error-box{
+
+background:#7F1D1D;
+
+color:#FECACA;
+
+padding:15px;
+
+border-radius:8px;
+
+margin-bottom:20px;
+
+border:1px solid #DC2626;
+
+}
+
+@media(max-width:768px){
+
+.header h1{
+
+font-size:28px;
+
+}
+
+.main{
+
+padding:25px;
+
+}
+
 }
 
 </style>
@@ -179,21 +328,37 @@ font-size:15px;
 
 <div class="header">
 
-<h1>🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor</h1>
+<h1>AI Smart Bug Analyzer</h1>
 
 <p>
-Analyze software bugs intelligently using Retrieval-Augmented Generation (RAG),
-Sentence Transformers and FAISS.
+Enterprise Defect Intelligence Platform for automated software bug triage,
+semantic retrieval, root cause analysis and remediation recommendations.
 </p>
+
+<div class="tech">
+
+<span>Flask</span>
+
+<span>Ollama</span>
+
+<span>Llama 3.2</span>
+
+<span>Sentence Transformers</span>
+
+<span>FAISS</span>
+
+<span>RAG</span>
+
+</div>
 
 </div>
 
 <div class="main">
 
-<h2>📝 Submit a Bug Report</h2>
+<h2>Submit Bug Report</h2>
 
 {% if error %}
-<div style="background:#ffe5e5;color:#d32f2f;border:1px solid #d32f2f;padding:12px;border-radius:8px;margin-bottom:20px;text-align:center;font-weight:bold;">
+<div class="error-box">
 {{ error }}
 </div>
 {% endif %}
@@ -201,31 +366,31 @@ Sentence Transformers and FAISS.
 <form action="/submit" method="POST" enctype="multipart/form-data">
 
 <label>Bug Title</label>
-<input type="text"
+
+<input
+type="text"
 name="bug_title"
-placeholder="Enter Bug Title"
+placeholder="Enter bug title"
 required>
 
-<label>Severity</label>
 
-<select name="severity" required>
-<option value="">Select Severity</option>
-<option value="Low">🟢 Low</option>
-<option value="Medium">🟡 Medium</option>
-<option value="High">🟠 High</option>
-<option value="Critical">🔴 Critical</option>
-</select>
+    <label for="stack_trace">
+        Stack Trace / Error Log (Optional)
+    </label>
 
-<label>Bug Description</label>
+    <textarea
+        id="stack_trace"
+        name="stack_trace"
+        class="form-control"
+        rows="6"
+        placeholder="Paste stack trace or error log here..."></textarea>
+</div>
 
-<textarea
-name="bug_report"
-placeholder="Describe the software bug in detail..."
-required></textarea>
 
-<div class="file-box">
 
-<h3>📎 Upload Screenshot or Log File (Optional)</h3>
+<div class="upload-box">
+
+<h3>Attach Log File or Screenshot (Optional)</h3>
 
 <input
 type="file"
@@ -234,46 +399,82 @@ accept=".png,.jpg,.jpeg,.pdf,.txt,.log">
 
 </div>
 
-<button
-type="submit"
-class="btn">
+<button type="submit" class="btn">
 
-🚀 Analyze Bug
+Analyze Bug
 
 </button>
 
 </form>
 
+<h2 class="section-title">Platform Capabilities</h2>
+
 <div class="features">
 
 <div class="feature">
-<h3>🔍 Similar Bug Retrieval</h3>
-<p>Retrieves the Top 5 most similar historical bugs from the Mozilla dataset using FAISS vector search.</p>
+
+<h3>AI Bug Triage</h3>
+
+<p>
+Automatically classifies severity, priority and affected component using
+local AI models.
+</p>
+
 </div>
 
 <div class="feature">
-<h3>🧠 AI Embedding Model</h3>
-<p>Uses Sentence Transformer all-MiniLM-L6-v2 to generate vector embeddings.</p>
+
+<h3>Log Analysis</h3>
+
+<p>
+Parses stack traces, identifies failure points and extracts structured
+technical insights.
+</p>
+
 </div>
 
 <div class="feature">
-<h3>🤖 Intelligent Fix Advisor</h3>
-<p>Generates AI-based bug fixes, root cause analysis and testing recommendations.</p>
+
+<h3>Root Cause Analysis</h3>
+
+<p>
+Uses Retrieval-Augmented Generation (RAG) with historical defects to
+identify probable root causes.
+</p>
+
 </div>
 
 <div class="feature">
-<h3>⚡ Fast Similarity Search</h3>
-<p>Performs semantic similarity search using Facebook AI Similarity Search (FAISS).</p>
+
+<h3>Duplicate Detection</h3>
+
+<p>
+Finds the most similar historical bug reports using semantic vector search
+and similarity scoring.
+</p>
+
 </div>
 
 <div class="feature">
-<h3>📊 Bug Analysis Dashboard</h3>
-<p>Displays bug priority, severity, confidence score and retrieved similar bugs.</p>
+
+<h3>Remediation Advisor</h3>
+
+<p>
+Generates engineering recommendations, testing strategies and best
+practices grounded in historical resolutions.
+</p>
+
 </div>
 
 <div class="feature">
-<h3>🗂 Mozilla Bug Dataset</h3>
-<p>Uses real Mozilla bug reports for intelligent similarity matching.</p>
+
+<h3>Knowledge Base</h3>
+
+<p>
+Powered by Mozilla historical defects, FAISS vector database and Sentence
+Transformers.
+</p>
+
 </div>
 
 </div>
@@ -282,33 +483,32 @@ class="btn">
 
 <div class="footer">
 
-<hr style="margin-bottom:20px;">
-
-<h3 style="color:#0d6efd;">
-🐞 AI Smart Bug Analyzer & Intelligent Fix Advisor
-</h3>
-
-<br>
+<h3>AI Smart Bug Analyzer</h3>
 
 <p>
-Powered by
-<strong>Flask</strong> •
-<strong>Sentence Transformers</strong> •
-<strong>FAISS</strong> •
-<strong>Retrieval-Augmented Generation (RAG)</strong>
+Enterprise Defect Intelligence Platform
 </p>
 
 <br>
 
-<p>Offline AI Recommendation Engine</p>
+<p>
+
+Powered by Flask • Ollama • Llama 3.2 • FAISS • Sentence Transformers • RAG
+
+</p>
 
 <br>
 
-<p>© 2026 AI Smart Bug Analyzer</p>
+<p>
+
+Version 3.0 • 2026
+
+</p>
 
 </div>
 
 </div>
 
 </body>
+
 </html>

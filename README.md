@@ -1,250 +1,208 @@
-# 🤖 AI Smart Bug Analyzer & Intelligent Fix Advisor
+# 🤖 AI Smart Bug Analyzer & Fix Advisor
+
+An AI-powered Software Defect Analysis platform that automatically analyzes bug reports, identifies root causes, detects duplicate bugs, performs log analysis, and generates intelligent remediation recommendations using Large Language Models (Ollama Llama 3.2), Retrieval-Augmented Generation (RAG), and FAISS vector search.
+
+---
 
 ## 📌 Project Overview
 
-AI Smart Bug Analyzer & Intelligent Fix Advisor is an intelligent web application developed using Flask and Artificial Intelligence techniques to automate bug analysis. The system accepts bug reports, retrieves similar historical bugs using a Retrieval-Augmented Generation (RAG) approach, classifies the bug using AI agents, analyzes stack traces, and provides intelligent fix recommendations.
+AI Smart Bug Analyzer & Fix Advisor is an intelligent bug analysis system that assists software developers in diagnosing and resolving software defects.
 
-This project was developed as part of the **Infosys Springboard Internship - Milestone 2**.
-
----
-
-# 🎯 Objectives
-
-- Automate software bug analysis.
-- Reduce manual bug triaging effort.
-- Retrieve similar historical bugs.
-- Classify bug severity and priority.
-- Analyze stack traces and log files.
-- Suggest intelligent fixes based on bug type.
-- Generate structured analysis reports.
+The platform combines multiple AI agents to analyze uploaded bug reports and log files, retrieve historical defects, identify similar issues, determine the probable root cause, and recommend actionable fixes.
 
 ---
 
-# 🚀 Features
+# 🚀 Milestone 3 Features
 
-## ✅ Bug Submission Module
-
-- Submit bug descriptions.
-- Upload bug report files.
-- Store bug reports in CSV.
-
----
-
-## ✅ Historical Bug Retrieval (RAG)
-
-- Mozilla Bug Dataset
-- Sentence Transformers
-- FAISS Vector Search
-- Top similar bug retrieval
-
----
-
-## ✅ AI Smart Fix Advisor
-
-Provides:
-
-- Bug Category
-- Priority
-- Root Cause Analysis
-- Impact Analysis
-- Recommended Fixes
-- Testing Recommendations
-- Prevention Tips
-
----
-
-## ✅ Triage Agent (Milestone 2)
-
-Automatically predicts:
-
-- Severity
-- Priority
-- Affected Component
+## ✅ AI Triage Agent
+- Predicts Bug Severity
+- Assigns Priority Level
+- Detects Affected Component
+- Generates AI Reasoning
 - Confidence Score
-- Reasoning
 
 ---
 
-## ✅ Log Analysis Agent (Milestone 2)
+## ✅ Log Analysis Agent
 
-Analyzes stack traces and error logs.
-
-Extracts:
+Automatically extracts:
 
 - Exception Type
 - Failure Point
 - Line Number
 - Code Path
 - Error Message
+- Root Cause
+- Suggested Fix
 
 ---
 
-## ✅ Multi-Agent Orchestration (Milestone 2)
+## ✅ Root Cause Agent
 
-After bug submission:
+Uses Retrieval-Augmented Generation (RAG) with historical defect knowledge to identify:
 
-1. Bug is submitted.
-2. Triage Agent analyzes the bug.
-3. Log Analysis Agent parses logs.
-4. Historical bugs are retrieved.
-5. AI Fix Advisor generates recommendations.
-6. JSON analysis report is generated.
+- Root Cause Hypothesis
+- Confidence Score
+- Supporting Historical Evidence
+
+---
+
+## ✅ Duplicate Detection Agent
+
+Performs semantic similarity search using FAISS.
+
+Displays:
+
+- Top Matching Historical Bugs
+- Similarity Score
+- Historical Resolution Summary
+
+---
+
+## ✅ Remediation Agent
+
+Generates intelligent recommendations including:
+
+- Remediation Summary
+- Recommended Fixes
+- Testing Strategy
+- Prevention Strategy
+
+---
+
+## ✅ Analytics Dashboard
+
+Provides interactive visualizations:
+
+- AI Confidence Chart
+- Severity Analysis Chart
+
+---
+
+## ✅ Reports
+
+Supports:
+
+- Download JSON Report
+- Print Report
+- Analyze Another Bug
+
+---
+
+# 🧠 AI Technologies Used
+
+- Ollama (Llama 3.2)
+- Retrieval-Augmented Generation (RAG)
+- FAISS Vector Database
+- Sentence Transformers
+- Semantic Similarity Search
 
 ---
 
 # 🛠 Technology Stack
 
-## Frontend
+### Frontend
 
 - HTML5
 - CSS3
+- Bootstrap 5
+- JavaScript
+- Chart.js
+- Font Awesome
 
-## Backend
+### Backend
 
 - Python
 - Flask
 
-## AI / ML
+### AI
 
+- Ollama
+- Llama 3.2
 - Sentence Transformers
 - FAISS
-
-## Dataset
-
-- Mozilla Bug Dataset
-
-## Storage
-
-- CSV
-- JSON
 
 ---
 
 # 📂 Project Structure
 
-```text
-AI-SMART-BUG-ANALYZER/
+```
+AI-Smart-Bug-Analyzer/
 
 │── app.py
-│── preprocess.py
-│── build_vector_db.py
-│── search_bug.py
-│── requirements.txt
-│── README.md
 │── bug_reports.csv
+│── build_vector_db.py
+│── preprocess.py
+│── README.md
 
-│
 ├── dataset/
-│   └── mozilla/
-│       ├── clean_mozilla.csv
-│       ├── mozilla_bugs.csv
-│       └── bug_index.faiss
-│
+│     └── mozilla/
+│            ├── clean_mozilla.csv
+│            └── mozilla_bugs.csv
+
 ├── templates/
-│   ├── index.html
-│   └── result.html
-│
+│     ├── index.html
+│     └── result.html
+
 ├── static/
-│
+│     ├── style.css
+│     └── script.js
+
 ├── uploads/
-│
+
 ├── analysis_results/
-│
-└── utils/
-    ├── triage_agent.py
-    └── log_analysis.py
+
+├── utils/
+│     ├── triage_agent.py
+│     ├── log_analysis.py
+│     ├── root_cause_agent.py
+│     ├── duplicate_detection.py
+│     └── remediation_agent.py
 ```
 
 ---
 
-# 🔄 Workflow
-
-```text
-User
-   │
-   ▼
-Bug Submission
-   │
-   ▼
-Triage Agent
-   │
-   ▼
-Log Analysis Agent
-   │
-   ▼
-FAISS Similar Bug Retrieval
-   │
-   ▼
-AI Smart Fix Advisor
-   │
-   ▼
-JSON Report Generation
-   │
-   ▼
-Result Dashboard
-```
-
----
-
-# 📊 Outputs
-
-The application generates:
-
-- Bug Analysis Summary
-- Submitted Bug Report
-- Triage Agent Results
-- Log Analysis Results
-- Similar Historical Bugs
-- AI Smart Fix Recommendations
-- JSON Analysis Report
-
----
-
-# 📁 JSON Output
-
-Every bug analysis is stored inside:
-
-```
-analysis_results/
-```
-
-Example:
-
-```
-bug_1.json
-bug_2.json
-bug_3.json
-```
-
----
-
-# ▶️ Installation
+# ⚙ Installation
 
 Clone the repository
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/YOUR_USERNAME/AI-Smart-Bug-Analyzer.git
 ```
 
-Move into project folder
+Move into project
 
 ```bash
-cd AI-SMART-BUG-ANALYZER
+cd AI-Smart-Bug-Analyzer
 ```
 
-Install dependencies
+Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application
+Run
 
 ```bash
 python app.py
 ```
 
-Open browser
+Open
 
 ```
 http://127.0.0.1:5000
@@ -252,27 +210,60 @@ http://127.0.0.1:5000
 
 ---
 
-# 📸 Application Modules
+# 🔄 Workflow
 
-- Home Page
-- Bug Submission
-- Bug Analysis Summary
-- Triage Agent
-- Log Analysis Agent
-- Similar Historical Bugs
-- AI Smart Fix Advisor
+1. Upload Bug Report
+2. Upload Log File (Optional)
+3. AI Triage Analysis
+4. Log Analysis
+5. Root Cause Detection
+6. Duplicate Detection
+7. Remediation Recommendation
+8. Analytics Dashboard
+9. Download Report
 
 ---
 
-# 🎯 Milestone 2 Deliverables Completed
+# 📊 Dashboard Modules
 
-✅ Triage Agent
+- Executive Summary
+- Bug Information
+- AI Triage
+- Root Cause Analysis
+- Log Analysis
+- Duplicate Detection
+- Remediation
+- Analytics Dashboard
+- Reports
 
-✅ Log Analysis Agent
+---
 
-✅ Multi-Agent Orchestration
+# 🎯 Key Highlights
 
-✅ Structured JSON Output
+- AI-Based Multi-Agent Architecture
+- Retrieval-Augmented Generation (RAG)
+- Historical Bug Retrieval
+- Semantic Similarity Search
+- Interactive Dashboard
+- Enterprise UI
+- JSON Report Generation
+- Print Support
+- Analytics Charts
+- Intelligent Bug Resolution
+
+---
+
+# 📈 Future Enhancements
+
+- PDF Report Download
+- Email Notifications
+- Jira Integration
+- GitHub Issues Integration
+- Docker Deployment
+- Kubernetes Support
+- Cloud Deployment (AWS/Azure/GCP)
+- Multi-Language Bug Analysis
+- Real-Time Bug Monitoring
 
 ---
 
@@ -280,14 +271,14 @@ http://127.0.0.1:5000
 
 **Vyshnavi Polavarapu**
 
-B.Tech CSE (AI & ML)
+B.Tech (CSE - AI & ML)
 
-Narayana Engineering College, Nellore
+AI Smart Bug Analyzer & Fix Advisor
+
+2026
 
 ---
 
-# 📜 Internship
+# 📄 License
 
-**Infosys Springboard Internship**
-
-**Milestone 2 Project**
+This project is developed for educational and research purposes.

@@ -134,3 +134,185 @@ Invalid password.",,18-07-2026 10:37 AM
 133,Application crashes on login page,logfile.txt,23-07-2026 08:08 PM
 134,Application crashes on login page,logfile.txt,23-07-2026 08:10 PM
 135,Application crashes on login,logfile.txt,23-07-2026 08:20 PM
+136,Application crashes on login page,logfile.txt,24-07-2026 03:14 PM
+137,Application crashes on login page,logfile.txt,24-07-2026 03:15 PM
+138,Application crashes on login page,logfile.txt,24-07-2026 04:46 PM
+139,Application crashes on login page,logfile.txt,24-07-2026 04:47 PM
+140,Application crashes on login page,logfile.txt,24-07-2026 04:49 PM
+141,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 05:38 PM
+142,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 05:40 PM
+143,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 05:42 PM
+144,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 05:43 PM
+145,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 05:49 PM
+146,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 05:53 PM
+147,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 05:55 PM
+148,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 06:02 PM
+149,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 06:06 PM
+150,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 06:09 PM
+151,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 08:35 PM
+152,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 08:36 PM
+153,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 08:37 PM
+154,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 08:38 PM
+155,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 08:40 PM
+156,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 08:41 PM
+157,Application crashes on login,Application crashes on login page,High,logfile.txt,24-07-2026 08:46 PM
+158,Application crashes on login,Application crashes on login,High,,24-07-2026 08:47 PM
+159,Application crashes on login,Application crashes on login,High,,24-07-2026 08:47 PM
+160,Application crashes on login,Application crashes on login,High,,24-07-2026 08:53 PM
+161,Application crashes on login,Application crashes on login,High,,24-07-2026 09:12 PM
+162,application crashes when login the page,the application crashes when it opens the login page,High,logfile.txt,25-07-2026 09:13 AM
+163,application crashes when login the page,the application crashes when it opens the login page,High,logfile.txt,25-07-2026 09:14 AM
+164,application crashes when login the page,the application crashes when it opens the login page,High,logfile.txt,25-07-2026 09:15 AM
+165,application crashes when login the page,the application crashes when it opens the login page,High,logfile.txt,25-07-2026 09:20 AM
+166,application crashes when login the page,the application crashes when it opens the login page,High,logfile.txt,25-07-2026 09:27 AM
+167,application crashes when login the page,application crashes when login the page while opening,High,logfile.txt,25-07-2026 01:53 PM
+168,application crashes when login the page,application crashes when login the page while opening,High,logfile.txt,25-07-2026 01:54 PM
+169,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:32 PM
+170,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:32 PM
+171,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:34 PM
+172,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:36 PM
+173,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:38 PM
+174,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:39 PM
+175,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:39 PM
+176,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:41 PM
+177,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:43 PM
+178,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:46 PM
+179,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:46 PM
+180,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:47 PM
+181,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:49 PM
+182,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:52 PM
+183,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:52 PM
+184,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:53 PM
+185,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:54 PM
+186,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 07:58 PM
+187,application crashes when login the page,application crashes when login page enters,High,,25-07-2026 08:02 PM
+188,Application crashes on login,Application crashes on login page opens,High,,27-07-2026 08:34 PM
+189,Application crashes on login,Application crashes on login page opens,High,,27-07-2026 08:37 PM
+190,Application crashes on login,Application crashes on login page opens,High,,27-07-2026 09:08 PM
+191,Login Page Crashes After Invalid Credentials,The application crashes when a user enters invalid login credentials three times. The login page becomes unresponsive and a NullPointerException is generated.,High,,28-07-2026 02:30 PM
+192,Login Failed,The application crashes whenever a user tries to log in using valid credentials.,"Traceback (most recent call last):
+  File ""app.py"", line 25, in login
+    user.authenticate()
+AttributeError: 'NoneType' object has no attribute 'authenticate'",,29-07-2026 08:03 PM
+196,Login Failed,The application crashes whenever a user tries to log in using valid credentials.,"Traceback (most recent call last):
+  File ""app.py"", line 25, in login
+    user.authenticate()
+AttributeError: 'NoneType' object has no attribute 'authenticate'",,29-07-2026 08:04 PM
+200,Login Failed,The application crashes whenever a user tries to log in using valid credentials.,"Traceback (most recent call last):
+  File ""app.py"", line 25, in login
+    user.authenticate()
+AttributeError: 'NoneType' object has no attribute 'authenticate'",,29-07-2026 08:04 PM
+204,Login Failed,The application crashes whenever a user tries to log in using valid credentials.,"Traceback (most recent call last):
+  File ""app.py"", line 25, in login
+    user.authenticate()
+AttributeError: 'NoneType' object has no attribute 'authenticate'",,29-07-2026 08:06 PM
+208,Login Failed,The application crashes whenever a user tries to log in using valid credentials.,"Traceback (most recent call last):
+  File ""app.py"", line 25, in login
+    user.authenticate()
+AttributeError: 'NoneType' object has no attribute 'authenticate'",,29-07-2026 08:06 PM
+212,Login page crashes,Login page crashes,NullPointerException at LoginController.java:45,,30-07-2026 08:10 PM
+213,Login page crashes,Login page crashes,NullPointerException at LoginController.java:45,,31-07-2026 06:49 PM
+214,Login page crashes,Login page crashes,NullPointerException at LoginController.java:45,,31-07-2026 06:51 PM
+215,Login page crashes,Login page crashes,NullPointerException at LoginController.java:45,,31-07-2026 06:53 PM
+216,Login page crashes,Login page crashes,NullPointerException at LoginController.java:45,,31-07-2026 06:54 PM
+217,Login page crashes,Login page crashes,NullPointerException at LoginController.java:45,,31-07-2026 08:42 PM
+218,Login API Throws NullPointerException,Login API Throws NullPointerException,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 08:45 PM
+225,Login API Throws NullPointerException,Login API Throws NullPointerException,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:02 PM
+232,Application crashes on login,Application crashes on login,"Traceback (most recent call last):
+  File ""app.py"", line 142, in submit_bug
+    result = analyze_bug(description)
+  File ""utils/log_analysis.py"", line 58, in analyze_bug
+    severity = classify_bug(log_data)
+  File ""utils/classifier.py"", line 24, in classify_bug
+    raise ValueError(""Invalid log format"")
+
+ValueError: Invalid log format",,31-07-2026 10:11 PM
+241,Application crashes on login,Application crashes on login,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:11 PM
+248,Application crashes on login,Application crashes on login,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:11 PM
+255,Application crashes on login,Application crashes on login,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:12 PM
+262,Application crashes on login,Application crashes on login,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:12 PM
+269,Application crashes on login,Application crashes on login,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:12 PM
+276,Login API Throws NullPointerException,Login API Throws NullPointerException,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:15 PM
+283,Login API Throws NullPointerException,Login API Throws NullPointerException,"java.lang.NullPointerException: Cannot invoke ""String.trim()"" because ""username"" is null
+    at com.company.auth.LoginService.validateUser(LoginService.java:78)
+    at com.company.auth.LoginController.login(LoginController.java:42)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1082)
+    at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)",,31-07-2026 10:19 PM
+290,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,01-08-2026 08:06 AM
+291,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 08:42 AM
+292,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:21 PM
+293,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:21 PM
+294,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:29 PM
+295,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:30 PM
+296,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:32 PM
+297,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:35 PM
+298,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:37 PM
+299,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:40 PM
+300,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:43 PM
+301,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 05:52 PM
+302,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 06:11 PM
+303,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 06:14 PM
+304,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 06:17 PM
+305,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 06:17 PM
+306,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 06:20 PM
+307,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,01-08-2026 06:34 PM
+308,Login API Throws NullPointerException,Login API Throws NullPointerException,ERROR AuthenticationController - Login Failed,,01-08-2026 06:44 PM
+309,Login API Throws NullPointerException,Login API Throws NullPointerException,ERROR AuthenticationController - Login Failed,,01-08-2026 06:46 PM
+310,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,02-08-2026 10:36 AM
+311,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,02-08-2026 10:39 AM
+312,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,02-08-2026 10:56 AM
+313,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 10:56 AM
+314,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 10:56 AM
+315,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 10:57 AM
+316,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 11:02 AM
+317,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 11:07 AM
