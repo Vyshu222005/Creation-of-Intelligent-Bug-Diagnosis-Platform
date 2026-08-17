@@ -1,2024 +1,1175 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>AI Smart Bug Analyzer Dashboard</title>
-
-<!-- Bootstrap -->
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Font Awesome -->
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-
-<!-- Chart.js -->
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bug Analysis Result</title>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Segoe UI",sans-serif;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box}
 body{
-
-background:#0f172a;
-
-color:white;
-
-overflow-x:hidden;
-
+ margin:0;font-family:Inter,Arial,sans-serif;color:#eaf2ff;
+ background:#061426
 }
-
-/* ===========================
-SIDEBAR
-=========================== */
-
-.sidebar{
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-width:260px;
-
-height:100vh;
-
-background:#111827;
-
-padding:25px;
-
-overflow-y:auto;
-
-border-right:1px solid rgba(255,255,255,.08);
-
-z-index:1000;
-
+header{
+ height:72px;background:#06101f;border-bottom:1px solid #183b5e
 }
-
-.sidebar::-webkit-scrollbar{
-
-width:6px;
-
+.nav{
+ width:min(1120px,calc(100% - 32px));height:100%;margin:auto;
+ display:flex;align-items:center;justify-content:space-between
 }
-
-.sidebar::-webkit-scrollbar-thumb{
-
-background:#2563eb;
-
-border-radius:10px;
-
-}
-
+.brand{display:flex;align-items:center;gap:11px}
 .logo{
-
-text-align:center;
-
-margin-bottom:30px;
-
+ width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+ background:linear-gradient(135deg,#2563eb,#06b6d4);font-size:21px
 }
-
-
-.logo i{
-    font-size:60px;
-    color:#22d3ee;
-    margin-bottom:15px;
-
+.brand h1{margin:0;font-size:19px}
+.brand p{margin:3px 0 0;color:#7fa8d4;font-size:13px}
+nav a{
+ color:#8fc7ef;text-decoration:none;font-size:13px;margin-left:18px
 }
-
-.logo h3{
-
-font-size:24px;
-
-font-weight:700;
-
-margin:0;
-
+main{width:min(1120px,calc(100% - 32px));margin:auto;padding:25px 0 45px}
+.crumb{color:#5f8bb2;font-size:13px;margin-bottom:8px}
+.title-row{
+ display:flex;align-items:flex-start;justify-content:space-between;
+ gap:20px;margin-bottom:18px
 }
-
-.logo p{
-
-color:#94a3b8;
-
-font-size:14px;
-
-margin-top:5px;
-
+h2{margin:0 0 6px;font-size:32px}
+.subtitle{margin:0;color:#7fa5cb;font-size:13px}
+.badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.badge{
+ padding:7px 10px;border-radius:999px;font-size:13px;font-weight:800;
+ border:1px solid #285276;background:#0a2037
 }
-
-.sidebar a{
-
-display:block;
-
-padding:12px 16px;
-
-margin-bottom:8px;
-
-border-radius:10px;
-
-text-decoration:none;
-
-color:#cbd5e1;
-
-transition:.3s;
-
+.critical{color:#ff9ea8;border-color:#9f3440}
+.p1{color:#ffd27b;border-color:#8a6423}
+.card{
+ border:1px solid #21496d;border-radius:13px;background:#081b30;
+ padding:18px;margin-bottom:13px
 }
-
-.sidebar a:hover{
-
-background:#2563eb;
-
-padding-left:22px;
-
-color:white;
-
+.card-title{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:12px;margin-bottom:14px
 }
-
-.sidebar i{
-
-width:25px;
-
+.card-title h3{margin:0;font-size:17px}
+.tag{color:#5cc9ff;font-size:10px;font-weight:800}
+.grid4{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:9px
 }
-
-/* ===========================
-MAIN
-=========================== */
-
-.main{
-
-margin-left:280px;
-
-padding:35px;
-
+.metric{
+ background:#07172a;border:1px solid #193a59;border-radius:9px;padding:12px
 }
-
-/* ===========================
-HERO
-=========================== */
-
-.hero{
-
-background: linear-gradient(135deg, #111827, #1f2937);
-
-padding:35px;
-
-border-radius:18px;
-
-margin-bottom:35px;
-
-box-shadow:0 8px 25px rgba(0,0,0,.25);
-
+.metric span{display:block;color:#668db5;font-size:10px;text-transform:uppercase;margin-bottom:5px}
+.metric strong{font-size:16px}
+.info{
+ background:#07172a;border:1px solid #193a59;border-radius:9px;
+ padding:13px;color:#cfe0f3;font:12px/1.6 Consolas,"Courier New",monospace;
+ white-space:pre-wrap;word-break:break-word
 }
-
-.hero h1{
-
-font-size:38px;
-
-font-weight:700;
-
-margin-bottom:12px;
-
+.two{
+ display:grid;grid-template-columns:1fr 1fr;gap:13px
 }
-
-.hero p{
-
-font-size:16px;
-
-color:#e2e8f0;
-
+.issue{
+ border:1px solid #193a59;background:#07172a;border-radius:9px;padding:13px;
+ margin-bottom:9px
 }
-
-/* ===========================
-SECTION
-=========================== */
-
-.section-title{
-
-font-size:28px;
-
-font-weight:700;
-
-margin-bottom:20px;
-
+.issue:last-child{margin-bottom:0}
+.issue-head{
+ display:flex;justify-content:space-between;gap:10px;margin-bottom:9px
 }
-
-.section-title i{
-
-color:#38bdf8;
-
-margin-right:10px;
-
+.issue-head strong{font-size:13px;color:#ffadba}
+.small{color:#7699bd;font-size:13px}
+.line{
+ display:grid;grid-template-columns:120px 1fr;gap:8px;
+ margin:5px 0;font-size:13px
 }
-
-/* ===========================
-CARDS
-=========================== */
-
-.card-box{
-
-background:#1e293b;
-
-border-radius:16px;
-
-padding:24px;
-
-border:1px solid rgba(255,255,255,.08);
-
-height:100%;
-
-transition:.3s;
-
+.line b{color:#7599be}
+.line span{color:#cbdced;word-break:break-word}
+.cause{
+ font-size:16px;line-height:1.65;color:#e8f2ff;
+ background:#07172a;border-left:3px solid #22b8f0;
+ padding:14px;border-radius:7px
 }
-
-.card-box:hover{
-
-transform:translateY(-5px);
-
-box-shadow:0 10px 20px rgba(0,0,0,.30);
-
+.confidence{margin-top:12px}
+.conf-head{display:flex;justify-content:space-between;color:#7fa5cb;font-size:13px}
+.bar{height:7px;background:#1a2d44;border-radius:20px;margin-top:5px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,#2563eb,#22d3ee)}
+ul{margin:7px 0 0;padding-left:18px;color:#bfd1e5;font-size:13px;line-height:1.75}
+.fix-grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:13px
 }
-
-.card-box h6{
-
-font-size:14px;
-
-color:#94a3b8;
-
-margin-top:15px;
-
+.fix-list{
+ background:#07172a;border:1px solid #193a59;border-radius:9px;padding:13px
 }
-
-.card-box h3{
-
-    font-weight:700;
-
-    margin-top:8px;
-
-    font-size:2rem;
-
-    word-break:break-word;
-
-    overflow-wrap:anywhere;
-
-    white-space:normal;
-
-    text-align:center;
-
+.fix-list h4{margin:0 0 8px;font-size:13px;color:#68d3ff}
+.match{
+ background:#07172a;border:1px solid #193a59;border-radius:9px;
+ padding:12px;margin-bottom:8px
 }
-
-.card-box i{
-
-font-size:38px;
-
-color:#38bdf8;
-
+.match:last-child{margin-bottom:0}
+.match-top{display:flex;justify-content:space-between;gap:10px}
+.match-top strong{font-size:13px}
+.sim{color:#5ed3ff;font-size:13px;font-weight:800}
+.match p{margin:6px 0 0;color:#8daecc;font-size:13px;line-height:1.5}
+.summary{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:9px
 }
-
-/* ===========================
-GLASS
-=========================== */
-
-.glass{
-
-background:#1e293b;
-
-border-radius:16px;
-
-padding:25px;
-
-margin-bottom:25px;
-
-border:1px solid rgba(255,255,255,.08);
-
+.actions{
+ display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px
 }
-
-/* ===========================
-TABLE
-=========================== */
-
-.table{
-
-margin:0;
-
+.btn{
+ display:inline-block;padding:10px 14px;border-radius:8px;
+ text-decoration:none;font-size:13px;font-weight:800;border:1px solid #285276;
+ color:#dff3ff;background:#0a2037
 }
-
-.table th{
-
-background:#2563eb;
-
-color:white;
-
-width:30%;
-
-}
-
-.table td{
-
-color:white;
-
-}
-
-/* ===========================
-INFO BOX
-=========================== */
-
-.info-box{
-
-background:#273449;
-
-padding:18px;
-
-border-radius:12px;
-
-height:100%;
-
-}
-
-.info-box h6{
-
-color:#38bdf8;
-
-font-weight:700;
-
-margin-bottom:10px;
-
-}
-
-.info-box p{
-
-margin:0;
-
-line-height:1.7;
-
-word-break:break-word;
-
-}
-
-/* ===========================
-CHART
-=========================== */
-
-.chart-box{
-
-background:#1e293b;
-
-padding:20px;
-
-border-radius:15px;
-
-}
-
-/* ===========================
-FOOTER
-=========================== */
-
+.primary{background:linear-gradient(135deg,#2563eb,#06a8df);border:0;color:white}
 footer{
+ text-align:center;color:#567b9f;font-size:10px;margin-top:25px
+}
+@media(max-width:780px){
+ .title-row{display:block}.badges{justify-content:flex-start;margin-top:10px}
+ .grid4,.summary{grid-template-columns:1fr 1fr}
+ .two,.fix-grid{grid-template-columns:1fr}
+ .line{grid-template-columns:100px 1fr}
+}
+@media(max-width:460px){
+ .grid4,.summary{grid-template-columns:1fr}
+}
 
-text-align:center;
+/* Readability improvements */
+.brand h1{font-size:19px}
+.brand p{font-size:12px}
+nav a{font-size:13px}
+.crumb{font-size:12px}
+h2{font-size:32px;line-height:1.2}
+.subtitle{font-size:13px;line-height:1.5}
+.card-title h3{font-size:17px}
+.metric span{font-size:10px}
+.metric strong{font-size:16px}
+.info{font-size:13px;line-height:1.7}
+.line{font-size:13px;line-height:1.55}
+.line b{font-size:12px}
+.line span{font-size:13px}
+.issue-head strong{font-size:13px}
+.small{font-size:11px}
+.cause{font-size:16px;line-height:1.7}
+.conf-head{font-size:12px}
+ul{font-size:13px;line-height:1.8}
+.match-top strong{font-size:13px}
+.match p{font-size:12px;line-height:1.65}
+.btn{font-size:12px}
+footer{font-size:10px}
 
-padding:35px;
+/* ============================================================
+   MEDIUM & CLEAN TYPOGRAPHY
+   ============================================================ */
 
-color:#94a3b8;
+.brand h1 {
+    font-size: 20px;
+}
 
-font-size:14px;
+.brand p {
+    font-size: 12px;
+}
 
-margin-top:50px;
+nav a {
+    font-size: 13px;
+}
+
+.crumb {
+    font-size: 12px;
+}
+
+h2 {
+    font-size: 30px;
+    line-height: 1.25;
+}
+
+.subtitle {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.card-title h3 {
+    font-size: 17px;
+}
+
+.metric span {
+    font-size: 11px;
+}
+
+.metric strong {
+    font-size: 16px;
+}
+
+.info {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.line {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.line b {
+    font-size: 12px;
+}
+
+.line span {
+    font-size: 13px;
+}
+
+.issue-head strong {
+    font-size: 14px;
+}
+
+.small {
+    font-size: 12px;
+}
+
+.cause {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.conf-head {
+    font-size: 12px;
+}
+
+ul {
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.match-top strong {
+    font-size: 14px;
+}
+
+.match p {
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.btn {
+    font-size: 13px;
+}
+
+footer {
+    font-size: 11px;
+}
+/* ============================================================
+   DUPLICATE DETECTION
+============================================================ */
+
+.duplicate-box {
+    background: #0b1a2d;
+    border: 1px solid #ef4444;
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 12px;
+}
+
+.duplicate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.duplicate-header strong {
+    font-size: 15px;
+    color: #f87171;
+}
+
+.duplicate-id {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.duplicate-score {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f87171;
+}
+
+.duplicate-description {
+    margin-top: 15px;
+    padding: 14px;
+    background: #081525;
+    border-radius: 8px;
+}
+
+.duplicate-description strong {
+    font-size: 13px;
+    color: #7dd3fc;
+}
+
+.duplicate-description p {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.duplicate-meta {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.duplicate-meta strong {
+    color: #e2e8f0;
+    margin-left: 5px;
+}
+
+.duplicate-resolution {
+    margin-top: 14px;
+    padding: 12px;
+    border-left: 3px solid #38bdf8;
+    background: #081525;
+}
+
+.duplicate-resolution strong {
+    font-size: 13px;
+    color: #7dd3fc;
+}
+
+.duplicate-resolution p {
+    margin: 7px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.no-duplicate {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+    background: #081c18;
+    border: 1px solid #14532d;
+    border-radius: 10px;
+}
+
+.success-icon {
+    font-size: 18px;
+    color: #4ade80;
+    font-weight: 700;
+}
+
+.no-duplicate strong {
+    font-size: 14px;
+    color: #4ade80;
+}
+
+.no-duplicate p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #94a3b8;
+}
+/* ============================================================
+   KNOWLEDGE BASE GROWTH
+============================================================ */
+
+.kb-success,
+.kb-pending {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-bottom: 12px;
+}
+
+
+.kb-success {
+
+    background: #06291d;
+
+    border: 1px solid #146b4b;
 
 }
 
-/* ===========================
-RESPONSIVE
-=========================== */
 
-@media(max-width:992px){
+.kb-pending {
 
-.sidebar{
+    background: #071c31;
 
-position:relative;
-
-width:100%;
-
-height:auto;
+    border: 1px solid #245276;
 
 }
 
-.main{
 
-margin-left:0;
+.kb-icon {
 
-padding:20px;
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: #0c3850;
+
+    color: #48d6ff;
+
+    font-size: 18px;
+
+    font-weight: bold;
 
 }
 
-.hero h1{
 
-font-size:30px;
+.kb-success .kb-icon {
+
+    background: #0b5a3d;
+
+    color: #48efa5;
 
 }
 
+
+.kb-success strong {
+
+    color: #45e99d;
+
+    font-size: 14px;
+
 }
 
+
+.kb-pending strong {
+
+    color: #72d8ff;
+
+    font-size: 14px;
+
+}
+
+
+.kb-success p,
+.kb-pending p {
+
+    margin: 4px 0 0;
+
+    color: #91aec8;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+.kb-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 9px;
+
+}
+
+
+.kb-button {
+
+    width: 100%;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    padding: 11px 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #0891b2
+        );
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.kb-button:hover {
+
+    opacity: 0.9;
+
+}
+
+
+.kb-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+}
+
+
+.kb-message {
+
+    margin-top: 10px;
+
+    padding: 10px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+.kb-message.success {
+
+    background: #06291d;
+
+    border: 1px solid #146b4b;
+
+    color: #8ff0c4;
+
+}
+
+
+.kb-message.error {
+
+    background: #32141a;
+
+    border: 1px solid #8b3544;
+
+    color: #ffabb8;
+
+}
+
+
+@media (max-width: 650px) {
+
+    .kb-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
 </style>
-
 </head>
-
 <body>
 
-<!-- ===========================
-SIDEBAR
-=========================== -->
+<header>
+<div class="nav">
+ <div class="brand">
+  <div class="logo">🤖</div>
+  <div>
+   <h1>Intelligent Bug Diagnosis Platform</h1>
+   <p>AI-Powered Software Defect Analysis &amp; Fix Recommendation</p>
+  </div>
+ </div>
+ <nav>
+  <a href="{{ url_for('index') }}">Analyze</a>
+  <a href="{{ url_for('analytics') }}">Analytics</a>
+ </nav>
+</div>
+</header>
 
-<div class="sidebar">
+<main>
+<div class="crumb">Analysis Result / Bug #{{ bug_id }}</div>
 
-<div class="logo">
-
-<i class="fas fa-shield-halved"></i>
-
-<h3>AI Smart</h3>
-
-<h3>Bug Analyzer</h3>
-
-<p>Enterprise AI Platform</p>
-
+<div class="title-row">
+ <div>
+  <h2>Bug Analysis Result</h2>
+  <p class="subtitle">Multi-agent intelligent software defect analysis and fix recommendation report.</p>
+ </div>
+ <div class="badges">
+  <div class="badge critical">{{ triage.get('severity','Unknown') }}</div>
+  <div class="badge p1">{{ triage.get('priority','P2') }}</div>
+ </div>
 </div>
 
-<a href="#summary">
-<i class="fas fa-chart-line"></i>
-Executive Summary
-</a>
-
-<a href="#bug">
-<i class="fas fa-bug"></i>
-Bug Information
-</a>
-
-<a href="#triage">
-<i class="fas fa-brain"></i>
-AI Triage
-</a>
-
-<a href="#logs">
-<i class="fas fa-file-code"></i>
-Log Analysis
-</a>
-
-<a href="#root">
-<i class="fas fa-magnifying-glass"></i>
-Root Cause
-</a>
-
-<a href="#duplicate">
-<i class="fas fa-copy"></i>
-Duplicate Detection
-</a>
-
-<a href="#remediation">
-<i class="fas fa-screwdriver-wrench"></i>
-Remediation
-</a>
-
-<a href="#analytics">
-<i class="fas fa-chart-pie"></i>
-Analytics
-</a>
-
-<a href="#reports">
-<i class="fas fa-download"></i>
-Reports
-</a>
-
-</div>
-
-<!-- ===========================
-MAIN CONTENT
-=========================== -->
-
-<div class="main">
-     <!-- ===================================================== -->
-<!-- HERO SECTION -->
-<!-- ===================================================== -->
-
-<div class="hero">
-
-<div class="row align-items-center">
-
-<div class="col-lg-8">
-
-<h1>
-
-AI Smart Bug Analyzer & Fix Advisor
-
-</h1>
-
-<p>
-
-Enterprise AI-powered Software Defect Analysis Dashboard using
-AI Triage, Log Analysis, Root Cause Analysis,
-Duplicate Detection and Intelligent Remediation.
-
-</p>
-
-<br>
-
-<span class="badge bg-success p-2">
-
-<i class="fas fa-circle-check"></i>
-
-AI Analysis Ready
-
-</span>
-
-<span class="badge bg-primary p-2 ms-2">
-
-<i class="fas fa-microchip"></i>
-
-LLM Engine
-
-</span>
-
-<span class="badge bg-warning text-dark p-2 ms-2">
-
-<i class="fas fa-database"></i>
-
-Vector Database
-
-</span>
-
-</div>
-
-<div class="col-lg-4 text-center">
-
-<i class="fas fa-shield-halved"
-style="font-size:110px;color:#22d3ee;"></i>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ===================================================== -->
-<!-- EXECUTIVE SUMMARY -->
-<!-- ===================================================== -->
-
-<section id="summary">
-
-<h2 class="section-title">
-
-<i class="fas fa-chart-line"></i>
-
-Executive Summary
-
-</h2>
-
-<div class="row g-4">
-
-<div class="col-lg-3">
-
-<div class="card-box text-center">
-
-<i class="fas fa-bug"></i>
-
-<h6>Bug ID</h6>
-
-<h3>{{ bug_id }}</h3>
-
-</div>
-
-</div>
-
-<div class="col-lg-3">
-
-<div class="card-box text-center">
-
-<i class="fas fa-triangle-exclamation text-danger"></i>
-
-<h6>Severity</h6>
-
-<h3>{{ triage.severity }}</h3>
-
-</div>
-
-</div>
-
-<div class="col-lg-3">
-
-<div class="card-box text-center">
-
-<i class="fas fa-fire text-warning"></i>
-
-<h6>Priority</h6>
-
-<h3>{{ triage.priority }}</h3>
-
-</div>
-
-</div>
-
-<div class="col-lg-3">
-
-<div class="card-box text-center">
-
-<i class="fas fa-chart-column text-success"></i>
-
-<h6>Confidence</h6>
-
-<h3>{{ triage.confidence }}%</h3>
-
-</div>
-
-</div>
-
-</div>
-
+<section class="card">
+ <div class="card-title">
+  <h3>🐞 Bug Information</h3>
+  <span class="tag">TRIAGE OUTPUT</span>
+ </div>
+
+ <div class="grid4">
+  <div class="metric"><span>Bug ID</span><strong>#{{ bug_id }}</strong></div>
+  <div class="metric"><span>Severity</span><strong>{{ triage.get('severity','Unknown') }}</strong></div>
+  <div class="metric"><span>Priority</span><strong>{{ triage.get('priority','P2') }}</strong></div>
+  <div class="metric"><span>Component</span><strong>{{ triage.get('component','Unknown') }}</strong></div>
+ </div>
+
+ <div style="margin-top:10px" class="info">{{ bug_title }}</div>
 </section>
 
-<br><br>
+<section class="two">
+ <section class="card">
+  <div class="card-title">
+   <h3>🎯 Triage Analysis</h3>
+   <span class="tag">AI AGENT</span>
+  </div>
+  <div class="line"><b>Severity</b><span>{{ triage.get('severity','Unknown') }}</span></div>
+  <div class="line"><b>Priority</b><span>{{ triage.get('priority','P2') }}</span></div>
+  <div class="line"><b>Component</b><span>{{ triage.get('component','Unknown') }}</span></div>
+  <div class="line"><b>Confidence</b><span>{{ triage.get('confidence',0) }}%</span></div>
+  <div class="line"><b>Reasoning</b><span>{{ triage.get('reasoning','AI triage completed.') }}</span></div>
+ </section>
 
-<!-- ===================================================== -->
-<!-- BUG INFORMATION -->
-<!-- ===================================================== -->
-
-<section id="bug">
-
-<h2 class="section-title">
-
-<i class="fas fa-bug"></i>
-
-Bug Information
-
-</h2>
-
-<div class="glass">
-
-<table class="table table-dark table-bordered align-middle">
-
-<tbody>
-
-<tr>
-
-<th>Bug ID</th>
-
-<td>{{ bug_id }}</td>
-
-</tr>
-
-<tr>
-
-<th>Bug Title</th>
-
-<td>{{ bug_title }}</td>
-
-</tr>
-
-<tr>
-
-<th>Bug Description</th>
-
-<td>{{ user_bug }}</td>
-
-</tr>
-
-<tr>
-
-<th>Uploaded Log File</th>
-
-<td>{{ filename }}</td>
-
-</tr>
-
-<tr>
-
-<th>Analysis Status</th>
-
-<td>
-
-<span class="badge bg-success">
-
-Completed Successfully
-
-</span>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
+ <section class="card">
+  <div class="card-title">
+   <h3>📋 Submitted Stack Trace</h3>
+   <span class="tag">INPUT</span>
+  </div>
+  <div class="info">{{ bug_report }}</div>
+ </section>
 </section>
 
-<br><br>
-
-<!-- ===================================================== -->
-<!-- AI TRIAGE ANALYSIS -->
-<!-- ===================================================== -->
-
-<section id="triage">
-
-<h2 class="section-title">
-
-<i class="fas fa-brain"></i>
-
-AI Triage Analysis
-
-</h2>
-
-<div class="row">
-
-<div class="col-lg-7">
-
-<div class="glass">
-
-<table class="table table-dark table-bordered">
-
-<tbody>
-
-<tr>
-
-<th width="35%">
-
-Severity
-
-</th>
-
-<td>
-
-<span class="badge bg-danger">
-
-{{ triage.severity }}
-
-</span>
-
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-
-Priority
-
-</th>
-
-<td>
-
-{{ triage.priority }}
-
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-
-Affected Component
-
-</th>
-
-<td>
-
-{{ triage.component }}
-
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-
-Confidence
-
-</th>
-
-<td>
-
-<div class="progress">
-
-<div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-
-style="width:80%;">
-
-{{ triage.confidence }}%
-
-</div>
-
-</div>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-<div class="col-lg-5">
-
-<div class="glass">
-
-<h5>
-
-<i class="fas fa-lightbulb text-warning"></i>
-
-AI Reasoning
-
-</h5>
-
-<hr>
-
-<p>
-
-{{ triage.reasoning }}
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
+<section class="card">
+ <div class="card-title">
+  <h3>📋 Log Analysis</h3>
+  <span class="tag">AI AGENT</span>
+ </div>
+
+ {% set issues = log_analysis.get('issues', []) if log_analysis is mapping else [] %}
+ {% if issues %}
+  {% for issue in issues %}
+  <div class="issue">
+   <div class="issue-head">
+    <strong>Issue {{ loop.index }} — {{ issue.get('exception_type','Unknown') }}</strong>
+    <span class="small">Line {{ issue.get('line_number','-') }}</span>
+   </div>
+   <div class="line"><b>Failure Point</b><span>{{ issue.get('failure_point','Not identified') }}</span></div>
+   <div class="line"><b>Code Path</b><span>{{ issue.get('code_path','Not identified') }}</span></div>
+   <div class="line"><b>Error Message</b><span>{{ issue.get('error_message','Not available') }}</span></div>
+   <div class="line"><b>Root Cause</b><span>{{ issue.get('root_cause','Requires review of the failure pattern.') }}</span></div>
+  </div>
+  {% endfor %}
+ {% else %}
+  <div class="info">No structured exception was detected. Review the submitted stack trace manually.</div>
+ {% endif %}
 </section>
 
-<br><br>
-
-<!-- ===================================================== -->
-<!-- TRIAGE SUMMARY -->
-<!-- ===================================================== -->
-
-<div class="row g-4">
-
-<div class="col-lg-4">
-
-<div class="card-box text-center">
-
-<i class="fas fa-layer-group"></i>
-
-<h6>
-
-Affected Component
-
-</h6>
-
-
-<h3 class="component-text">{{ triage.component }}</h3>
-
-</div>
-
-
-</div>
-
-<div class="col-lg-4">
-
-<div class="card-box text-center">
-
-<i class="fas fa-check-circle"></i>
-
-<h6>
-
-Confidence Score
-
-</h6>
-
-<h3>{{ triage.confidence }}%</h3>
-
-</div>
-
-</div>
-
-<div class="col-lg-4">
-
-<div class="card-box text-center">
-
-<i class="fas fa-list-check"></i>
-
-<h6>
-
-Priority Level
-
-</h6>
-
-<h3>
-
-{{ triage.priority }}
-
-</h3>
-
-</div>
-
-</div>
-
-</div>
-
-<br><br>
-
-<!-- ===================================================== -->
-<!-- ROOT CAUSE ANALYSIS -->
-<!-- ===================================================== -->
-
-<section id="root">
-
-<h2 class="section-title">
-
-<i class="fas fa-magnifying-glass"></i>
-
-Root Cause Analysis
-
-</h2>
-
-<div class="row g-4">
-
-<div class="col-lg-5">
-
-<div class="glass">
-
-<h5 class="mb-3">
-
-Root Cause Hypothesis
-
-</h5>
-
-<table class="table table-dark table-bordered">
-
-<tbody>
-
-<tr>
-
-<th width="35%">Root Cause</th>
-
-<td>{{ root_cause.root_cause }}</td>
-
-</tr>
-
-<tr>
-
-<th>Confidence</th>
-
-<td>
-
-<span class="badge bg-success">
-
-{{ root_cause.confidence }}
-
-</span>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-<div class="col-lg-7">
-
-<div class="glass">
-
-<h5 class="mb-3">
-
-Supporting Historical Evidence
-
-</h5>
-
-{% if root_cause.evidence %}
-
-<ul class="list-group">
-
-{% for evidence in root_cause.evidence %}
-
-<li class="list-group-item bg-dark text-light border-secondary">
-
-{{ evidence }}
-
-</li>
-
-{% endfor %}
-
-</ul>
-
-{% else %}
-
-<div class="alert alert-secondary">
-
-No historical evidence available.
-
-</div>
-
-{% endif %}
-
-</div>
-
-</div>
-
-</div>
-
+<section class="two">
+ <section class="card">
+  <div class="card-title">
+   <h3>🧠 Root Cause Analysis</h3>
+   <span class="tag">AI ANALYSIS</span>
+  </div>
+
+  <div class="cause">
+   {{ root_cause.get('root_cause','The root cause could not be determined automatically.') }}
+  </div>
+
+  <div class="confidence">
+   <div class="conf-head">
+    <span>CONFIDENCE</span>
+    <strong>{{ root_cause.get('confidence',0) }}%</strong>
+   </div>
+   <div class="bar">
+    <div id="confidenceFill" class="fill" data-confidence="{{ root_cause.get('confidence',0) }}"></div>
+   </div>
+  </div>
+
+  <ul>
+   {% for item in root_cause.get('evidence',[]) %}
+    <li>{{ item }}</li>
+   {% endfor %}
+  </ul>
+ </section>
+
+ <section class="card">
+  <div class="card-title">
+   <h3>🛠️ AI Smart Fix Advisor</h3>
+   <span class="tag">RECOMMENDATION ENGINE</span>
+  </div>
+
+  <div class="line"><b>Category</b><span>{{ fix_advisor.get('category','General Software Bug') }}</span></div>
+  <div class="line"><b>Priority</b><span>{{ fix_advisor.get('priority',triage.get('priority','P2')) }}</span></div>
+  <div class="line"><b>Status</b><span>Recommendation Available</span></div>
+
+  <ul>
+   {% for item in fix_advisor.get('recommended_fix',[]) %}
+    <li>{{ item }}</li>
+   {% endfor %}
+  </ul>
+ </section>
 </section>
 
-<br><br>
-
-<!-- ===================================================== -->
-<!-- LOG ANALYSIS -->
-<!-- ===================================================== -->
-
-<section id="logs">
-
-<h2 class="section-title">
-
-<i class="fas fa-file-code"></i>
-
-Log Analysis
-
-</h2>
-
-{% if log_analysis.issues %}
-
-{% for issue in log_analysis.issues %}
-
-<div class="glass mb-4">
-
-<div class="row g-4">
-
-<div class="col-md-6">
-
-<div class="info-box">
-
-<h6>Exception Type</h6>
-
-<p>{{ issue.exception_type or "Not Available" }}</p>
-
-</div>
-
-</div>
-
-<div class="col-md-6">
-
-<div class="info-box">
-
-<h6>Failure Point</h6>
-
-<p>{{ issue.failure_point or "Not Available" }}</p>
-
-</div>
-
-</div>
-
-<div class="col-md-6">
-
-<div class="info-box">
-
-<h6>Line Number</h6>
-
-<p>{{ issue.line_number or "Not Available" }}</p>
-
-</div>
-
-</div>
-
-<div class="col-md-6">
-
-<div class="info-box">
-
-<h6>Code Path</h6>
-
-<p>{{ issue.code_path or "Not Available" }}</p>
-
-</div>
-
-</div>
-
-<div class="col-md-12">
-
-<div class="info-box">
-
-<h6>Error Message</h6>
-
-<p>{{ issue.error_message or "Not Available" }}</p>
-
-</div>
-
-</div>
-
-<div class="col-md-12">
-
-<div class="info-box">
-
-<h6>Root Cause</h6>
-
-<p>{{ issue.root_cause or "Not Available" }}</p>
-
-</div>
-
-</div>
-
-<div class="col-md-6">
-
-<div class="info-box">
-
-<h6>Severity</h6>
-
-<span class="badge bg-danger">
-
-{{ issue.severity or "Unknown" }}
-
-</span>
-
-</div>
-
-</div>
-
-<div class="col-md-6">
-
-<div class="info-box">
-
-<h6>Suggested Fix</h6>
-
-<p>
-
-{{ issue.suggested_fix or "No recommendation available." }}
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-{% endfor %}
-
-{% else %}
-
-<div class="glass text-center">
-
-<h4>No Log Analysis Available</h4>
-
-<p>No issues were detected in the uploaded log file.</p>
-
-</div>
-
-{% endif %}
-
+<section class="card">
+ <div class="card-title">
+  <h3>🔎 Similar Historical Bugs</h3>
+  <span class="tag">FAISS KNOWLEDGE BASE</span>
+ </div>
+
+ {% if similar_bugs %}
+  {% for bug in similar_bugs[:3] %}
+  <div class="match">
+   <div class="match-top">
+    <strong>Historical Match #{{ loop.index }} — {{ bug.get('title','Historical Bug') }}</strong>
+    <span class="sim">{{ bug.get('similarity',0) }}%</span>
+   </div>
+   <p>{{ bug.get('description','No description available.') }}</p>
+  </div>
+  {% endfor %}
+ {% else %}
+  <div class="info">No historical matches were found.</div>
+ {% endif %}
 </section>
 
-<br><br>
+ <!-- ============================================================
+     DUPLICATE DETECTION
+============================================================ -->
 
-<!-- ===================================================== -->
-<!-- QUICK ANALYSIS OVERVIEW -->
-<!-- ===================================================== -->
+<section class="card">
 
-<div class="row g-4">
+    <div class="card-title">
 
-<div class="col-lg-4">
+        <h3>♻️ Duplicate Detection</h3>
 
-<div class="card-box text-center">
+        <span class="tag">
+            HISTORICAL COMPARISON
+        </span>
 
-<i class="fas fa-file-code"></i>
+    </div>
 
-<h6>Exceptions Found</h6>
 
-<h3>{{ log_analysis.issues|length }}</h3>
+    {% set strong_duplicate = none %}
 
-</div>
 
-</div>
+    {% if duplicate_detection %}
 
-<div class="col-lg-4">
+        {% for duplicate in duplicate_detection %}
 
-<div class="card-box text-center">
+            {% if duplicate.get('similarity', 0)|float >= 80 %}
 
-<i class="fas fa-brain"></i>
+                {% if strong_duplicate is none %}
 
-<h6>AI Diagnosis</h6>
+                    {% set strong_duplicate = duplicate %}
 
-<h3>Completed</h3>
+                {% endif %}
 
-</div>
+            {% endif %}
 
-</div>
+        {% endfor %}
 
-<div class="col-lg-4">
+    {% endif %}
 
-<div class="card-box text-center">
 
-<i class="fas fa-wrench"></i>
+    {% if strong_duplicate %}
 
-<h6>Fix Suggestions</h6>
+        <div class="duplicate-box">
 
-<h3>Ready</h3>
+            <div class="duplicate-header">
 
-</div>
+                <div>
 
-</div>
+                    <strong>
+                        ⚠️ Possible Duplicate
+                    </strong>
 
-</div>
+                    <div class="duplicate-id">
 
-<br><br>
-<!-- ===================================================== -->
-<!-- DUPLICATE DETECTION -->
-<!-- ===================================================== -->
+                        Bug ID:
+                        {{ strong_duplicate.get(
+                            'bug_id',
+                            strong_duplicate.get(
+                                'id',
+                                'Unknown'
+                            )
+                        ) }}
 
-<section id="duplicate">
+                    </div>
 
-<h2 class="section-title">
+                </div>
 
-<i class="fas fa-copy"></i>
 
-Duplicate Detection
+                <div class="duplicate-score">
 
-</h2>
+                    {{ "%.2f"|format(
+                        strong_duplicate.get(
+                            'similarity',
+                            0
+                        )|float
+                    ) }}%
 
-<div class="glass">
+                </div>
 
-{% if duplicate_detection %}
+            </div>
 
-<div class="table-responsive">
 
-<table class="table table-dark table-hover align-middle">
+            <div class="duplicate-description">
 
-<thead>
+                <strong>
+                    Historical Bug
+                </strong>
 
-<tr>
+                <p>
+                    {{
+                        strong_duplicate.get(
+                            'description',
+                            strong_duplicate.get(
+                                'title',
+                                'No description available.'
+                            )
+                        )
+                    }}
+                </p>
 
-<th width="8%">Rank</th>
+            </div>
 
-<th width="45%">Historical Bug</th>
 
-<th width="15%">Similarity</th>
+            {% if strong_duplicate.get('severity') %}
 
-<th>Resolution Summary</th>
+                <div class="duplicate-meta">
 
-</tr>
+                    <span>
+                        Severity:
+                    </span>
 
-</thead>
+                    <strong>
+                        {{
+                            strong_duplicate.get(
+                                'severity',
+                                'Unknown'
+                            )
+                        }}
+                    </strong>
 
-<tbody>
+                </div>
 
-{% for bug in duplicate_detection %}
+            {% endif %}
 
-<tr>
 
-<td>
+            {% if strong_duplicate.get('resolution') %}
 
-{{ loop.index }}
+                <div class="duplicate-resolution">
 
-</td>
+                    <strong>
+                        Historical Resolution
+                    </strong>
 
-<td>
+                    <p>
+                        {{
+                            strong_duplicate.get(
+                                'resolution'
+                            )
+                        }}
+                    </p>
 
-{{ bug.bug }}
+                </div>
 
-</td>
+            {% endif %}
 
-<td>
+        </div>
 
-<span class="badge bg-success">
 
-{{ bug.similarity }}
+    {% else %}
 
-</span>
+        <div class="no-duplicate">
 
-</td>
+            <span class="success-icon">
+                ✓
+            </span>
 
-<td>
+            <div>
 
-{{ bug.resolution }}
+                <strong>
+                    No Duplicate Detected
+                </strong>
 
-</td>
+                <p>
+                    No historical bug reached the
+                    80% similarity threshold required
+                    to be considered a strong duplicate.
+                </p>
 
-</tr>
+            </div>
 
-{% endfor %}
+        </div>
 
-</tbody>
-
-</table>
-
-</div>
-
-{% else %}
-
-<div class="alert alert-secondary">
-
-No duplicate bugs were identified.
-
-</div>
-
-{% endif %}
-
-</div>
+    {% endif %}
 
 </section>
+<!-- ========================================================
+     KNOWLEDGE BASE GROWTH
+======================================================== -->
 
-<br><br>
+<section class="card">
 
-<!-- ===================================================== -->
-<!-- AI SMART FIX ADVISOR -->
-<!-- ===================================================== -->
-<section id="advisor">
+    <div class="card-title">
 
-<h2 class="section-title">
+        <h3>
+            🧠 Knowledge Base Growth
+        </h3>
 
-<i class="fas fa-lightbulb"></i>
+        <span class="tag">
+            MILESTONE 4
+        </span>
 
-AI Smart Fix Advisor
+    </div>
 
-</h2>
 
-<div class="glass">
+    {% if analysis.get('knowledge_base_added', False) %}
 
-<h5>Bug Category</h5>
+        <div class="kb-success">
 
-<p>{{ ai_fix.category }}</p>
+            <div class="kb-icon">
+                ✓
+            </div>
 
-<hr>
+            <div>
 
-<h5>Priority</h5>
+                <strong>
+                    Bug Added to Knowledge Base
+                </strong>
 
-<p>{{ ai_fix.priority }}</p>
+                <p>
+                    Bug #{{ bug_id }} has been verified and
+                    stored for future historical similarity
+                    searches.
+                </p>
 
-<hr>
+            </div>
 
-<h5>Recommended Fixes</h5>
+        </div>
 
-<ul>
 
-{% for fix in ai_fix.recommended_fix %}
+        <div class="kb-grid">
 
-<li>{{ fix }}</li>
+            <div class="metric">
 
-{% endfor %}
+                <span>
+                    Bug Status
+                </span>
 
-</ul>
+                <strong>
+                    Resolved
+                </strong>
 
-</div>
+            </div>
 
-</section>
 
-<br><br>
+            <div class="metric">
 
-<!-- ===================================================== -->
-<!-- REMEDIATION AGENT -->
-<!-- ===================================================== -->
+                <span>
+                    Knowledge Base
+                </span>
 
-<section id="remediation">
+                <strong>
+                    Added ✓
+                </strong>
 
-<h2 class="section-title">
+            </div>
 
-<i class="fas fa-screwdriver-wrench"></i>
 
-Remediation Recommendations
+            <div class="metric">
 
-</h2>
+                <span>
+                    FAISS Index
+                </span>
 
-<div class="glass">
+                <strong>
+                    {% if analysis.get(
+                        'faiss_index_updated',
+                        False
+                    ) %}
+                        Updated ✓
+                    {% else %}
+                        Pending
+                    {% endif %}
+                </strong>
 
-<h5 class="mb-3">
+            </div>
 
-Remediation Summary
+        </div>
 
-</h5>
 
-<p>
+    {% else %}
 
-{{ remediation.summary }}
+        <div class="kb-pending">
 
-</p>
+            <div class="kb-icon">
+                +
+            </div>
 
-</div>
+            <div>
 
-<div class="row g-4">
+                <strong>
+                    Verify this bug after fixing it
+                </strong>
 
-<!-- Recommended Fixes -->
+                <p>
+                    Once the recommended fix has been
+                    applied and verified, add this bug
+                    to the historical Knowledge Base.
+                </p>
 
-<div class="col-lg-4">
+            </div>
 
-<div class="glass">
+        </div>
 
-<h5>
-
-Recommended Fixes
-
-</h5>
-
-<hr>
-
-{% if remediation.steps %}
-
-<ul class="list-group">
-
-{% for step in remediation.steps %}
-
-<li class="list-group-item bg-dark text-light border-secondary">
-
-{{ step }}
-
-</li>
-
-{% endfor %}
-
-</ul>
-
-{% else %}
-
-<p>
-
-No recommended fixes available.
-
-</p>
-
-{% endif %}
-
-</div>
-
-</div>
-
-<!-- Testing -->
-
-<div class="col-lg-4">
-
-<div class="glass">
-
-<h5>
-
-Testing Strategy
-
-</h5>
-
-<hr>
-
-{% if remediation.testing %}
-
-<ul class="list-group">
-
-{% for test in remediation.testing %}
-
-<li class="list-group-item bg-dark text-light border-secondary">
-
-{{ test }}
-
-</li>
-
-{% endfor %}
-
-</ul>
-
-{% else %}
-
-<p>
-
-No testing strategy available.
-
-</p>
-
-{% endif %}
-
-</div>
-
-</div>
-
-<!-- Prevention -->
-
-<div class="col-lg-4">
-
-<div class="glass">
-
-<h5>
-
-Prevention Strategy
-
-</h5>
-
-<hr>
-
-{% if remediation.prevention %}
-
-<ul class="list-group">
-
-{% for item in remediation.prevention %}
-
-<li class="list-group-item bg-dark text-light border-secondary">
-
-{{ item }}
-
-</li>
-
-{% endfor %}
-
-</ul>
-
-{% else %}
-
-<p>
-
-No prevention strategy available.
-
-</p>
-
-{% endif %}
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<br><br>
-
-<!-- ===================================================== -->
-<!-- AI REMEDIATION SUMMARY -->
-<!-- ===================================================== -->
-
-<div class="row g-4">
-
-<div class="col-lg-4">
-
-<div class="card-box text-center">
-
-<i class="fas fa-copy"></i>
-
-<h6>
-
-Duplicate Matches
-
-</h6>
-
-<h3>
-
-{{ duplicate_detection|length }}
-
-</h3>
-
-</div>
-
-</div>
-
-<div class="col-lg-4">
-
-<div class="card-box text-center">
-
-<i class="fas fa-list-check"></i>
-
-<h6>
-
-Recommended Fixes
-
-</h6>
-
-<h3>
-
-{{ remediation.steps|length }}
-
-</h3>
-
-</div>
-
-</div>
-
-<div class="col-lg-4">
-
-<div class="card-box text-center">
-
-<i class="fas fa-shield-alt"></i>
-
-<h6>
-
-Prevention Tasks
-
-</h6>
-
-<h3>
-
-{{ remediation.prevention|length }}
-
-</h3>
-
-</div>
-
-</div>
-
-</div>
-
-<br><br>
-<!-- ===================================================== -->
-<!-- ANALYTICS DASHBOARD -->
-<!-- ===================================================== -->
-
-<section id="analytics">
-
-<h2 class="section-title">
-
-<i class="fas fa-chart-pie"></i>
-
-Analytics Dashboard
-
-</h2>
-
-<div class="row g-4">
-
-<div class="col-lg-6">
-
-<div class="chart-box">
-
-<h5 class="text-center mb-4">
-
-AI Confidence Score
-
-</h5>
-
-<div style="width:240px;height:240px;margin:auto;">
-
-<canvas id="confidenceChart"></canvas>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-lg-6">
-
-<div class="chart-box">
-
-<h5 class="text-center mb-4">
-
-Severity Analysis
-
-</h5>
-
-<canvas id="severityChart"></canvas>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<br><br>
-
-<!-- ===================================================== -->
-<!-- REPORTS -->
-<!-- ===================================================== -->
-
-<section id="reports">
-
-<h2 class="section-title">
-
-<i class="fas fa-download"></i>
-
-Reports
-
-</h2>
-
-<div class="glass text-center">
-
-<a href="/download/{{ bug_id }}"
-
-class="btn btn-success btn-lg m-2">
-
-<i class="fas fa-file-download"></i>
-
-Download JSON Report
-
-</a>
-
-<button
-
-class="btn btn-primary btn-lg m-2"
-
-onclick="window.print()">
-
-<i class="fas fa-print"></i>
-
-Print Report
-
+        <button
+    id="resolveButton"
+    onclick="markBugResolved()"
+>
+    ✓ Mark as Resolved & Add to Knowledge Base
 </button>
 
-<a href="/"
+<div
+    id="kbMessage"
+    class="kb-message"
+    style="display:none;"
+></div>
 
-class="btn btn-secondary btn-lg m-2">
+        <div
+            id="kbMessage"
+            class="kb-message"
+            style="display:none;">
 
-<i class="fas fa-rotate-left"></i>
+        </div>
 
-Analyze Another Bug
-
-</a>
-
-</div>
+    {% endif %}
 
 </section>
 
-<br><br>
+ <section class="card">
+  <div class="card-title">
+   <h3>🚀 Remediation Plan</h3>
+   <span class="tag">ENGINEERING ACTIONS</span>
+  </div>
 
-<!-- ===================================================== -->
-<!-- FOOTER -->
-<!-- ===================================================== -->
+  {% set steps = remediation.get('recommended_steps', remediation.get('steps', [])) %}
+  <ul>
+   {% for step in steps %}
+    <li>{{ step }}</li>
+   {% endfor %}
+  </ul>
+ </section>
+</section>
 
-<footer>
+<section class="card">
+ <div class="card-title">
+  <h3>📈 Analysis Summary</h3>
+  <span class="tag">MILESTONE 3</span>
+ </div>
 
-<hr>
+ <div class="summary">
+  <div class="metric"><span>Bug ID</span><strong>{{ bug_id }}</strong></div>
+  <div class="metric"><span>Processing Time</span><strong>{{ processing_time }} sec</strong></div>
+  <div class="metric"><span>Historical Matches</span><strong>{{ similar_bugs|length }}</strong></div>
+  <div class="metric"><span>Status</span><strong>{{ 'Resolved' if analysis.get('resolved',False) else 'Open' }}</strong></div>
+ </div>
+</section>
 
-<h4>
-
-AI Smart Bug Analyzer & Fix Advisor
-
-</h4>
-
-<p>
-
-Enterprise AI-Powered Software Defect Analysis Dashboard
-
-</p>
-
-<p>
-
-Milestone 3 Deliverables
-
-</p>
-
-<p>
-
-✔ AI Triage Agent
-
-&nbsp; | &nbsp;
-
-✔ Root Cause Agent
-
-&nbsp; | &nbsp;
-
-✔ Duplicate Detection Agent
-
-&nbsp; | &nbsp;
-
-✔ Remediation Agent
-
-</p>
-
-<p>
-
-Powered by
-
-<strong>Flask</strong> •
-
-<strong>Ollama</strong> •
-
-<strong>FAISS</strong> •
-
-<strong>Bootstrap 5</strong> •
-
-<strong>Chart.js</strong>
-
-</p>
-
-<p>
-
-© 2026 AI Smart Bug Analyzer
-
-</p>
-
-</footer>
-
+<div class="actions">
+ <a class="btn primary" href="{{ url_for('index') }}">➕ Analyze Another Bug</a>
+ <a class="btn" href="{{ url_for('analytics') }}">📊 View Analytics</a>
+ <a class="btn" href="{{ url_for('download_report', bug_id=bug_id|int) }}">⬇️ Download JSON</a>
+ <a class="btn" href="javascript:window.print()">🖨️ Print Report</a>
 </div>
 
-<!-- ===================================================== -->
-<!-- JAVASCRIPT -->
-<!-- ===================================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<footer>
+ Intelligent Bug Diagnosis Platform • AI Triage • Log Analysis • Root Cause • Duplicate Detection • Fix Recommendation
+</footer>
+</main>
 <script>
 
-// ================================
-// AI Confidence Chart
-// ================================
+async function markBugResolved() {
 
-const confidence =
-parseInt("{{ triage.confidence }}") || 80;
+    const button = document.getElementById("resolveButton");
+    const message = document.getElementById("kbMessage");
 
-new Chart(
+    if (!button || !message) {
+        return;
+    }
 
-document.getElementById("confidenceChart"),
+    button.disabled = true;
+    button.textContent = "Updating Knowledge Base...";
 
-{
+    message.style.display = "none";
+    message.textContent = "";
 
-type:"doughnut",
+    try {
 
-data:{
+        const response = await fetch(
+            "{{ url_for('mark_resolved', bug_id=bug_id) }}",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        );
 
-labels:["Confidence","Remaining"],
+        const data = await response.json();
 
-datasets:[{
+        if (!response.ok || !data.success) {
+            throw new Error(
+                data.message || "Knowledge Base update failed."
+            );
+        }
 
-data:[confidence,100-confidence],
+        message.className = "kb-message success";
 
-backgroundColor:[
+        message.innerHTML =
+            "✓ " + data.message +
+            "<br><br>" +
+            "Bug ID: #" + data.bug_id +
+            "<br>" +
+            "Knowledge Base: Added ✓" +
+            "<br>" +
+            "FAISS Index: " +
+            (
+                data.index_updated
+                    ? "Updated ✓"
+                    : "Not updated"
+            );
 
-"#22c55e",
+        message.style.display = "block";
 
-"#334155"
+        button.style.display = "none";
 
-],
+    } catch (error) {
 
-borderWidth:1
+        message.className = "kb-message error";
 
-}]
+        message.textContent =
+            "✕ " + error.message;
 
-},
+        message.style.display = "block";
 
-options:{
+        button.disabled = false;
 
-responsive:true,
-
-maintainAspectRatio:false,
-
-plugins:{
-
-legend:{
-
-position:"bottom",
-
-labels:{
-
-color:"#ffffff"
-
+        button.textContent =
+            "✓ Mark as Resolved & Add to Knowledge Base";
+    }
 }
-
-}
-
-}
-
-}
-
-}
-
-);
-
-// ================================
-// Severity Chart
-// ================================
-
-const severity="{{ triage.severity }}";
-
-let severityValues=[0,0,0,0];
-
-switch(severity){
-
-case "Low":
-
-severityValues=[1,0,0,0];
-
-break;
-
-case "Medium":
-
-severityValues=[0,1,0,0];
-
-break;
-
-case "High":
-
-severityValues=[0,0,1,0];
-
-break;
-
-default:
-
-severityValues=[0,0,0,1];
-
-}
-
-new Chart(
-
-document.getElementById("severityChart"),
-
-{
-
-type:"bar",
-
-data:{
-
-labels:[
-
-"Low",
-
-"Medium",
-
-"High",
-
-"Critical"
-
-],
-
-datasets:[{
-
-label:"Severity",
-
-data:severityValues,
-
-backgroundColor:[
-
-"#22c55e",
-
-"#3b82f6",
-
-"#f59e0b",
-
-"#ef4444"
-
-]
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-plugins:{
-
-legend:{
-
-display:false
-
-}
-
-},
-
-scales:{
-
-x:{
-
-ticks:{
-
-color:"#ffffff"
-
-}
-
-},
-
-y:{
-
-beginAtZero:true,
-
-ticks:{
-
-stepSize:1,
-
-color:"#ffffff"
-
-}
-
-}
-
-}
-
-}
-
-}
-
-);
-
 </script>
 
-</body>
 
+</body>
 </html>

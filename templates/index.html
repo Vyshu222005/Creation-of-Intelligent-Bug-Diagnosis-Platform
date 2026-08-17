@@ -1,514 +1,829 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Bug Diagnosis Platform</title>
 
-<title>AI Smart Bug Analyzer</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        html {
+            scroll-behavior: smooth;
+        }
 
-<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #061526;
+            color: #e8f1ff;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            width: 100%;
+            background: #04101f;
+            border-bottom: 1px solid #173553;
+            padding: 18px 6%;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #06b6d4
+            );
+            font-size: 27px;
+        }
+
+        .brand-text h1 {
+            margin: 0;
+            font-size: 25px;
+            font-weight: 700;
+            color: #f2f7ff;
+        }
+
+        .brand-text p {
+            margin: 5px 0 0;
+            font-size: 13px;
+            color: #75bfff;
+        }
+
+        .status {
+            border: 1px solid #008f6c;
+            border-radius: 22px;
+            padding: 9px 18px;
+            color: #52e0a7;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #20d889;
+            border-radius: 50%;
+            margin-right: 7px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 92%;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 48px 0 35px;
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid #009dcc;
+            border-radius: 20px;
+            padding: 9px 16px;
+            color: #29d7ff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 22px;
+        }
+
+        .hero-title {
+    max-width: 900px;
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #eef5ff;
 }
 
-body{
-background:#0B1220;
-color:#F8FAFC;
-}
-
-.container{
-width:92%;
-max-width:1200px;
-margin:30px auto;
-}
-
-/* ================= HEADER ================= */
-
-.header{
-background:#111827;
-border:1px solid #334155;
-border-radius:15px;
-padding:30px;
-box-shadow:0 8px 20px rgba(0,0,0,.35);
-}
-
-.header h1{
-font-size:34px;
-font-weight:700;
-}
-
-.header p{
-margin-top:10px;
-color:#94A3B8;
-font-size:16px;
-line-height:1.7;
-}
-
-.tech{
-margin-top:15px;
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-}
-
-.tech span{
-background:#1E293B;
-padding:8px 14px;
-border-radius:8px;
-font-size:14px;
-border:1px solid #334155;
-color:#CBD5E1;
-}
-
-/* ================= MAIN CARD ================= */
-
-.main{
-margin-top:30px;
-background:#111827;
-border:1px solid #334155;
-padding:35px;
-border-radius:15px;
-box-shadow:0 8px 20px rgba(0,0,0,.35);
-}
-
-.main h2{
-margin-bottom:25px;
-font-size:26px;
-}
-
-/* ================= FORM ================= */
-
-label{
-display:block;
-margin-bottom:8px;
-font-weight:600;
-font-size:15px;
-}
-
-input[type=text],
-select,
-textarea{
-
-width:100%;
-padding:14px;
-
-background:#0F172A;
-
-border:1px solid #334155;
-
-border-radius:10px;
-
-color:white;
-
-font-size:15px;
-
-margin-bottom:22px;
-
-transition:.25s;
-
-}
-
-textarea{
-height:180px;
-resize:none;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-
-outline:none;
-
-border-color:#2563EB;
-
-box-shadow:0 0 10px rgba(37,99,235,.25);
-
-}
-
-/* Upload */
-
-.upload-box{
-
-background:#0F172A;
-
-border:1px solid #334155;
-
-border-radius:10px;
-
-padding:20px;
-
-margin-bottom:25px;
-
-}
-
-.upload-box h3{
-
-font-size:17px;
-
-margin-bottom:15px;
-
-color:#CBD5E1;
-
-}
-
-input[type=file]{
-
-color:#CBD5E1;
-
-}
-
-/* Button */
-
-.btn{
-
-width:100%;
-
-padding:15px;
-
-background:#2563EB;
-
-border:none;
-
-border-radius:10px;
-
-color:white;
-
-font-size:17px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-.btn:hover{
-
-background:#1D4ED8;
-
-}
-
-/* ================= CAPABILITIES ================= */
-
-.section-title{
-
-margin-top:40px;
-
-margin-bottom:20px;
-
-font-size:24px;
-
-}
-
-.features{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-gap:18px;
-
-}
-
-.feature{
-
-background:#1E293B;
-
-border:1px solid #334155;
-
-border-radius:12px;
-
-padding:22px;
-
-transition:.3s;
-
-}
-
-.feature:hover{
-
-transform:translateY(-4px);
-
-border-color:#2563EB;
-
-}
-
-.feature h3{
-
-margin-bottom:10px;
-
-font-size:18px;
-
-}
-
-.feature p{
-
-color:#CBD5E1;
-
-line-height:1.6;
-
-font-size:15px;
-
-}
-
-/* Footer */
-
-.footer{
-
-margin-top:40px;
-
-padding:25px;
-
-text-align:center;
-
-background:#111827;
-
-border-radius:12px;
-
-border:1px solid #334155;
-
-color:#94A3B8;
-
-}
-
-.footer h3{
-
-color:white;
-
-margin-bottom:15px;
-
-}
-
-.error-box{
-
-background:#7F1D1D;
-
-color:#FECACA;
-
-padding:15px;
-
-border-radius:8px;
-
-margin-bottom:20px;
-
-border:1px solid #DC2626;
-
-}
-
-@media(max-width:768px){
-
-.header h1{
-
-font-size:28px;
-
-}
-
-.main{
-
-padding:25px;
-
-}
-
-}
-
-</style>
-
+        .hero-title span {
+            color: #4da9ff;
+        }
+
+        .hero-description {
+            max-width: 900px;
+            margin: 18px 0 38px;
+            color: #8dc6ff;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           FLASH MESSAGE
+        ========================= */
+
+        .flash-message {
+            background: #291b2c;
+            border: 1px solid #c83b52;
+            border-radius: 9px;
+            padding: 13px 16px;
+            margin-bottom: 20px;
+            color: #ff9ba9;
+            font-size: 14px;
+        }
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .form-card {
+            background: #091e33;
+            border: 1px solid #245071;
+            border-radius: 15px;
+            padding: 28px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1d3c58;
+            margin-bottom: 24px;
+        }
+
+        .form-header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #102e4d;
+            border: 1px solid #2773b7;
+            font-size: 20px;
+        }
+
+        .form-header h2 {
+            margin: 0;
+            font-size: 21px;
+            color: #f1f7ff;
+        }
+
+        .form-header p {
+            margin: 5px 0 0;
+            color: #7faeda;
+            font-size: 13px;
+        }
+
+        /* =========================
+           FORM ROW
+        ========================= */
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #edf5ff;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .required {
+            color: #ff687c;
+        }
+
+        .optional {
+            color: #7895b2;
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #2b587c;
+            border-radius: 9px;
+            background: #071a2d;
+            color: #edf6ff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        input[type="text"],
+        select {
+            height: 48px;
+            padding: 0 13px;
+        }
+
+        textarea {
+            min-height: 250px;
+            padding: 14px;
+            resize: vertical;
+            line-height: 1.6;
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: #6085a8;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #269cff;
+            box-shadow: 0 0 0 2px rgba(38, 156, 255, 0.12);
+        }
+
+        .field-help {
+            margin-top: 7px;
+            color: #6289ae;
+            font-size: 11px;
+        }
+
+        /* =========================
+           FILE UPLOAD
+        ========================= */
+
+        .file-upload-box {
+            border: 1px dashed #2d709d;
+            border-radius: 10px;
+            background: #071a2d;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .upload-icon {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .upload-title {
+            color: #e9f4ff;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .upload-help {
+            color: #7195b5;
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+
+        .choose-file-btn {
+            display: inline-block;
+            padding: 9px 17px;
+            border-radius: 7px;
+            background: #1459c5;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .choose-file-btn:hover {
+            background: #1e70e8;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            color: #58b7ff;
+            font-size: 12px;
+            min-height: 16px;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        .analyze-button {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #06a9d8
+            );
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .analyze-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 22px rgba(20, 125, 220, 0.28);
+        }
+
+        .analyze-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            color: #527da4;
+            font-size: 11px;
+            padding: 0 0 25px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .header-inner {
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .brand-text h1 {
+                font-size: 20px;
+            }
+
+            .hero-title {
+                font-size: 35px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 94%;
+                padding-top: 30px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .button-row {
+                justify-content: stretch;
+            }
+
+            .analyze-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .brand-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
+            }
+
+            .brand-text h1 {
+                font-size: 18px;
+            }
+
+            .brand-text p {
+                font-size: 11px;
+            }
+
+            .hero-title {
+                font-size: 30px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <!-- =========================
+         HEADER
+    ========================= -->
 
-<div class="header">
+    <header class="header">
+        <div class="header-inner">
 
-<h1>AI Smart Bug Analyzer</h1>
+            <div class="brand">
 
-<p>
-Enterprise Defect Intelligence Platform for automated software bug triage,
-semantic retrieval, root cause analysis and remediation recommendations.
-</p>
+                <div class="brand-icon">
+                    🤖
+                </div>
 
-<div class="tech">
+                <div class="brand-text">
+                    <h1>Intelligent Bug Diagnosis Platform</h1>
+                    <p>AI-Powered Software Defect Analysis &amp; Fix Recommendation</p>
+                </div>
 
-<span>Flask</span>
+            </div>
 
-<span>Ollama</span>
+            <div class="status">
+                <span class="status-dot"></span>
+                AI System Ready
+            </div>
 
-<span>Llama 3.2</span>
+        </div>
+    </header>
 
-<span>Sentence Transformers</span>
 
-<span>FAISS</span>
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
 
-<span>RAG</span>
+    <main class="container">
 
-</div>
+        <div class="badge">
+            ✦ MULTI-AGENT AI DEFECT ANALYSIS
+        </div>
 
-</div>
+        <h2 class="hero-title">
+            Analyze Software Bugs with
+            <span>Intelligent AI</span>
+        </h2>
 
-<div class="main">
+        <p class="hero-description">
+            Submit a software defect and let the intelligent diagnosis
+            pipeline analyze severity, logs, historical bugs, duplicate
+            issues, root cause and remediation recommendations.
+        </p>
 
-<h2>Submit Bug Report</h2>
 
-{% if error %}
-<div class="error-box">
-{{ error }}
-</div>
-{% endif %}
+        <!-- =========================
+             FLASH MESSAGES
+        ========================= -->
 
-<form action="/submit" method="POST" enctype="multipart/form-data">
+        {% with messages = get_flashed_messages(with_categories=true) %}
 
-<label>Bug Title</label>
+            {% if messages %}
 
-<input
-type="text"
-name="bug_title"
-placeholder="Enter bug title"
-required>
+                {% for category, message in messages %}
 
+                    <div class="flash-message">
+                        {{ message }}
+                    </div>
 
-    <label for="stack_trace">
-        Stack Trace / Error Log (Optional)
-    </label>
+                {% endfor %}
 
-    <textarea
-        id="stack_trace"
-        name="stack_trace"
-        class="form-control"
-        rows="6"
-        placeholder="Paste stack trace or error log here..."></textarea>
-</div>
+            {% endif %}
 
+        {% endwith %}
 
 
-<div class="upload-box">
+        <!-- =========================
+             BUG FORM
+        ========================= -->
 
-<h3>Attach Log File or Screenshot (Optional)</h3>
+        <div class="form-card">
 
-<input
-type="file"
-name="bug_file"
-accept=".png,.jpg,.jpeg,.pdf,.txt,.log">
+            <div class="form-header">
 
-</div>
+                <div class="form-header-icon">
+                    🐞
+                </div>
 
-<button type="submit" class="btn">
+                <div>
+                    <h2>Submit Bug for Analysis</h2>
 
-Analyze Bug
+                    <p>
+                        Enter the bug title and manually paste the
+                        error/stack trace. You can optionally upload a log file.
+                    </p>
+                </div>
 
-</button>
+            </div>
 
-</form>
 
-<h2 class="section-title">Platform Capabilities</h2>
+            <form
+                action="{{ url_for('analyze') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                id="bugForm"
+            >
 
-<div class="features">
+                <!-- =========================
+                     TITLE + CATEGORY
+                ========================= -->
 
-<div class="feature">
+                <div class="form-row">
 
-<h3>AI Bug Triage</h3>
+                    <div class="form-group">
 
-<p>
-Automatically classifies severity, priority and affected component using
-local AI models.
-</p>
+                        <label for="bug_title">
+                            BUG TITLE <span class="required">*</span>
+                        </label>
 
-</div>
+                        <input
+                            type="text"
+                            id="bug_title"
+                            name="bug_title"
+                            placeholder="Example: Login API crashes with NullPointerException"
+                            required
+                            autocomplete="off"
+                        >
 
-<div class="feature">
+                        <div class="field-help">
+                            Enter a short and meaningful title for the bug.
+                        </div>
 
-<h3>Log Analysis</h3>
+                    </div>
 
-<p>
-Parses stack traces, identifies failure points and extracts structured
-technical insights.
-</p>
 
-</div>
+                    <div class="form-group">
 
-<div class="feature">
+                        <label for="category">
+                            BUG CATEGORY
+                        </label>
 
-<h3>Root Cause Analysis</h3>
+                        <select
+                            id="category"
+                            name="category"
+                        >
 
-<p>
-Uses Retrieval-Augmented Generation (RAG) with historical defects to
-identify probable root causes.
-</p>
+                            <option value="General Software Bug">
+                                General Software Bug
+                            </option>
 
-</div>
+                            <option value="Authentication">
+                                Authentication
+                            </option>
 
-<div class="feature">
+                            <option value="Database">
+                                Database
+                            </option>
 
-<h3>Duplicate Detection</h3>
+                            <option value="API">
+                                API
+                            </option>
 
-<p>
-Finds the most similar historical bug reports using semantic vector search
-and similarity scoring.
-</p>
+                            <option value="Frontend">
+                                Frontend
+                            </option>
 
-</div>
+                            <option value="Backend">
+                                Backend
+                            </option>
 
-<div class="feature">
+                            <option value="Performance">
+                                Performance
+                            </option>
 
-<h3>Remediation Advisor</h3>
+                            <option value="Security">
+                                Security
+                            </option>
 
-<p>
-Generates engineering recommendations, testing strategies and best
-practices grounded in historical resolutions.
-</p>
+                            <option value="Network">
+                                Network
+                            </option>
 
-</div>
+                        </select>
 
-<div class="feature">
+                    </div>
 
-<h3>Knowledge Base</h3>
+                </div>
 
-<p>
-Powered by Mozilla historical defects, FAISS vector database and Sentence
-Transformers.
-</p>
 
-</div>
+                <!-- =========================
+                     STACK TRACE
+                ========================= -->
 
-</div>
+                <div class="form-group">
 
-</div>
+                    <label for="bug_report">
+                        STACK TRACE / ERROR LOG
+                        <span class="required">*</span>
+                    </label>
 
-<div class="footer">
+                    <textarea
+                        id="bug_report"
+                        name="bug_report"
+                        placeholder="Paste the complete error message or stack trace here..."
+                        required
+                    ></textarea>
 
-<h3>AI Smart Bug Analyzer</h3>
+                    <div class="field-help">
+                        Paste a different error or stack trace manually for every bug.
+                    </div>
 
-<p>
-Enterprise Defect Intelligence Platform
-</p>
+                </div>
 
-<br>
 
-<p>
+                <!-- =========================
+                     FILE UPLOAD
+                ========================= -->
 
-Powered by Flask • Ollama • Llama 3.2 • FAISS • Sentence Transformers • RAG
+                <div class="form-group">
 
-</p>
+                    <label for="log_file">
+                        UPLOAD BUG / LOG FILE
+                        <span class="optional">(Optional)</span>
+                    </label>
 
-<br>
+                    <div class="file-upload-box">
 
-<p>
+                        <div class="upload-icon">
+                            📎
+                        </div>
 
-Version 3.0 • 2026
+                        <div class="upload-title">
+                            Upload Error Log
+                        </div>
 
-</p>
+                        <div class="upload-help">
+                            Supported formats: TXT, LOG, PDF, PNG, JPG, JPEG
+                        </div>
 
-</div>
+                        <label
+                            for="log_file"
+                            class="choose-file-btn"
+                        >
+                            Choose File
+                        </label>
 
-</div>
+                        <input
+                            type="file"
+                            id="log_file"
+                            name="log_file"
+                            accept=".txt,.log,.pdf,.png,.jpg,.jpeg"
+                            hidden
+                        >
+
+                        <div
+                            id="file-name"
+                            class="file-name"
+                        >
+                            No file selected
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     SUBMIT BUTTON
+                ========================= -->
+
+                <div class="button-row">
+
+                    <button
+                        type="submit"
+                        class="analyze-button"
+                        id="analyzeButton"
+                    >
+                        🔍 Analyze Bug
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+        Intelligent Bug Diagnosis Platform • Milestone 4 • 2026
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const logFile =
+            document.getElementById("log_file");
+
+        const fileName =
+            document.getElementById("file-name");
+
+        const bugForm =
+            document.getElementById("bugForm");
+
+        const analyzeButton =
+            document.getElementById("analyzeButton");
+
+
+        /* =========================
+           FILE NAME
+        ========================= */
+
+        if (logFile) {
+
+            logFile.addEventListener(
+                "change",
+                function () {
+
+                    if (this.files.length > 0) {
+
+                        fileName.textContent =
+                            "Selected file: " +
+                            this.files[0].name;
+
+                    } else {
+
+                        fileName.textContent =
+                            "No file selected";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           FORM SUBMIT
+        ========================= */
+
+        if (bugForm) {
+
+            bugForm.addEventListener(
+                "submit",
+                function () {
+
+                    if (
+                        analyzeButton &&
+                        bugForm.checkValidity()
+                    ) {
+
+                        analyzeButton.disabled = true;
+
+                        analyzeButton.textContent =
+                            "⏳ Analyzing Bug...";
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
 
 </body>
-
 </html>

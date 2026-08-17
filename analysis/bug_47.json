@@ -1,0 +1,374 @@
+{
+    "bug_id": "47",
+    "bug_title": "Users cannot log in because valid credentials are rejected.",
+    "bug_report": "AuthenticationException: Invalid credentials\r\nat com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:61)\r\nat com.example.controller.LoginController.login(LoginController.java:32)",
+    "category": "Authentication",
+    "uploaded_file": "None",
+    "submission_date": "17-08-2026 08:36 PM",
+    "processing_time": 0.32,
+    "triage": {
+        "severity": "Critical",
+        "priority": "P1",
+        "component": "Authentication",
+        "confidence": 65,
+        "reasoning": "Hybrid semantic triage combined similarity-weighted historical defect evidence with rule-based priority fallback. Priority was derived from historical evidence when available and inferred from severity and critical failure indicators when historical priority was unavailable.",
+        "evidence": [
+            {
+                "bug_id": "23",
+                "similarity": 65.27,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "24",
+                "similarity": 65.27,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "26",
+                "similarity": 65.27,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "triage_analysis": {
+        "severity": "Critical",
+        "priority": "P1",
+        "component": "Authentication",
+        "confidence": 65,
+        "reasoning": "Hybrid semantic triage combined similarity-weighted historical defect evidence with rule-based priority fallback. Priority was derived from historical evidence when available and inferred from severity and critical failure indicators when historical priority was unavailable.",
+        "evidence": [
+            {
+                "bug_id": "23",
+                "similarity": 65.27,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "24",
+                "similarity": 65.27,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "26",
+                "similarity": 65.27,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "log_analysis": {
+        "issues": [
+            {
+                "exception_type": "Unknown",
+                "failure_point": "com.example.auth.AuthenticationService.authenticate()",
+                "line_number": "61",
+                "code_path": "com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:61)",
+                "error_message": "AuthenticationException: Invalid credentials",
+                "root_cause": "The submitted log indicates an application runtime failure. The exception and primary failure point should be reviewed together.",
+                "severity": "Medium",
+                "suggested_fix": "Review the exception, failure point and affected code path.",
+                "call_stack": [
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.auth.AuthenticationService",
+                        "method": "authenticate",
+                        "file": "AuthenticationService.java",
+                        "line_number": "61",
+                        "failure_point": "com.example.auth.AuthenticationService.authenticate()",
+                        "code_path": "com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:61)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.controller.LoginController",
+                        "method": "login",
+                        "file": "LoginController.java",
+                        "line_number": "32",
+                        "failure_point": "com.example.controller.LoginController.login()",
+                        "code_path": "com.example.controller.LoginController.login(LoginController.java:32)"
+                    }
+                ]
+            }
+        ],
+        "summary": "Detected Unknown. Primary failure point identified from 2 stack-trace frame(s).",
+        "call_stack": [
+            {
+                "language": "Java",
+                "class_path": "com.example.auth.AuthenticationService",
+                "method": "authenticate",
+                "file": "AuthenticationService.java",
+                "line_number": "61",
+                "failure_point": "com.example.auth.AuthenticationService.authenticate()",
+                "code_path": "com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:61)"
+            },
+            {
+                "language": "Java",
+                "class_path": "com.example.controller.LoginController",
+                "method": "login",
+                "file": "LoginController.java",
+                "line_number": "32",
+                "failure_point": "com.example.controller.LoginController.login()",
+                "code_path": "com.example.controller.LoginController.login(LoginController.java:32)"
+            }
+        ]
+    },
+    "similar_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "Created by Kazushi Marukawa jam pobox com on Friday July 31 1998 3 25 14 PM PDT Additional Details Netscape and Mozilla hasn t work correctly with a http user passwd hostname path style URI after the Netscape 4 05 I m not sure whether this URI is right or not But few months ago we can use it Is it a BUG or right behavior This I believe is a duplicate of non bugzilla bug Reassiging to Judson who had fixed that The actual format is http username password server com Marking Verified Invalid",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 46.44,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "If you attempt to file a bug using bugzilla in NGlayout I am first asked for my email address and password to log in I enter valid data that works fine in Nav4 but apparently we re not sending the same string as Nav4 because bugzilla refuses my login in NGLayout but accepts it in Nav4 I suspect the fact that the login form uses GET rather than POST may be part of the issue but what do I know Bug 1168 has been marked as a duplicate of this bug http cvs mirror mozilla org webtools bugzilla enter_b",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.82,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "This page asks for an email address and password which I supply I click Login and it seems to accept the values but then returns the same page with the form fields emptied I can t log in I think this bug is relatively high priority because we want our testers to use Viewer as their everyday browser and they ll need this This bug has been marked as a duplicate of 866",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.8,
+            "rank": 3
+        },
+        {
+            "bug_id": 4,
+            "id": 4,
+            "title": "Historical Bug",
+            "description": "When starting Mozilla Xlib connection to 0 0 refused by server Xlib Client is not authorized to connect to Server Error Can t open display 0 0 All other programs can open from the local machine and user even when access control is on xhost solved the problem Version Night buil 980924 mozilla sparc sun solaris2 6 tar gz Machine Sun Sun Microsystems Ultra 1 Main Memory 92 MB and 200MB swap Kernel Version SunOS Release 5 6 Version Generic_105181 06 UNIX R System V Release 4 0 That is the way xhost",
+            "severity": "minor",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 42.34,
+            "rank": 4
+        },
+        {
+            "bug_id": 5,
+            "id": 5,
+            "title": "Historical Bug",
+            "description": "Created by Chris Hodson cmh fpk hp com on Friday May 15 1998 7 23 06 AM PDT Additional Details We have a proxy that requires a username and password At startup I get the 2 warnings saying unable to locate rdf netscape com and warning the following hosts are unknown blah blah perhaps there is a problem with your name server As soon as I go to the first site through the proxy server it asks for my name and password and everything is ok Looks like its not doing the checks in the right order This bu",
+            "severity": "trivial",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 41.7,
+            "rank": 5
+        }
+    ],
+    "similar_historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "Created by Kazushi Marukawa jam pobox com on Friday July 31 1998 3 25 14 PM PDT Additional Details Netscape and Mozilla hasn t work correctly with a http user passwd hostname path style URI after the Netscape 4 05 I m not sure whether this URI is right or not But few months ago we can use it Is it a BUG or right behavior This I believe is a duplicate of non bugzilla bug Reassiging to Judson who had fixed that The actual format is http username password server com Marking Verified Invalid",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 46.44,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "If you attempt to file a bug using bugzilla in NGlayout I am first asked for my email address and password to log in I enter valid data that works fine in Nav4 but apparently we re not sending the same string as Nav4 because bugzilla refuses my login in NGLayout but accepts it in Nav4 I suspect the fact that the login form uses GET rather than POST may be part of the issue but what do I know Bug 1168 has been marked as a duplicate of this bug http cvs mirror mozilla org webtools bugzilla enter_b",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.82,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "This page asks for an email address and password which I supply I click Login and it seems to accept the values but then returns the same page with the form fields emptied I can t log in I think this bug is relatively high priority because we want our testers to use Viewer as their everyday browser and they ll need this This bug has been marked as a duplicate of 866",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.8,
+            "rank": 3
+        }
+    ],
+    "historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "Created by Kazushi Marukawa jam pobox com on Friday July 31 1998 3 25 14 PM PDT Additional Details Netscape and Mozilla hasn t work correctly with a http user passwd hostname path style URI after the Netscape 4 05 I m not sure whether this URI is right or not But few months ago we can use it Is it a BUG or right behavior This I believe is a duplicate of non bugzilla bug Reassiging to Judson who had fixed that The actual format is http username password server com Marking Verified Invalid",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 46.44,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "If you attempt to file a bug using bugzilla in NGlayout I am first asked for my email address and password to log in I enter valid data that works fine in Nav4 but apparently we re not sending the same string as Nav4 because bugzilla refuses my login in NGLayout but accepts it in Nav4 I suspect the fact that the login form uses GET rather than POST may be part of the issue but what do I know Bug 1168 has been marked as a duplicate of this bug http cvs mirror mozilla org webtools bugzilla enter_b",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.82,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "This page asks for an email address and password which I supply I click Login and it seems to accept the values but then returns the same page with the form fields emptied I can t log in I think this bug is relatively high priority because we want our testers to use Viewer as their everyday browser and they ll need this This bug has been marked as a duplicate of 866",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.8,
+            "rank": 3
+        }
+    ],
+    "duplicate_detection": [],
+    "duplicates": [],
+    "root_cause_analysis": {
+        "root_cause": "The authentication flow is not safely handling an invalid or missing user state.",
+        "confidence": 85,
+        "evidence": [
+            "Detected component: Authentication.",
+            "Log analysis identified Unknown.",
+            "Historical bug similarity was considered during the diagnosis."
+        ]
+    },
+    "root_cause": {
+        "root_cause": "The authentication flow is not safely handling an invalid or missing user state.",
+        "confidence": 85,
+        "evidence": [
+            "Detected component: Authentication.",
+            "Log analysis identified Unknown.",
+            "Historical bug similarity was considered during the diagnosis."
+        ]
+    },
+    "remediation": {
+        "summary": "The authentication flow is not safely handling an invalid or missing user state.",
+        "recommended_steps": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing user credentials safely.",
+            "Add regression tests for invalid login attempts.",
+            "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+        ],
+        "steps": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing user credentials safely.",
+            "Add regression tests for invalid login attempts.",
+            "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+        ],
+        "testing": [
+            "Run functional testing for the affected feature.",
+            "Run regression testing for related functionality.",
+            "Run integration testing where applicable."
+        ],
+        "prevention": [
+            "Add regression tests for the confirmed defect.",
+            "Improve input validation and exception handling.",
+            "Monitor the affected component after deployment."
+        ],
+        "confidence": 77,
+        "component": "Authentication",
+        "priority": "P1",
+        "historical_similarity": 65.27,
+        "evidence": [
+            {
+                "similarity": 65.27,
+                "resolution": "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            },
+            {
+                "similarity": 65.27,
+                "resolution": "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            },
+            {
+                "similarity": 65.27,
+                "resolution": "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            }
+        ]
+    },
+    "fix_advisor": {
+        "category": "Authentication",
+        "priority": "P1",
+        "severity": "Critical",
+        "root_cause": "The authentication flow is not safely handling an invalid or missing user state.",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "ai_smart_fix": {
+        "category": "Authentication",
+        "priority": "P1",
+        "severity": "Critical",
+        "root_cause": "The authentication flow is not safely handling an invalid or missing user state.",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "resolved": true,
+    "resolved_at": "2026-08-17T20:36:48.661402",
+    "knowledge_base_added": true
+}

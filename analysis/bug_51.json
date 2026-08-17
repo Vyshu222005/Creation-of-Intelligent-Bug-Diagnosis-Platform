@@ -1,0 +1,372 @@
+{
+    "bug_id": "51",
+    "bug_title": "Application crashes when attempting to load the configuration file.",
+    "bug_report": "java.io.FileNotFoundException: config.properties\r\nat com.example.config.ConfigLoader.load(ConfigLoader.java:25)\r\nat com.example.application.Application.start(Application.java:18)",
+    "category": "Authentication",
+    "uploaded_file": "None",
+    "submission_date": "17-08-2026 09:35 PM",
+    "processing_time": 0.28,
+    "triage": {
+        "severity": "Critical",
+        "priority": "P1",
+        "component": "Authentication",
+        "confidence": 44,
+        "reasoning": "Hybrid semantic triage combined similarity-weighted historical defect evidence with rule-based priority fallback. Priority was derived from historical evidence when available and inferred from severity and critical failure indicators when historical priority was unavailable.",
+        "evidence": [
+            {
+                "bug_id": 1,
+                "similarity": 44.21,
+                "severity": "major",
+                "priority": "Unknown",
+                "component": "Unknown"
+            },
+            {
+                "bug_id": "44",
+                "similarity": 44.14,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "23",
+                "similarity": 43.61,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "triage_analysis": {
+        "severity": "Critical",
+        "priority": "P1",
+        "component": "Authentication",
+        "confidence": 44,
+        "reasoning": "Hybrid semantic triage combined similarity-weighted historical defect evidence with rule-based priority fallback. Priority was derived from historical evidence when available and inferred from severity and critical failure indicators when historical priority was unavailable.",
+        "evidence": [
+            {
+                "bug_id": 1,
+                "similarity": 44.21,
+                "severity": "major",
+                "priority": "Unknown",
+                "component": "Unknown"
+            },
+            {
+                "bug_id": "44",
+                "similarity": 44.14,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "23",
+                "similarity": 43.61,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "log_analysis": {
+        "issues": [
+            {
+                "exception_type": "Unknown",
+                "failure_point": "com.example.config.ConfigLoader.load()",
+                "line_number": "25",
+                "code_path": "com.example.config.ConfigLoader.load(ConfigLoader.java:25)",
+                "error_message": "java.io.FileNotFoundException: config.properties",
+                "root_cause": "The submitted log indicates an application runtime failure. The exception and primary failure point should be reviewed together.",
+                "severity": "Medium",
+                "suggested_fix": "Review the exception, failure point and affected code path.",
+                "call_stack": [
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.config.ConfigLoader",
+                        "method": "load",
+                        "file": "ConfigLoader.java",
+                        "line_number": "25",
+                        "failure_point": "com.example.config.ConfigLoader.load()",
+                        "code_path": "com.example.config.ConfigLoader.load(ConfigLoader.java:25)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.application.Application",
+                        "method": "start",
+                        "file": "Application.java",
+                        "line_number": "18",
+                        "failure_point": "com.example.application.Application.start()",
+                        "code_path": "com.example.application.Application.start(Application.java:18)"
+                    }
+                ]
+            }
+        ],
+        "summary": "Detected Unknown. Primary failure point identified from 2 stack-trace frame(s).",
+        "call_stack": [
+            {
+                "language": "Java",
+                "class_path": "com.example.config.ConfigLoader",
+                "method": "load",
+                "file": "ConfigLoader.java",
+                "line_number": "25",
+                "failure_point": "com.example.config.ConfigLoader.load()",
+                "code_path": "com.example.config.ConfigLoader.load(ConfigLoader.java:25)"
+            },
+            {
+                "language": "Java",
+                "class_path": "com.example.application.Application",
+                "method": "start",
+                "file": "Application.java",
+                "line_number": "18",
+                "failure_point": "com.example.application.Application.start()",
+                "code_path": "com.example.application.Application.start(Application.java:18)"
+            }
+        ]
+    },
+    "similar_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "Created by Chris Alonso calonso cobank com on Wednesday June 24 1998 12 55 19 PM PDT Additional Details Killing browser after using large Java applets causes applicatio to die but proces lingers with memory allocated often lots 15 20MB I believe this also happens in Windows95 with result being GPF s when other applications get allocated those blocks from OS I have seen this for a while several versions so it is probably a know bug Chris Alonso IBM Updated by Garrett Arch Blythe blythe netscape c",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.46,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "Created by mcafee netscape com on Monday June 29 1998 1 30 36 AM PDT Additional Details This bug is to track the configdir patch so we don t forget to check it in This bug has been marked as a duplicate of 531 Marking Verified Duplicate",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.29,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Suneetha Yerneni suneetha hilco com on Friday July 24 1998 9 26 23 AM PDT Additional Details When tried running applets through netscape it uses the system resources each time the applet is loaded and eventually the netscape crashes as all the system resources are used Is there a way which works as a garbage collector and which releases the resources in Netscape This problem doesnot occur when I use Internet explorer Reassing Marc Byrd s mozilla bugs to Jean Charles for proper routing",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.03,
+            "rank": 3
+        },
+        {
+            "bug_id": 4,
+            "id": 4,
+            "title": "Historical Bug",
+            "description": "Created by Rick Downes mozilla radsoft net on Thursday July 16 1998 6 15 35 AM PDT Additional Details Seems you guys haven t really gotten multithreading Nowadays you ve got so much going on in this mutating app that even at exit there are threads running accessing things which other threads do their politest to clean up and destroy With all these threads running you must find a way of synchronising the ExitProcess call either directly or indirectly by waiting on all running threads to exit sign",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 43.43,
+            "rank": 4
+        },
+        {
+            "bug_id": 5,
+            "id": 5,
+            "title": "Historical Bug",
+            "description": "Version Night build 980924 mozilla sparc sun solaris2 6 tar gz When opening history window or bookmark window first time assert line 179 file xfe c After clicking on most frequent assert line 179 file xfe c assert line 189 file remstore c assert line 82 file remstore c assert line 328 file nlcstore c assert line 354 file remstore c assert line 328 file nlcstore c assert line 631 file mcf c assert line 7392 file ht c When closing bookmark window Bus Error and Mozilla has crashed Version Night bui",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 43.32,
+            "rank": 5
+        }
+    ],
+    "similar_historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "Created by Chris Alonso calonso cobank com on Wednesday June 24 1998 12 55 19 PM PDT Additional Details Killing browser after using large Java applets causes applicatio to die but proces lingers with memory allocated often lots 15 20MB I believe this also happens in Windows95 with result being GPF s when other applications get allocated those blocks from OS I have seen this for a while several versions so it is probably a know bug Chris Alonso IBM Updated by Garrett Arch Blythe blythe netscape c",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.46,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "Created by mcafee netscape com on Monday June 29 1998 1 30 36 AM PDT Additional Details This bug is to track the configdir patch so we don t forget to check it in This bug has been marked as a duplicate of 531 Marking Verified Duplicate",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.29,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Suneetha Yerneni suneetha hilco com on Friday July 24 1998 9 26 23 AM PDT Additional Details When tried running applets through netscape it uses the system resources each time the applet is loaded and eventually the netscape crashes as all the system resources are used Is there a way which works as a garbage collector and which releases the resources in Netscape This problem doesnot occur when I use Internet explorer Reassing Marc Byrd s mozilla bugs to Jean Charles for proper routing",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.03,
+            "rank": 3
+        }
+    ],
+    "historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "Created by Chris Alonso calonso cobank com on Wednesday June 24 1998 12 55 19 PM PDT Additional Details Killing browser after using large Java applets causes applicatio to die but proces lingers with memory allocated often lots 15 20MB I believe this also happens in Windows95 with result being GPF s when other applications get allocated those blocks from OS I have seen this for a while several versions so it is probably a know bug Chris Alonso IBM Updated by Garrett Arch Blythe blythe netscape c",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.46,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "Created by mcafee netscape com on Monday June 29 1998 1 30 36 AM PDT Additional Details This bug is to track the configdir patch so we don t forget to check it in This bug has been marked as a duplicate of 531 Marking Verified Duplicate",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.29,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Suneetha Yerneni suneetha hilco com on Friday July 24 1998 9 26 23 AM PDT Additional Details When tried running applets through netscape it uses the system resources each time the applet is loaded and eventually the netscape crashes as all the system resources are used Is there a way which works as a garbage collector and which releases the resources in Netscape This problem doesnot occur when I use Internet explorer Reassing Marc Byrd s mozilla bugs to Jean Charles for proper routing",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 45.03,
+            "rank": 3
+        }
+    ],
+    "duplicate_detection": [],
+    "duplicates": [],
+    "root_cause_analysis": {
+        "root_cause": "The application is failing with Unknown, with the failure occurring near com.example.config.ConfigLoader.load().",
+        "confidence": 91,
+        "evidence": [
+            "Detected component: File System.",
+            "Log analysis identified Unknown.",
+            "Historical bug similarity was considered (45.5%)."
+        ]
+    },
+    "root_cause": {
+        "root_cause": "The application is failing with Unknown, with the failure occurring near com.example.config.ConfigLoader.load().",
+        "confidence": 91,
+        "evidence": [
+            "Detected component: File System.",
+            "Log analysis identified Unknown.",
+            "Historical bug similarity was considered (45.5%)."
+        ]
+    },
+    "remediation": {
+        "summary": "The application is failing with Unknown, with the failure occurring near com.example.config.ConfigLoader.load().",
+        "recommended_steps": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing user credentials safely.",
+            "Add regression tests for invalid login attempts.",
+            "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+        ],
+        "steps": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing user credentials safely.",
+            "Add regression tests for invalid login attempts.",
+            "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+        ],
+        "testing": [
+            "Run functional testing for the affected feature.",
+            "Run regression testing for related functionality.",
+            "Run integration testing where applicable."
+        ],
+        "prevention": [
+            "Add regression tests for the confirmed defect.",
+            "Improve input validation and exception handling.",
+            "Monitor the affected component after deployment."
+        ],
+        "confidence": 72,
+        "component": "Authentication",
+        "priority": "P1",
+        "historical_similarity": 44.14,
+        "evidence": [
+            {
+                "similarity": 44.14,
+                "resolution": "Validate username and password before authentication. Handle invalid or missing user credentials safely. Add regression tests for invalid login attempts. The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            },
+            {
+                "similarity": 43.61,
+                "resolution": "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            },
+            {
+                "similarity": 43.61,
+                "resolution": "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            }
+        ]
+    },
+    "fix_advisor": {
+        "category": "Authentication",
+        "priority": "P1",
+        "severity": "Critical",
+        "root_cause": "The application is failing with Unknown, with the failure occurring near com.example.config.ConfigLoader.load().",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "ai_smart_fix": {
+        "category": "Authentication",
+        "priority": "P1",
+        "severity": "Critical",
+        "root_cause": "The application is failing with Unknown, with the failure occurring near com.example.config.ConfigLoader.load().",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "resolved": false
+}

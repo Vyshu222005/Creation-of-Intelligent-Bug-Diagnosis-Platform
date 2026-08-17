@@ -316,3 +316,126 @@ ValueError: Invalid log format",,31-07-2026 10:11 PM
 315,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 10:57 AM
 316,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 11:02 AM
 317,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,02-08-2026 11:07 AM
+318,Login API Throws NullPointerException During User Authentication,Login API Throws NullPointerException During User Authentication,"java.lang.NullPointerException: Cannot invoke ""User.getUsername()"" because ""user"" is null
+
+    at com.company.auth.UserRepository.findByUsername(UserRepository.java:41)
+    at com.company.auth.LoginService.validateUser(LoginService.java:58)
+    at com.company.auth.LoginController.login(LoginController.java:27)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1054)
+    at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)",,03-08-2026 05:43 PM
+325,Application crashes on login,Application crashes on login,,,03-08-2026 05:49 PM
+326,Application crashes on login,Application crashes on login,,logfile.txt,03-08-2026 05:58 PM
+327,Application crashes on login,Application crashes on login,"java.lang.NullPointerException: Cannot invoke ""User.getUsername()"" because ""user"" is null
+
+    at com.company.auth.UserRepository.findByUsername(UserRepository.java:41)
+    at com.company.auth.LoginService.validateUser(LoginService.java:58)
+    at com.company.auth.LoginController.login(LoginController.java:27)
+    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1054)
+    at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)",logfile.txt,03-08-2026 06:34 PM
+334,Application crashes on login,Application crashes on login,,logfile.txt,08-08-2026 06:08 PM
+335,Application crashes on login,Application crashes on login,,logfile.txt,08-08-2026 06:08 PM
+191,Application crashes on login,Application crashes on login,,logfile.txt,08-08-2026 06:23 PM
+192,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,08-08-2026 06:25 PM
+193,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,08-08-2026 06:29 PM
+194,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,08-08-2026 06:29 PM
+195,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,08-08-2026 06:35 PM
+196,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,08-08-2026 06:37 PM
+342,Login API Throws NullPointerException,Login API Throws NullPointerException,,logfile.txt,08-08-2026 07:10 PM
+343,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,08-08-2026 07:33 PM
+344,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,08-08-2026 07:35 PM
+345,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,08-08-2026 07:38 PM
+346,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,08-08-2026 08:12 PM
+347,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,08-08-2026 08:15 PM
+348,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,08-08-2026 08:18 PM
+349,NullPointerException while processing user login request,NullPointerException while processing user login request,,logfile.txt,08-08-2026 08:25 PM
+350,Database connection failure during user registration,Database connection failure during user registration,"2026-08-08 20:10:15 ERROR RegistrationController - Registration request failed
+2026-08-08 20:10:15 ERROR UserService - Unable to create new user
+2026-08-08 20:10:15 ERROR UserRepository - Database connection failed
+java.sql.SQLException: Connection refused
+    at com.company.database.DatabaseConnection.connect(DatabaseConnection.java:58)
+    at com.company.auth.UserRepository.save(UserRepository.java:41)
+    at com.company.auth.UserService.register(UserService.java:72)
+    at com.company.auth.RegistrationController.register(RegistrationController.java:35)
+Caused by: java.net.ConnectException: Connection refused
+    at java.net.Socket.connect(Socket.java:591)",,09-08-2026 03:19 PM
+351,Database connection failure during user registration,Database connection failure during user registration,"2026-08-08 20:10:15 ERROR RegistrationController - Registration request failed
+2026-08-08 20:10:15 ERROR UserService - Unable to create new user
+2026-08-08 20:10:15 ERROR UserRepository - Database connection failed
+java.sql.SQLException: Connection refused
+    at com.company.database.DatabaseConnection.connect(DatabaseConnection.java:58)
+    at com.company.auth.UserRepository.save(UserRepository.java:41)
+    at com.company.auth.UserService.register(UserService.java:72)
+    at com.company.auth.RegistrationController.register(RegistrationController.java:35)
+Caused by: java.net.ConnectException: Connection refused
+    at java.net.Socket.connect(Socket.java:591)",,09-08-2026 03:20 PM
+352,Application crashes on login,Application crashes on login,,logfile.txt,10-08-2026 05:53 PM
+353,Application crashes on login,Application crashes on login,,logfile.txt,10-08-2026 05:54 PM
+354,Application crashes on login,Application crashes on login,,logfile.txt,10-08-2026 05:54 PM
+355,Application crashes on login,Application crashes on login,,logfile.txt,10-08-2026 05:55 PM
+356,Application crashes on login,Application crashes on login,v,logfile.txt,10-08-2026 06:14 PM
+357,Application crashes on login,Application crashes on login,v,logfile.txt,10-08-2026 06:14 PM
+358,Application crashes on login,Application crashes on login,vv,logfile.txt,10-08-2026 08:06 PM
+359,Application crashes on login,Application crashes on login,vv,logfile.txt,10-08-2026 08:10 PM
+360,Application crashes on login,Application crashes on login,vv,logfile.txt,10-08-2026 08:19 PM
+361,Login API Throws NullPointerException,Login API Throws NullPointerException,v,logfile.txt,10-08-2026 08:21 PM
+362,Login API Throws NullPointerException,Login API Throws NullPointerException,v,logfile.txt,10-08-2026 08:23 PM
+363,Login API Throws NullPointerException,Login API Throws NullPointerException,v,logfile.txt,10-08-2026 08:25 PM
+364,Login API Throws NullPointerException,Login API Throws NullPointerException,v,logfile.txt,10-08-2026 08:37 PM
+365,Application crashes on login,Application crashes on login,v,logfile.txt,10-08-2026 08:39 PM
+366,Application crashes on login,Application crashes on login,b,logfile.txt,10-08-2026 08:51 PM
+367,Application crashes on login,Application crashes on login,v,logfile.txt,10-08-2026 08:55 PM
+368,Login Page Crashes After Invalid Credentials,Login Page Crashes After Invalid Credentials,Login Page Crashes After Invalid Credentials,logfile.txt,10-08-2026 09:31 PM
+369,Login Page Crashes After Invalid Credentials,Login Page Crashes After Invalid Credentials,Login Page Crashes After Invalid Credentials,logfile.txt,10-08-2026 09:44 PM
+370,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:46 PM
+371,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:49 PM
+372,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:50 PM
+373,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:50 PM
+374,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:50 PM
+375,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:54 PM
+376,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:54 PM
+377,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:55 PM
+378,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:56 PM
+379,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:57 PM
+380,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:57 PM
+381,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:57 PM
+382,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 09:58 PM
+383,Login API Throws NullPointerException,Login API Throws NullPointerException,Login API Throws NullPointerException,logfile.txt,10-08-2026 10:02 PM
+384,NullPointerException while processing user login request,NullPointerException while processing user login request,NullPointerException while processing user login reques,logfile.txt,11-08-2026 09:50 AM
+385,NullPointerException while processing user login request,NullPointerException while processing user login request,NullPointerException while processing user login request,logfile.txt,11-08-2026 10:20 AM
+386,NullPointerException while processing user login request,NullPointerException while processing user login request,NullPointerException while processing user login request,logfile.txt,11-08-2026 10:23 AM
+387,NullPointerException while processing user login request,NullPointerException while processing user login request,NullPointerException while processing user login request,logfile.txt,11-08-2026 10:27 AM
+406,Login API Throws NullPointerException,,,logfile.txt,11-08-2026 11:06 AM
+407,Login API Throws NullPointerException,,,logfile.txt,11-08-2026 11:19 AM
+408,Login API Throws NullPointerException,,,logfile.txt,11-08-2026 11:56 AM
+409,Login API Throws NullPointerException,,,logfile.txt,11-08-2026 12:11 PM
+410,Login API Throws NullPointerException,,,logfile.txt,11-08-2026 01:12 PM
+411,Login API Throws NullPointerException,,,logfile.txt,11-08-2026 01:35 PM
+412,Login API Throws NullPointerException,,,logfile.txt,11-08-2026 01:47 PM
+413,Login API Throws NullPointerException,"java.lang.NullPointerException: Cannot invoke ""User.getUsername()"" because ""user"" is null
+
+	at com.company.auth.UserRepository.findByUsername(UserRepository.java:42)
+	at com.company.auth.AuthenticationService.authenticate(AuthenticationService.java:82)
+	at com.company.auth.AuthenticationController.login(AuthenticationController.java:45)
+
+User login failed because the user object was null before validation.",,logfile.txt,11-08-2026 01:59 PM
+420,Login API Throws NullPointerException,"java.lang.NullPointerException: Cannot invoke ""User.getUsername()"" because ""user"" is null
+
+	at com.company.auth.UserRepository.findByUsername(UserRepository.java:42)
+	at com.company.auth.AuthenticationService.authenticate(AuthenticationService.java:82)
+	at com.company.auth.AuthenticationController.login(AuthenticationController.java:45)
+
+User login failed because the user object was null before validation.",,logfile.txt,11-08-2026 05:54 PM
+427,Login API Throws NullPointerException,"java.lang.NullPointerException: Cannot invoke ""User.getUsername()"" because ""user"" is null
+
+	at com.company.auth.UserRepository.findByUsername(UserRepository.java:42)
+	at com.company.auth.AuthenticationService.authenticate(AuthenticationService.java:82)
+	at com.company.auth.AuthenticationController.login(AuthenticationController.java:45)
+
+User login failed because the user object was null before validation.",,logfile.txt,11-08-2026 06:03 PM
+434,NullPointerException while processing user login request,"java.lang.NullPointerException: Cannot invoke ""User.getUsername()"" because ""user"" is null
+
+	at com.company.auth.UserRepository.findByUsername(UserRepository.java:42)
+	at com.company.auth.AuthenticationService.authenticate(AuthenticationService.java:82)
+	at com.company.auth.AuthenticationController.login(AuthenticationController.java:45)
+
+User login failed because the user object was null before validation.",,logfile.txt,11-08-2026 09:02 PM

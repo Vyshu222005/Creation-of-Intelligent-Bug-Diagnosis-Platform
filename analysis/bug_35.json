@@ -1,0 +1,450 @@
+{
+    "bug_id": "35",
+    "bug_title": "Login API crashes with NullPointerException",
+    "bug_report": "java.lang.NullPointerException: Cannot invoke \"String.equals(Object)\" because \"username\" is null\r\n    at com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:45)\r\n    at com.example.controller.LoginController.login(LoginController.java:28)\r\n    at com.example.controller.LoginController$$FastClassBySpringCGLIB.invoke(<generated>)\r\n    at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)\r\n    at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)\r\n    at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)\r\n    at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)\r\n    at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:982)",
+    "category": "Authentication",
+    "uploaded_file": "None",
+    "submission_date": "17-08-2026 05:59 PM",
+    "processing_time": 9.02,
+    "triage": {
+        "severity": "Critical",
+        "priority": "Unknown",
+        "component": "Authentication",
+        "confidence": 91,
+        "reasoning": "Hybrid semantic triage used historical defect embeddings, similarity-weighted evidence, and the retrieved severity, priority and component patterns.",
+        "evidence": [
+            {
+                "bug_id": "13",
+                "similarity": 91.87,
+                "severity": "Critical",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "14",
+                "similarity": 91.87,
+                "severity": "Critical",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "15",
+                "similarity": 91.87,
+                "severity": "Critical",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "triage_analysis": {
+        "severity": "Critical",
+        "priority": "Unknown",
+        "component": "Authentication",
+        "confidence": 91,
+        "reasoning": "Hybrid semantic triage used historical defect embeddings, similarity-weighted evidence, and the retrieved severity, priority and component patterns.",
+        "evidence": [
+            {
+                "bug_id": "13",
+                "similarity": 91.87,
+                "severity": "Critical",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "14",
+                "similarity": 91.87,
+                "severity": "Critical",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "15",
+                "similarity": 91.87,
+                "severity": "Critical",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "log_analysis": {
+        "issues": [
+            {
+                "exception_type": "NullPointerException",
+                "failure_point": "com.example.auth.AuthenticationService.authenticate()",
+                "line_number": "45",
+                "code_path": "com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:45)",
+                "error_message": "java.lang.NullPointerException: Cannot invoke \"String.equals(Object)\" because \"username\" is null",
+                "root_cause": "The username value is null before the authentication logic attempts to access it. The input should be validated before authentication.",
+                "severity": "High",
+                "suggested_fix": "Validate the object or value for null before accessing it.",
+                "call_stack": [
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.auth.AuthenticationService",
+                        "method": "authenticate",
+                        "file": "AuthenticationService.java",
+                        "line_number": "45",
+                        "failure_point": "com.example.auth.AuthenticationService.authenticate()",
+                        "code_path": "com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:45)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.controller.LoginController",
+                        "method": "login",
+                        "file": "LoginController.java",
+                        "line_number": "28",
+                        "failure_point": "com.example.controller.LoginController.login()",
+                        "code_path": "com.example.controller.LoginController.login(LoginController.java:28)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "org.springframework.web.method.support.InvocableHandlerMethod",
+                        "method": "doInvoke",
+                        "file": "InvocableHandlerMethod.java",
+                        "line_number": "205",
+                        "failure_point": "org.springframework.web.method.support.InvocableHandlerMethod.doInvoke()",
+                        "code_path": "org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "org.springframework.web.method.support.InvocableHandlerMethod",
+                        "method": "invokeForRequest",
+                        "file": "InvocableHandlerMethod.java",
+                        "line_number": "150",
+                        "failure_point": "org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest()",
+                        "code_path": "org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod",
+                        "method": "invokeAndHandle",
+                        "file": "ServletInvocableHandlerMethod.java",
+                        "line_number": "117",
+                        "failure_point": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle()",
+                        "code_path": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "org.springframework.web.servlet.DispatcherServlet",
+                        "method": "doDispatch",
+                        "file": "DispatcherServlet.java",
+                        "line_number": "1089",
+                        "failure_point": "org.springframework.web.servlet.DispatcherServlet.doDispatch()",
+                        "code_path": "org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "org.springframework.web.servlet.DispatcherServlet",
+                        "method": "doService",
+                        "file": "DispatcherServlet.java",
+                        "line_number": "982",
+                        "failure_point": "org.springframework.web.servlet.DispatcherServlet.doService()",
+                        "code_path": "org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:982)"
+                    }
+                ]
+            }
+        ],
+        "summary": "Detected NullPointerException. Primary failure point identified from 7 stack-trace frame(s).",
+        "call_stack": [
+            {
+                "language": "Java",
+                "class_path": "com.example.auth.AuthenticationService",
+                "method": "authenticate",
+                "file": "AuthenticationService.java",
+                "line_number": "45",
+                "failure_point": "com.example.auth.AuthenticationService.authenticate()",
+                "code_path": "com.example.auth.AuthenticationService.authenticate(AuthenticationService.java:45)"
+            },
+            {
+                "language": "Java",
+                "class_path": "com.example.controller.LoginController",
+                "method": "login",
+                "file": "LoginController.java",
+                "line_number": "28",
+                "failure_point": "com.example.controller.LoginController.login()",
+                "code_path": "com.example.controller.LoginController.login(LoginController.java:28)"
+            },
+            {
+                "language": "Java",
+                "class_path": "org.springframework.web.method.support.InvocableHandlerMethod",
+                "method": "doInvoke",
+                "file": "InvocableHandlerMethod.java",
+                "line_number": "205",
+                "failure_point": "org.springframework.web.method.support.InvocableHandlerMethod.doInvoke()",
+                "code_path": "org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)"
+            },
+            {
+                "language": "Java",
+                "class_path": "org.springframework.web.method.support.InvocableHandlerMethod",
+                "method": "invokeForRequest",
+                "file": "InvocableHandlerMethod.java",
+                "line_number": "150",
+                "failure_point": "org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest()",
+                "code_path": "org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)"
+            },
+            {
+                "language": "Java",
+                "class_path": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod",
+                "method": "invokeAndHandle",
+                "file": "ServletInvocableHandlerMethod.java",
+                "line_number": "117",
+                "failure_point": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle()",
+                "code_path": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)"
+            },
+            {
+                "language": "Java",
+                "class_path": "org.springframework.web.servlet.DispatcherServlet",
+                "method": "doDispatch",
+                "file": "DispatcherServlet.java",
+                "line_number": "1089",
+                "failure_point": "org.springframework.web.servlet.DispatcherServlet.doDispatch()",
+                "code_path": "org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)"
+            },
+            {
+                "language": "Java",
+                "class_path": "org.springframework.web.servlet.DispatcherServlet",
+                "method": "doService",
+                "file": "DispatcherServlet.java",
+                "line_number": "982",
+                "failure_point": "org.springframework.web.servlet.DispatcherServlet.doService()",
+                "code_path": "org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:982)"
+            }
+        ]
+    },
+    "similar_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "If you attempt to file a bug using bugzilla in NGlayout I am first asked for my email address and password to log in I enter valid data that works fine in Nav4 but apparently we re not sending the same string as Nav4 because bugzilla refuses my login in NGLayout but accepts it in Nav4 I suspect the fact that the login form uses GET rather than POST may be part of the issue but what do I know Bug 1168 has been marked as a duplicate of this bug http cvs mirror mozilla org webtools bugzilla enter_b",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 47.11,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "This page asks for an email address and password which I supply I click Login and it seems to accept the values but then returns the same page with the form fields emptied I can t log in I think this bug is relatively high priority because we want our testers to use Viewer as their everyday browser and they ll need this This bug has been marked as a duplicate of 866",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.35,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Kazushi Marukawa jam pobox com on Friday July 31 1998 3 25 14 PM PDT Additional Details Netscape and Mozilla hasn t work correctly with a http user passwd hostname path style URI after the Netscape 4 05 I m not sure whether this URI is right or not But few months ago we can use it Is it a BUG or right behavior This I believe is a duplicate of non bugzilla bug Reassiging to Judson who had fixed that The actual format is http username password server com Marking Verified Invalid",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 43.56,
+            "rank": 3
+        },
+        {
+            "bug_id": 4,
+            "id": 4,
+            "title": "Historical Bug",
+            "description": "Goto http scopus bugsplat Login with your username password You are sent to a confirmation page All subsequent pages will crash It s related to aborting the activity the page is performing the pages says but the line break is missing something like Please wait After the done comes up you can safely go to other pages But the cookies file is written out correctly This seems to work for me ok build from 08 07 98 mid air collision bugzilla cleanup Reopening current State verified and no resolution w",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 43.52,
+            "rank": 4
+        },
+        {
+            "bug_id": 5,
+            "id": 5,
+            "title": "Historical Bug",
+            "description": "Created by steve orens sorens acm org on Wednesday April 8 1998 10 28 12 AM PDT Additional Details mozilla for the mainctosh throws out the above user break on startup this prevents it from getting to its preferences correctly i believe which is also preventing things like cookies from working Also every time you startup it asks you which user you are again i built this version of mozilla on a different hard drive than the boot drive hence the dev however when i moved the client app to the boot",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 41.33,
+            "rank": 5
+        }
+    ],
+    "similar_historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "If you attempt to file a bug using bugzilla in NGlayout I am first asked for my email address and password to log in I enter valid data that works fine in Nav4 but apparently we re not sending the same string as Nav4 because bugzilla refuses my login in NGLayout but accepts it in Nav4 I suspect the fact that the login form uses GET rather than POST may be part of the issue but what do I know Bug 1168 has been marked as a duplicate of this bug http cvs mirror mozilla org webtools bugzilla enter_b",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 47.11,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "This page asks for an email address and password which I supply I click Login and it seems to accept the values but then returns the same page with the form fields emptied I can t log in I think this bug is relatively high priority because we want our testers to use Viewer as their everyday browser and they ll need this This bug has been marked as a duplicate of 866",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.35,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Kazushi Marukawa jam pobox com on Friday July 31 1998 3 25 14 PM PDT Additional Details Netscape and Mozilla hasn t work correctly with a http user passwd hostname path style URI after the Netscape 4 05 I m not sure whether this URI is right or not But few months ago we can use it Is it a BUG or right behavior This I believe is a duplicate of non bugzilla bug Reassiging to Judson who had fixed that The actual format is http username password server com Marking Verified Invalid",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 43.56,
+            "rank": 3
+        }
+    ],
+    "historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "If you attempt to file a bug using bugzilla in NGlayout I am first asked for my email address and password to log in I enter valid data that works fine in Nav4 but apparently we re not sending the same string as Nav4 because bugzilla refuses my login in NGLayout but accepts it in Nav4 I suspect the fact that the login form uses GET rather than POST may be part of the issue but what do I know Bug 1168 has been marked as a duplicate of this bug http cvs mirror mozilla org webtools bugzilla enter_b",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 47.11,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "This page asks for an email address and password which I supply I click Login and it seems to accept the values but then returns the same page with the form fields emptied I can t log in I think this bug is relatively high priority because we want our testers to use Viewer as their everyday browser and they ll need this This bug has been marked as a duplicate of 866",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 44.35,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Kazushi Marukawa jam pobox com on Friday July 31 1998 3 25 14 PM PDT Additional Details Netscape and Mozilla hasn t work correctly with a http user passwd hostname path style URI after the Netscape 4 05 I m not sure whether this URI is right or not But few months ago we can use it Is it a BUG or right behavior This I believe is a duplicate of non bugzilla bug Reassiging to Judson who had fixed that The actual format is http username password server com Marking Verified Invalid",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 43.56,
+            "rank": 3
+        }
+    ],
+    "duplicate_detection": [],
+    "duplicates": [],
+    "root_cause_analysis": {
+        "root_cause": "No sufficiently similar historical root cause was found.",
+        "confidence": 47,
+        "evidence": [],
+        "reasoning": "Root cause was inferred by combining structured log evidence (NullPointerException), failure location (com.example.auth.AuthenticationService.authenticate()), and similarity-weighted historical defect evidence."
+    },
+    "root_cause": {
+        "root_cause": "No sufficiently similar historical root cause was found.",
+        "confidence": 47,
+        "evidence": [],
+        "reasoning": "Root cause was inferred by combining structured log evidence (NullPointerException), failure location (com.example.auth.AuthenticationService.authenticate()), and similarity-weighted historical defect evidence."
+    },
+    "remediation": {
+        "summary": "No sufficiently similar historical root cause was found.",
+        "recommended_steps": [
+            "Validate all user inputs before processing",
+            "Add null and exception handling where required",
+            "Apply the necessary code fixes and verify the changes."
+        ],
+        "steps": [
+            "Validate all user inputs before processing",
+            "Add null and exception handling where required",
+            "Apply the necessary code fixes and verify the changes."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Add regression coverage for the confirmed defect.",
+            "Improve validation and error handling around the affected flow.",
+            "Monitor the affected component after deployment."
+        ],
+        "confidence": 91,
+        "method": "Hybrid semantic remediation using FAISS historical evidence and engineering validation.",
+        "historical_evidence_count": 5,
+        "best_similarity": 91.87,
+        "evidence": [
+            {
+                "similarity": 91.87,
+                "resolution": "Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            },
+            {
+                "similarity": 91.87,
+                "resolution": "Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            },
+            {
+                "similarity": 91.87,
+                "resolution": "Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            }
+        ]
+    },
+    "fix_advisor": {
+        "category": "Authentication",
+        "priority": "Unknown",
+        "severity": "Critical",
+        "root_cause": "No sufficiently similar historical root cause was found.",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "ai_smart_fix": {
+        "category": "Authentication",
+        "priority": "Unknown",
+        "severity": "Critical",
+        "root_cause": "No sufficiently similar historical root cause was found.",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "resolved": true,
+    "resolved_at": "2026-08-17T18:09:56.563641",
+    "knowledge_base_added": true
+}

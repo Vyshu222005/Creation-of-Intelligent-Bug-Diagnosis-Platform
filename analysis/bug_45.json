@@ -1,0 +1,374 @@
+{
+    "bug_id": "45",
+    "bug_title": "Application fails to connect to the database during user registration.",
+    "bug_report": "java.sql.SQLException: Connection refused\r\nat com.example.db.DatabaseConnection.connect(DatabaseConnection.java:52)\r\nat com.example.user.UserService.register(UserService.java:31)",
+    "category": "General Software Bug",
+    "uploaded_file": "None",
+    "submission_date": "17-08-2026 08:31 PM",
+    "processing_time": 0.32,
+    "triage": {
+        "severity": "Critical",
+        "priority": "P1",
+        "component": "Authentication",
+        "confidence": 46,
+        "reasoning": "Hybrid semantic triage combined similarity-weighted historical defect evidence with rule-based priority fallback. Priority was derived from historical evidence when available and inferred from severity and critical failure indicators when historical priority was unavailable.",
+        "evidence": [
+            {
+                "bug_id": "420",
+                "similarity": 46.62,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "2",
+                "similarity": 45.43,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "44",
+                "similarity": 45.36,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "triage_analysis": {
+        "severity": "Critical",
+        "priority": "P1",
+        "component": "Authentication",
+        "confidence": 46,
+        "reasoning": "Hybrid semantic triage combined similarity-weighted historical defect evidence with rule-based priority fallback. Priority was derived from historical evidence when available and inferred from severity and critical failure indicators when historical priority was unavailable.",
+        "evidence": [
+            {
+                "bug_id": "420",
+                "similarity": 46.62,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "2",
+                "similarity": 45.43,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            },
+            {
+                "bug_id": "44",
+                "similarity": 45.36,
+                "severity": "Critical",
+                "priority": "Unknown",
+                "component": "Authentication"
+            }
+        ]
+    },
+    "log_analysis": {
+        "issues": [
+            {
+                "exception_type": "SQLException",
+                "failure_point": "com.example.db.DatabaseConnection.connect()",
+                "line_number": "52",
+                "code_path": "com.example.db.DatabaseConnection.connect(DatabaseConnection.java:52)",
+                "error_message": "java.sql.SQLException: Connection refused",
+                "root_cause": "The application encountered a database operation failure. The query, connection, schema, constraints and supplied values should be reviewed.",
+                "severity": "High",
+                "suggested_fix": "Review the SQL query, database connection, schema and constraints.",
+                "call_stack": [
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.db.DatabaseConnection",
+                        "method": "connect",
+                        "file": "DatabaseConnection.java",
+                        "line_number": "52",
+                        "failure_point": "com.example.db.DatabaseConnection.connect()",
+                        "code_path": "com.example.db.DatabaseConnection.connect(DatabaseConnection.java:52)"
+                    },
+                    {
+                        "language": "Java",
+                        "class_path": "com.example.user.UserService",
+                        "method": "register",
+                        "file": "UserService.java",
+                        "line_number": "31",
+                        "failure_point": "com.example.user.UserService.register()",
+                        "code_path": "com.example.user.UserService.register(UserService.java:31)"
+                    }
+                ]
+            }
+        ],
+        "summary": "Detected SQLException. Primary failure point identified from 2 stack-trace frame(s).",
+        "call_stack": [
+            {
+                "language": "Java",
+                "class_path": "com.example.db.DatabaseConnection",
+                "method": "connect",
+                "file": "DatabaseConnection.java",
+                "line_number": "52",
+                "failure_point": "com.example.db.DatabaseConnection.connect()",
+                "code_path": "com.example.db.DatabaseConnection.connect(DatabaseConnection.java:52)"
+            },
+            {
+                "language": "Java",
+                "class_path": "com.example.user.UserService",
+                "method": "register",
+                "file": "UserService.java",
+                "line_number": "31",
+                "failure_point": "com.example.user.UserService.register()",
+                "code_path": "com.example.user.UserService.register(UserService.java:31)"
+            }
+        ]
+    },
+    "similar_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "When starting Mozilla Xlib connection to 0 0 refused by server Xlib Client is not authorized to connect to Server Error Can t open display 0 0 All other programs can open from the local machine and user even when access control is on xhost solved the problem Version Night buil 980924 mozilla sparc sun solaris2 6 tar gz Machine Sun Sun Microsystems Ultra 1 Main Memory 92 MB and 200MB swap Kernel Version SunOS Release 5 6 Version Generic_105181 06 UNIX R System V Release 4 0 That is the way xhost",
+            "severity": "minor",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 42.49,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "When you type in a user s e mail address it should check syntax for a valid address There should also be ways of typing a substring or a regexp in for the address The database is being reorganized a bit Instead of the Bugzilla product a new Webtools product has been created with Bugzilla being a component of it This bug is being moved from the old Bugzilla product to the new Webtools product terry this can be marked fixed now yes You have put this in now And it works great Yes I think this is es",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 41.21,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Chris Hodson cmh fpk hp com on Friday May 15 1998 7 23 06 AM PDT Additional Details We have a proxy that requires a username and password At startup I get the 2 warnings saying unable to locate rdf netscape com and warning the following hosts are unknown blah blah perhaps there is a problem with your name server As soon as I go to the first site through the proxy server it asks for my name and password and everything is ok Looks like its not doing the checks in the right order This bu",
+            "severity": "trivial",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 40.36,
+            "rank": 3
+        },
+        {
+            "bug_id": 4,
+            "id": 4,
+            "title": "Historical Bug",
+            "description": "Created by Kazushi Marukawa jam pobox com on Friday July 31 1998 3 25 14 PM PDT Additional Details Netscape and Mozilla hasn t work correctly with a http user passwd hostname path style URI after the Netscape 4 05 I m not sure whether this URI is right or not But few months ago we can use it Is it a BUG or right behavior This I believe is a duplicate of non bugzilla bug Reassiging to Judson who had fixed that The actual format is http username password server com Marking Verified Invalid",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 39.81,
+            "rank": 4
+        },
+        {
+            "bug_id": 5,
+            "id": 5,
+            "title": "Historical Bug",
+            "description": "Created by mcafee netscape com on Monday June 29 1998 1 30 36 AM PDT Additional Details This bug is to track the configdir patch so we don t forget to check it in This bug has been marked as a duplicate of 531 Marking Verified Duplicate",
+            "severity": "major",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 39.25,
+            "rank": 5
+        }
+    ],
+    "similar_historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "When starting Mozilla Xlib connection to 0 0 refused by server Xlib Client is not authorized to connect to Server Error Can t open display 0 0 All other programs can open from the local machine and user even when access control is on xhost solved the problem Version Night buil 980924 mozilla sparc sun solaris2 6 tar gz Machine Sun Sun Microsystems Ultra 1 Main Memory 92 MB and 200MB swap Kernel Version SunOS Release 5 6 Version Generic_105181 06 UNIX R System V Release 4 0 That is the way xhost",
+            "severity": "minor",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 42.49,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "When you type in a user s e mail address it should check syntax for a valid address There should also be ways of typing a substring or a regexp in for the address The database is being reorganized a bit Instead of the Bugzilla product a new Webtools product has been created with Bugzilla being a component of it This bug is being moved from the old Bugzilla product to the new Webtools product terry this can be marked fixed now yes You have put this in now And it works great Yes I think this is es",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 41.21,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Chris Hodson cmh fpk hp com on Friday May 15 1998 7 23 06 AM PDT Additional Details We have a proxy that requires a username and password At startup I get the 2 warnings saying unable to locate rdf netscape com and warning the following hosts are unknown blah blah perhaps there is a problem with your name server As soon as I go to the first site through the proxy server it asks for my name and password and everything is ok Looks like its not doing the checks in the right order This bu",
+            "severity": "trivial",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 40.36,
+            "rank": 3
+        }
+    ],
+    "historical_bugs": [
+        {
+            "bug_id": 1,
+            "id": 1,
+            "title": "Historical Bug",
+            "description": "When starting Mozilla Xlib connection to 0 0 refused by server Xlib Client is not authorized to connect to Server Error Can t open display 0 0 All other programs can open from the local machine and user even when access control is on xhost solved the problem Version Night buil 980924 mozilla sparc sun solaris2 6 tar gz Machine Sun Sun Microsystems Ultra 1 Main Memory 92 MB and 200MB swap Kernel Version SunOS Release 5 6 Version Generic_105181 06 UNIX R System V Release 4 0 That is the way xhost",
+            "severity": "minor",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 42.49,
+            "rank": 1
+        },
+        {
+            "bug_id": 2,
+            "id": 2,
+            "title": "Historical Bug",
+            "description": "When you type in a user s e mail address it should check syntax for a valid address There should also be ways of typing a substring or a regexp in for the address The database is being reorganized a bit Instead of the Bugzilla product a new Webtools product has been created with Bugzilla being a component of it This bug is being moved from the old Bugzilla product to the new Webtools product terry this can be marked fixed now yes You have put this in now And it works great Yes I think this is es",
+            "severity": "normal",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 41.21,
+            "rank": 2
+        },
+        {
+            "bug_id": 3,
+            "id": 3,
+            "title": "Historical Bug",
+            "description": "Created by Chris Hodson cmh fpk hp com on Friday May 15 1998 7 23 06 AM PDT Additional Details We have a proxy that requires a username and password At startup I get the 2 warnings saying unable to locate rdf netscape com and warning the following hosts are unknown blah blah perhaps there is a problem with your name server As soon as I go to the first site through the proxy server it asks for my name and password and everything is ok Looks like its not doing the checks in the right order This bu",
+            "severity": "trivial",
+            "component": "Unknown",
+            "root_cause": "",
+            "resolution": "",
+            "similarity": 40.36,
+            "rank": 3
+        }
+    ],
+    "duplicate_detection": [],
+    "duplicates": [],
+    "root_cause_analysis": {
+        "root_cause": "The application likely received an invalid or missing database result.",
+        "confidence": 85,
+        "evidence": [
+            "Detected component: Database.",
+            "Log analysis identified SQLException.",
+            "Historical bug similarity was considered during the diagnosis."
+        ]
+    },
+    "root_cause": {
+        "root_cause": "The application likely received an invalid or missing database result.",
+        "confidence": 85,
+        "evidence": [
+            "Detected component: Database.",
+            "Log analysis identified SQLException.",
+            "Historical bug similarity was considered during the diagnosis."
+        ]
+    },
+    "remediation": {
+        "summary": "The application likely received an invalid or missing database result.",
+        "recommended_steps": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing user credentials safely.",
+            "Add regression tests for invalid login attempts.",
+            "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes.",
+            "Investigate the java.lang.NullPointerException at User.getUsername(). Review application logs and reproduce the issue. Address the identified root cause: An object is null before a method or property is accessed. Apply the fix and verify the original scenario."
+        ],
+        "steps": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing user credentials safely.",
+            "Add regression tests for invalid login attempts.",
+            "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes.",
+            "Investigate the java.lang.NullPointerException at User.getUsername(). Review application logs and reproduce the issue. Address the identified root cause: An object is null before a method or property is accessed. Apply the fix and verify the original scenario."
+        ],
+        "testing": [
+            "Run functional testing for the affected feature.",
+            "Run regression testing for related functionality.",
+            "Run integration testing where applicable."
+        ],
+        "prevention": [
+            "Add regression tests for the confirmed defect.",
+            "Improve input validation and exception handling.",
+            "Monitor the affected component after deployment."
+        ],
+        "confidence": 70,
+        "component": "Authentication",
+        "priority": "P1",
+        "historical_similarity": 46.62,
+        "evidence": [
+            {
+                "similarity": 46.62,
+                "resolution": "The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            },
+            {
+                "similarity": 45.43,
+                "resolution": "Investigate the java.lang.NullPointerException at User.getUsername(). Review application logs and reproduce the issue. Address the identified root cause: An object is null before a method or property is accessed. Apply the fix and verify the original scenario."
+            },
+            {
+                "similarity": 45.36,
+                "resolution": "Validate username and password before authentication. Handle invalid or missing user credentials safely. Add regression tests for invalid login attempts. The issue should be resolved by addressing the identified root cause, reviewing historical resolutions, and following software engineering best practices. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes. Validate all user inputs before processing. Add null and exception handling where required. Apply the necessary code fixes and verify the changes."
+            }
+        ]
+    },
+    "fix_advisor": {
+        "category": "Authentication",
+        "priority": "P1",
+        "severity": "Critical",
+        "root_cause": "The application likely received an invalid or missing database result.",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "ai_smart_fix": {
+        "category": "Authentication",
+        "priority": "P1",
+        "severity": "Critical",
+        "root_cause": "The application likely received an invalid or missing database result.",
+        "impact": "The affected feature may produce unexpected application behavior.",
+        "recommended_fix": [
+            "Validate username and password before authentication.",
+            "Handle invalid or missing users safely.",
+            "Review session and authorization handling.",
+            "Add regression tests for invalid login attempts."
+        ],
+        "testing": [
+            "Functional testing.",
+            "Regression testing.",
+            "Integration testing."
+        ],
+        "prevention": [
+            "Improve validation.",
+            "Improve logging.",
+            "Automate regression tests."
+        ]
+    },
+    "resolved": false
+}

@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Intelligent Bug Diagnosis Platform- Analytics</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #071426;
+            --bg2: #0b1b31;
+            --card: #0d2038;
+            --card2: #102943;
+            --border: #294666;
+            --primary: #2f80ff;
+            --cyan: #39d9ff;
+            --text: #f5f9ff;
+            --muted: #9db2ca;
+            --green: #28d17c;
+            --yellow: #f5c451;
+            --red: #ff6678;
+            --purple: #9b7cff;
+        }
+
+        body {
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(47, 128, 255, 0.16),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(57, 217, 255, 0.10),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #061120,
+                    #08182b 50%,
+                    #061120
+                );
+
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 42px;
+
+            background:
+                rgba(7, 20, 38, 0.94);
+
+            backdrop-filter: blur(14px);
+
+            border-bottom:
+                1px solid rgba(77, 135, 190, 0.22);
+
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            font-size: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #38bdf8
+                );
+
+            box-shadow:
+                0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .brand-title {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-subtitle {
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 10px 17px;
+
+            border-radius: 10px;
+
+            color: white;
+
+            background:
+                rgba(47, 128, 255, 0.14);
+
+            border:
+                1px solid rgba(83, 154, 255, 0.25);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background:
+                rgba(47, 128, 255, 0.25);
+
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: min(1380px, 94%);
+            margin: 35px auto 60px;
+        }
+
+        .page-heading {
+            margin-bottom: 28px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 13px;
+
+            border-radius: 999px;
+
+            color: #57e0ff;
+
+            background:
+                rgba(57, 217, 255, 0.08);
+
+            border:
+                1px solid rgba(57, 217, 255, 0.2);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+
+            margin-bottom: 13px;
+        }
+
+        .page-heading h1 {
+            font-size: clamp(28px, 4vw, 42px);
+
+            line-height: 1.15;
+
+            margin-bottom: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #53d8ff
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .page-heading p {
+            max-width: 850px;
+
+            color: var(--muted);
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 17px;
+
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 21px;
+
+            min-height: 145px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16, 41, 67, 0.96),
+                    rgba(9, 28, 49, 0.96)
+                );
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.18);
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+
+            border-color:
+                rgba(64, 154, 255, 0.6);
+        }
+
+        .stat-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 90px;
+            height: 90px;
+
+            right: -35px;
+            top: -35px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(47, 128, 255, 0.08);
+        }
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+        }
+
+        .stat-number {
+            margin-top: 11px;
+
+            font-size: 32px;
+
+            font-weight: 850;
+
+            letter-spacing: -1px;
+        }
+
+        .stat-description {
+            margin-top: 7px;
+
+            color: #728aa6;
+
+            font-size: 11px;
+        }
+
+        /* =========================
+           SECTION CARD
+        ========================= */
+
+        .section {
+            margin-bottom: 22px;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(13, 32, 56, 0.98),
+                    rgba(8, 25, 44, 0.98)
+                );
+
+            border:
+                1px solid var(--border);
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.16);
+        }
+
+        .section-header {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+
+            padding-bottom: 17px;
+
+            margin-bottom: 18px;
+
+            border-bottom:
+                1px solid rgba(93, 132, 166, 0.18);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .section-title-icon {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background:
+                rgba(47, 128, 255, 0.12);
+
+            border:
+                1px solid rgba(47, 128, 255, 0.22);
+        }
+
+        .section-badge {
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            color: #71dcff;
+
+            background:
+                rgba(57, 217, 255, 0.08);
+
+            border:
+                1px solid rgba(57, 217, 255, 0.16);
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           CHART GRID
+        ========================= */
+
+        .charts-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .chart-card {
+            min-width: 0;
+
+            padding: 20px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(8, 25, 44, 0.78);
+
+            border:
+                1px solid rgba(74, 111, 145, 0.3);
+        }
+
+        .chart-card h3 {
+            margin-bottom: 15px;
+
+            font-size: 14px;
+            font-weight: 750;
+        }
+
+        .chart-wrapper {
+            position: relative;
+
+            height: 280px;
+        }
+
+        .chart-empty {
+            height: 280px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #6f87a2;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           TABLES
+        ========================= */
+
+        .tables-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+        }
+
+        .table-card {
+            min-width: 0;
+
+            overflow: hidden;
+
+            border-radius: 14px;
+
+            background:
+                rgba(8, 25, 44, 0.78);
+
+            border:
+                1px solid rgba(74, 111, 145, 0.3);
+        }
+
+        .table-title {
+            padding: 17px 18px;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            border-bottom:
+                1px solid rgba(74, 111, 145, 0.25);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 12px 15px;
+
+            text-align: left;
+
+            color: #8fa8c2;
+
+            background:
+                rgba(20, 47, 75, 0.55);
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.4px;
+        }
+
+        td {
+            padding: 12px 15px;
+
+            border-top:
+                1px solid rgba(74, 111, 145, 0.14);
+
+            color: #dce8f5;
+
+            font-size: 12px;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background:
+                rgba(47, 128, 255, 0.045);
+        }
+
+        .count-badge {
+            display: inline-flex;
+
+            min-width: 31px;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            color: #76ddff;
+
+            background:
+                rgba(57, 217, 255, 0.08);
+
+            border:
+                1px solid rgba(57, 217, 255, 0.18);
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+        .severity-critical {
+            color: #ff6678;
+            font-weight: 800;
+        }
+
+        .severity-high {
+            color: #ff9a57;
+            font-weight: 800;
+        }
+
+        .severity-medium {
+            color: #f5c451;
+            font-weight: 800;
+        }
+
+        .severity-low {
+            color: #43dc8c;
+            font-weight: 800;
+        }
+
+        .empty-table {
+            padding: 22px;
+
+            text-align: center;
+
+            color: #7188a1;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           INSIGHT
+        ========================= */
+
+        .insight-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .insight {
+            padding: 17px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(12, 34, 58, 0.72);
+
+            border:
+                1px solid rgba(74, 111, 145, 0.3);
+        }
+
+        .insight-icon {
+            font-size: 22px;
+
+            margin-bottom: 9px;
+        }
+
+        .insight h3 {
+            margin-bottom: 6px;
+
+            font-size: 13px;
+        }
+
+        .insight p {
+            color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            padding: 30px 10px 15px;
+
+            text-align: center;
+
+            color: #647d98;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1050px) {
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .charts-grid,
+            .tables-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .header {
+                padding: 15px 18px;
+
+                align-items: flex-start;
+
+                gap: 12px;
+
+                flex-direction: column;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .header-btn {
+                flex: 1;
+
+                justify-content: center;
+            }
+
+            .container {
+                width: 92%;
+
+                margin-top: 24px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .page-heading h1 {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🤖
+            </div>
+
+            <div>
+                <div class="brand-title">
+                    Intelligent Bug Diagnosis Platform
+                </div>
+
+                <div class="brand-subtitle">
+                    Creation of Intelligent Bug Diagnosis Platform
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <a
+                href="/"
+                class="header-btn"
+            >
+                🏠 New Analysis
+            </a>
+
+            <a
+                href="/analytics"
+                class="header-btn"
+            >
+                📊 Analytics
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+        <section class="page-heading">
+
+            <div class="eyebrow">
+                ● AI DEFECT ANALYTICS
+            </div>
+
+            <h1>
+                Defect Pattern Analytics
+            </h1>
+
+            <p>
+                Analyze software defects across severity,
+                affected components, exception types,
+                root-cause patterns and historical bug
+                knowledge.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             STATISTICS
+        ========================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Total Bugs
+                </div>
+
+                <div class="stat-number">
+                    {{ dashboard.total_bugs|default(0) }}
+                </div>
+
+                <div class="stat-description">
+                    Total analyzed submissions
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Average AI Confidence
+                </div>
+
+                <div class="stat-number">
+                    {{ dashboard.average_confidence|default(0) }}%
+                </div>
+
+                <div class="stat-description">
+                    Average triage confidence
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Bugs With Matches
+                </div>
+
+                <div class="stat-number">
+                    {{ dashboard.duplicate_bugs|default(dashboard.bugs_with_matches|default(0)) }}
+                </div>
+
+                <div class="stat-description">
+                    Submissions with historical matches
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Average Matches
+                </div>
+
+                <div class="stat-number">
+                    {{ dashboard.average_duplicate_matches|default(dashboard.average_matches|default(0)) }}
+                </div>
+
+                <div class="stat-description">
+                    Historical matches per analyzed bug
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             CHARTS
+        ========================= -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div class="section-title">
+
+                    <div class="section-title-icon">
+                        📊
+                    </div>
+
+                    Analytics Overview
+
+                </div>
+
+                <div class="section-badge">
+                    MILESTONE 4
+                </div>
+
+            </div>
+
+
+            <div class="charts-grid">
+
+
+                <!-- Severity -->
+
+                <div class="chart-card">
+
+                    <h3>
+                        Severity Distribution
+                    </h3>
+
+                    {% if dashboard.severity|default({}) %}
+
+                    <div class="chart-wrapper">
+                        <canvas id="severityChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="chart-empty">
+                        No severity data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Components -->
+
+                <div class="chart-card">
+
+                    <h3>
+                        Affected Components
+                    </h3>
+
+                    {% if dashboard.components|default({}) %}
+
+                    <div class="chart-wrapper">
+                        <canvas id="componentChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="chart-empty">
+                        No component data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Exceptions -->
+
+                <div class="chart-card">
+
+                    <h3>
+                        Exception Types
+                    </h3>
+
+                    {% if dashboard.exceptions|default({}) %}
+
+                    <div class="chart-wrapper">
+                        <canvas id="exceptionChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="chart-empty">
+                        No exception data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Root Cause -->
+
+                <div class="chart-card">
+
+                    <h3>
+                        Root Cause Patterns
+                    </h3>
+
+                    {% if dashboard.root_causes|default({}) %}
+
+                    <div class="chart-wrapper">
+                        <canvas id="rootCauseChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="chart-empty">
+                        No root-cause data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TABLES
+        ========================= -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div class="section-title">
+
+                    <div class="section-title-icon">
+                        📋
+                    </div>
+
+                    Defect Intelligence Summary
+
+                </div>
+
+            </div>
+
+
+            <div class="tables-grid">
+
+
+                <!-- Severity Table -->
+
+                <div class="table-card">
+
+                    <div class="table-title">
+                        Severity Summary
+                    </div>
+
+                    {% if dashboard.severity|default({}) %}
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Severity</th>
+                                    <th>Number of Bugs</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for severity, count in dashboard.severity.items() %}
+
+                                <tr>
+
+                                    <td>
+
+                                        {% if severity == "Critical" %}
+
+                                        <span class="severity-critical">
+                                            {{ severity }}
+                                        </span>
+
+                                        {% elif severity == "High" %}
+
+                                        <span class="severity-high">
+                                            {{ severity }}
+                                        </span>
+
+                                        {% elif severity == "Medium" %}
+
+                                        <span class="severity-medium">
+                                            {{ severity }}
+                                        </span>
+
+                                        {% elif severity == "Low" %}
+
+                                        <span class="severity-low">
+                                            {{ severity }}
+                                        </span>
+
+                                        {% else %}
+
+                                        {{ severity }}
+
+                                        {% endif %}
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="count-badge">
+                                            {{ count }}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-table">
+                        No severity data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Components Table -->
+
+                <div class="table-card">
+
+                    <div class="table-title">
+                        Affected Components
+                    </div>
+
+                    {% if dashboard.components|default({}) %}
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Bugs</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for component, count in dashboard.components.items() %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ component }}
+                                    </td>
+
+                                    <td>
+
+                                        <span class="count-badge">
+                                            {{ count }}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-table">
+                        No component data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Exception Table -->
+
+                <div class="table-card">
+
+                    <div class="table-title">
+                        Detected Exceptions
+                    </div>
+
+                    {% if dashboard.exceptions|default({}) %}
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Exception Type</th>
+                                    <th>Occurrences</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for exception, count in dashboard.exceptions.items() %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ exception }}
+                                    </td>
+
+                                    <td>
+
+                                        <span class="count-badge">
+                                            {{ count }}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-table">
+                        No exception data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Root Cause Table -->
+
+                <div class="table-card">
+
+                    <div class="table-title">
+                        Root Cause Patterns
+                    </div>
+
+                    {% if dashboard.root_causes|default({}) %}
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Root Cause</th>
+                                    <th>Occurrences</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for cause, count in dashboard.root_causes.items() %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ cause }}
+                                    </td>
+
+                                    <td>
+
+                                        <span class="count-badge">
+                                            {{ count }}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-table">
+                        No root-cause data available.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             AI INSIGHTS
+        ========================= -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div class="section-title">
+
+                    <div class="section-title-icon">
+                        🧠
+                    </div>
+
+                    AI Analysis Capabilities
+
+                </div>
+
+            </div>
+
+
+            <div class="insight-grid">
+
+
+                <div class="insight">
+
+                    <div class="insight-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        Intelligent Triage
+                    </h3>
+
+                    <p>
+                        Classifies defects by severity,
+                        priority and affected component
+                        using AI-based reasoning.
+                    </p>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <div class="insight-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Historical Similarity
+                    </h3>
+
+                    <p>
+                        Searches historical defect knowledge
+                        to identify similar previously reported
+                        software issues.
+                    </p>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <div class="insight-icon">
+                        🛠️
+                    </div>
+
+                    <h3>
+                        Root Cause & Remediation
+                    </h3>
+
+                    <p>
+                        Uses defect evidence and log analysis
+                        to recommend practical fixes and
+                        preventive actions.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <div>
+            Creation of Intelligent Bug Diagnosis Platform
+            with Fix Recommendation Assistance — Group 2
+        </div>
+
+        <div>
+            Milestone 4 • Defect Pattern Analytics
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         HIDDEN ANALYTICS DATA
+
+         IMPORTANT:
+         Jinja is used only in HTML attributes.
+         No Jinja expressions are placed inside CSS.
+    ====================================================== -->
+
+    <div
+        id="analyticsData"
+        data-severity='{{ dashboard.severity|default({})|tojson|safe }}'
+        data-components='{{ dashboard.components|default({})|tojson|safe }}'
+        data-exceptions='{{ dashboard.exceptions|default({})|tojson|safe }}'
+        data-root-causes='{{ dashboard.root_causes|default({})|tojson|safe }}'
+        hidden>
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const element =
+                    document.getElementById(
+                        "analyticsData"
+                    );
+
+                if (!element) {
+                    return;
+                }
+
+
+                function parseData(attribute) {
+
+                    try {
+
+                        const value =
+                            element.getAttribute(
+                                attribute
+                            );
+
+                        if (!value) {
+                            return {};
+                        }
+
+                        return JSON.parse(value);
+
+                    } catch (error) {
+
+                        console.error(
+                            "Analytics data error:",
+                            attribute,
+                            error
+                        );
+
+                        return {};
+                    }
+                }
+
+
+                const severityData =
+                    parseData("data-severity");
+
+
+                const componentData =
+                    parseData("data-components");
+
+
+                const exceptionData =
+                    parseData("data-exceptions");
+
+
+                const rootCauseData =
+                    parseData("data-root-causes");
+
+
+                /* =========================
+                   CHART COLORS
+                ========================= */
+
+                const chartColors = [
+                    "#2f80ff",
+                    "#39d9ff",
+                    "#9b7cff",
+                    "#28d17c",
+                    "#f5c451",
+                    "#ff6678",
+                    "#ff9a57",
+                    "#7c9cff"
+                ];
+
+
+                /* =========================
+                   COMMON OPTIONS
+                ========================= */
+
+                const commonOptions = {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    animation: {
+                        duration: 700
+                    },
+
+                    plugins: {
+
+                        legend: {
+                            position: "bottom",
+
+                            labels: {
+                                color: "#a9bfd5",
+
+                                padding: 16,
+
+                                usePointStyle: true,
+
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    }
+                };
+
+
+                /* =========================
+                   SEVERITY CHART
+                ========================= */
+
+                const severityCanvas =
+                    document.getElementById(
+                        "severityChart"
+                    );
+
+
+                if (
+                    severityCanvas &&
+                    Object.keys(severityData).length > 0
+                ) {
+
+                    new Chart(
+                        severityCanvas,
+                        {
+
+                            type: "doughnut",
+
+                            data: {
+
+                                labels:
+                                    Object.keys(
+                                        severityData
+                                    ),
+
+                                datasets: [
+
+                                    {
+                                        data:
+                                            Object.values(
+                                                severityData
+                                            ),
+
+                                        backgroundColor:
+                                            chartColors,
+
+                                        borderColor:
+                                            "#0d2038",
+
+                                        borderWidth: 3
+                                    }
+
+                                ]
+                            },
+
+                            options: {
+
+                                ...commonOptions,
+
+                                cutout: "67%",
+
+                                plugins: {
+
+                                    ...commonOptions.plugins,
+
+                                    legend: {
+                                        ...commonOptions.plugins.legend
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
+
+
+                /* =========================
+                   COMPONENT CHART
+                ========================= */
+
+                const componentCanvas =
+                    document.getElementById(
+                        "componentChart"
+                    );
+
+
+                if (
+                    componentCanvas &&
+                    Object.keys(componentData).length > 0
+                ) {
+
+                    new Chart(
+                        componentCanvas,
+                        {
+
+                            type: "bar",
+
+                            data: {
+
+                                labels:
+                                    Object.keys(
+                                        componentData
+                                    ),
+
+                                datasets: [
+
+                                    {
+                                        label:
+                                            "Number of Bugs",
+
+                                        data:
+                                            Object.values(
+                                                componentData
+                                            ),
+
+                                        backgroundColor:
+                                            "#2f80ff",
+
+                                        borderRadius: 7,
+
+                                        borderSkipped: false
+                                    }
+
+                                ]
+                            },
+
+                            options: {
+
+                                ...commonOptions,
+
+                                scales: {
+
+                                    x: {
+
+                                        ticks: {
+                                            color:
+                                                "#8fa8c2"
+                                        },
+
+                                        grid: {
+                                            color:
+                                                "rgba(120,160,200,0.08)"
+                                        }
+                                    },
+
+                                    y: {
+
+                                        beginAtZero: true,
+
+                                        ticks: {
+                                            color:
+                                                "#8fa8c2",
+
+                                            precision: 0
+                                        },
+
+                                        grid: {
+                                            color:
+                                                "rgba(120,160,200,0.08)"
+                                        }
+                                    }
+                                },
+
+                                plugins: {
+
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
+
+
+                /* =========================
+                   EXCEPTION CHART
+                ========================= */
+
+                const exceptionCanvas =
+                    document.getElementById(
+                        "exceptionChart"
+                    );
+
+
+                if (
+                    exceptionCanvas &&
+                    Object.keys(exceptionData).length > 0
+                ) {
+
+                    new Chart(
+                        exceptionCanvas,
+                        {
+
+                            type: "bar",
+
+                            data: {
+
+                                labels:
+                                    Object.keys(
+                                        exceptionData
+                                    ),
+
+                                datasets: [
+
+                                    {
+                                        label:
+                                            "Occurrences",
+
+                                        data:
+                                            Object.values(
+                                                exceptionData
+                                            ),
+
+                                        backgroundColor:
+                                            "#9b7cff",
+
+                                        borderRadius: 7,
+
+                                        borderSkipped: false
+                                    }
+
+                                ]
+                            },
+
+                            options: {
+
+                                ...commonOptions,
+
+                                indexAxis: "y",
+
+                                scales: {
+
+                                    x: {
+
+                                        beginAtZero: true,
+
+                                        ticks: {
+                                            color:
+                                                "#8fa8c2",
+
+                                            precision: 0
+                                        },
+
+                                        grid: {
+                                            color:
+                                                "rgba(120,160,200,0.08)"
+                                        }
+                                    },
+
+                                    y: {
+
+                                        ticks: {
+                                            color:
+                                                "#8fa8c2"
+                                        },
+
+                                        grid: {
+                                            display: false
+                                        }
+                                    }
+                                },
+
+                                plugins: {
+
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
+
+
+                /* =========================
+                   ROOT CAUSE CHART
+                ========================= */
+
+                const rootCauseCanvas =
+                    document.getElementById(
+                        "rootCauseChart"
+                    );
+
+
+                if (
+                    rootCauseCanvas &&
+                    Object.keys(rootCauseData).length > 0
+                ) {
+
+                    new Chart(
+                        rootCauseCanvas,
+                        {
+
+                            type: "bar",
+
+                            data: {
+
+                                labels:
+                                    Object.keys(
+                                        rootCauseData
+                                    ),
+
+                                datasets: [
+
+                                    {
+                                        label:
+                                            "Occurrences",
+
+                                        data:
+                                            Object.values(
+                                                rootCauseData
+                                            ),
+
+                                        backgroundColor:
+                                            "#28d17c",
+
+                                        borderRadius: 7,
+
+                                        borderSkipped: false
+                                    }
+
+                                ]
+                            },
+
+                            options: {
+
+                                ...commonOptions,
+
+                                indexAxis: "y",
+
+                                scales: {
+
+                                    x: {
+
+                                        beginAtZero: true,
+
+                                        ticks: {
+                                            color:
+                                                "#8fa8c2",
+
+                                            precision: 0
+                                        },
+
+                                        grid: {
+                                            color:
+                                                "rgba(120,160,200,0.08)"
+                                        }
+                                    },
+
+                                    y: {
+
+                                        ticks: {
+                                            color:
+                                                "#8fa8c2"
+                                        },
+
+                                        grid: {
+                                            display: false
+                                        }
+                                    }
+                                },
+
+                                plugins: {
+
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
+
+            }
+
+        );
+
+    </script>
+
+</body>
+
+</html>
