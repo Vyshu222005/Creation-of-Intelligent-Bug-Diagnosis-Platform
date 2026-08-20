@@ -7,26 +7,6 @@ import re
 import time
 
 try:
-    import numpy as np
-except Exception:
-    np = None
-
-try:
-    import pandas as pd
-except Exception:
-    pd = None
-
-try:
-    import faiss
-except Exception:
-    faiss = None
-
-try:
-    from sentence_transformers import SentenceTransformer
-except Exception:
-    SentenceTransformer = None
-
-try:
     from utils.triage_agent import triage_bug
 except Exception:
     triage_bug = None
@@ -45,6 +25,8 @@ try:
     from utils.remediation_agent import generate_remediation
 except Exception:
     generate_remediation = None
+
+
 
 # ============================================================
 # APPLICATION
@@ -1398,71 +1380,74 @@ def generate_fix_advisor(
     }
 
 
+
+
 # ============================================================
-# HISTORICAL DATA
+# LIGHTWEIGHT HISTORICAL BUG SEARCH
 # ============================================================
 
-embedding_model = None
-mozilla_data = None
-mozilla_index = None
+def tokenize_text(text):
+    """
+    Convert text into simple lowercase keywords.
+    No ML model or FAISS required.
+    """
+    text = clean_text(text).lower()
+
+    words = re.findall(
+        r"\b[a-zA-Z][a-zA-Z0-9_]{2,}\b",
+        text
+    )
+
+    stop_words = {
+        "the", "and", "for", "with", "this",
+        "that", "from", "into", "when", "then",
+        "have", "has", "was", "were", "are",
+        "not", "but", "you", "your", "our",
+        "error", "failed", "failure", "issue",
+        "bug", "application"
+    }
+
+    return set(
+        word
+        for word in words
+        if word not in stop_words
+    )
 
 
-def load_ml_resources():
+def calculate_text_similarity(query, historical_text):
+    """
+    Lightweight keyword-based similarity.
 
-    global embedding_model
-    global mozilla_data
-    global mozilla_index
+    Returns a percentage between 0 and 100.
+    """
 
-    if (
-        SentenceTransformer is not None
-        and embedding_model is None
-    ):
+    query_words = tokenize_text(query)
+    historical_words = tokenize_text(historical_text)
 
-        try:
-            embedding_model = SentenceTransformer(
-                "all-MiniLM-L6-v2"
-            )
+    if not query_words or not historical_words:
+        return 0.0
 
-        except Exception as exc:
-            print(
-                "Sentence Transformer unavailable:",
-                exc
-            )
+    intersection = query_words.intersection(
+        historical_words
+    )
 
-    if (
-        pd is not None
-        and mozilla_data is None
-        and os.path.isfile(MOZILLA_CSV)
-    ):
+    # Jaccard-style similarity
+    union = query_words.union(
+        historical_words
+    )
 
-        try:
-            mozilla_data = pd.read_csv(
-                MOZILLA_CSV
-            )
+    if not union:
+        return 0.0
 
-        except Exception as exc:
-            print(
-                "Mozilla dataset unavailable:",
-                exc
-            )
+    similarity = (
+        len(intersection)
+        / len(union)
+    ) * 100
 
-    if (
-        faiss is not None
-        and mozilla_index is None
-        and os.path.isfile(MOZILLA_INDEX)
-    ):
-
-        try:
-            mozilla_index = faiss.read_index(
-                MOZILLA_INDEX
-            )
-
-        except Exception as exc:
-            print(
-                "Mozilla FAISS index unavailable:",
-                exc
-            )
-
+    return round(
+        similarity,
+        2
+    )
 
 
 def prepare_historical_bugs(
@@ -1544,9 +1529,11 @@ def prepare_historical_bugs(
                 similarity *= 100
 
         except Exception:
+
             similarity = 0
 
         results.append({
+
             "bug_id":
                 bug_id
                 or len(results) + 1,
@@ -1607,8 +1594,20 @@ def prepare_historical_bugs(
                 )
         })
 
-        if len(results) >= limit:
-            break
+    # Highest similarity first
+    results.sort(
+        key=lambda item:
+            float(
+                item.get(
+                    "similarity",
+                    0
+                )
+                or 0
+            ),
+        reverse=True
+    )
+
+    results = results[:limit]
 
     for rank, item in enumerate(
         results,
@@ -1623,128 +1622,89 @@ def search_historical_bugs(
     query,
     top_k=5
 ):
+    """
+    Lightweight historical bug search.
 
-    load_ml_resources()
+    This version does NOT load:
+    - SentenceTransformer
+    - PyTorch
+    - FAISS
+    - pandas
 
-    if (
-        embedding_model is not None
-        and mozilla_index is not None
-        and mozilla_data is not None
-    ):
+    This significantly reduces Render RAM usage.
+    """
 
-        try:
+    bugs = load_verified_bugs()
 
-            vector = embedding_model.encode(
-                [query],
-                convert_to_numpy=True
-            ).astype("float32")
+    if not bugs:
+        return []
 
-            distances, indices = (
-                mozilla_index.search(
-                    vector,
-                    top_k
+    results = []
+
+    for bug in bugs:
+
+        if not isinstance(
+            bug,
+            dict
+        ):
+            continue
+
+        title = clean_text(
+            bug.get(
+                "bug_title",
+                bug.get(
+                    "title",
+                    ""
                 )
             )
+        )
 
-            results = []
-
-            for rank, idx in enumerate(
-                indices[0]
-            ):
-
-                if (
-                    idx < 0
-                    or idx >= len(mozilla_data)
-                ):
-                    continue
-
-                distance = float(
-                    distances[0][rank]
+        description = clean_text(
+            bug.get(
+                "bug_report",
+                bug.get(
+                    "description",
+                    ""
                 )
+            )
+        )
 
-                similarity = (
-                    1.0
-                    /
-                    (1.0 + max(distance, 0.0))
-                ) * 100
+        historical_text = (
+            title
+            + " "
+            + description
+        )
 
-                row = mozilla_data.iloc[
-                    int(idx)
-                ]
+        similarity = calculate_text_similarity(
+            query,
+            historical_text
+        )
 
-                description = clean_text(
-                    row.get(
-                        "Description",
-                        row.get(
-                            "description",
-                            ""
-                        )
-                    )
+        bug_copy = dict(bug)
+
+        bug_copy["similarity"] = similarity
+
+        results.append(
+            bug_copy
+        )
+
+    # Highest similarity first
+    results.sort(
+        key=lambda item:
+            float(
+                item.get(
+                    "similarity",
+                    0
                 )
-
-                results.append({
-                    "bug_id":
-                        row.get(
-                            "Bug ID",
-                            row.get(
-                                "id",
-                                rank + 1
-                            )
-                        ),
-
-                    "title":
-                        clean_text(
-                            row.get(
-                                "Summary",
-                                row.get(
-                                    "Title",
-                                    "Historical Bug"
-                                )
-                            )
-                        ),
-
-                    "description":
-                        description[:500],
-
-                    "severity":
-                        str(
-                            row.get(
-                                "Severity",
-                                "Unknown"
-                            )
-                        ),
-
-                    "component":
-                        clean_text(
-                            row.get(
-                                "Component",
-                                "Unknown"
-                            )
-                        ),
-
-                    "similarity":
-                        round(
-                            similarity,
-                            2
-                        )
-                })
-
-            return prepare_historical_bugs(
-                results,
-                limit=top_k
-            )
-
-        except Exception as exc:
-            print(
-                "Historical search error:",
-                exc
-            )
-
-    return prepare_historical_bugs(
-        load_verified_bugs(),
-        limit=top_k
+                or 0
+            ),
+        reverse=True
     )
 
+    return prepare_historical_bugs(
+        results[:top_k],
+        limit=top_k
+    )
 
 def detect_duplicates(
     similar_bugs
@@ -1814,63 +1774,21 @@ def detect_duplicates(
 # ============================================================
 
 def rebuild_knowledge_base_index():
+    """
+    Lightweight knowledge-base rebuild.
+
+    The application no longer creates a FAISS index
+    during deployment, avoiding high memory usage.
+    """
 
     bugs = load_verified_bugs()
 
-    if (
-        not bugs
-        or embedding_model is None
-        or faiss is None
-        or np is None
-    ):
+    if not bugs:
         return False
 
-    texts = []
-
-    for bug in bugs:
-
-        texts.append(
-            clean_text(
-                bug.get(
-                    "bug_title",
-                    ""
-                )
-            )
-            + " "
-            + clean_text(
-                bug.get(
-                    "bug_report",
-                    ""
-                )
-            )
-        )
-
-    try:
-
-        vectors = embedding_model.encode(
-            texts,
-            convert_to_numpy=True
-        ).astype("float32")
-
-        index = faiss.IndexFlatL2(
-            vectors.shape[1]
-        )
-
-        index.add(vectors)
-
-        faiss.write_index(
-            index,
-            VERIFIED_INDEX_FILE
-        )
-
-        return True
-
-    except Exception as exc:
-        print(
-            "Knowledge base rebuild error:",
-            exc
-        )
-        return False
+    # The verified bugs are already stored in JSON.
+    # No embedding model or FAISS index is required.
+    return True
 
 
 # ============================================================
@@ -3417,6 +3335,7 @@ def rebuild_knowledge_base():
 def health():
 
     return jsonify({
+
         "status":
             "running",
 
@@ -3429,18 +3348,15 @@ def health():
         "milestone":
             "Milestone 3",
 
-        "sentence_transformer":
-            embedding_model is not None,
-
-        "faiss":
-            faiss is not None,
+        "historical_search":
+            "lightweight",
 
         "knowledge_base":
             len(
                 load_verified_bugs()
             )
     })
-
+    
 
 # ============================================================
 # ERROR HANDLERS
