@@ -687,6 +687,7 @@ Specialization – Artificial Intelligence and Machine Learning
 
 This project was developed for academic and educational purposes.
 
-    https://github.com/Vyshu222005/Creation-of-Intelligent-Bug-Diagnosis-Platform
+    https:
+    //github.com/Vyshu222005/Creation-of-Intelligent-Bug-Diagnosis-Platform
 
 
