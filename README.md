@@ -1,6 +1,3 @@
-Absolutely. Here is a **professional, clean, GitHub-ready README**. You can **copy and paste the entire content directly into `README.md`**.
-
-````markdown
 # Intelligent Bug Diagnosis Platform
 
 ## AI-Powered Software Defect Analysis, Root Cause Detection and Remediation Platform
@@ -166,7 +163,6 @@ The system then:
 
 ### Knowledge Base Workflow
 
-```text
 Bug Submission
       |
       v
@@ -194,7 +190,6 @@ FAISS Index Rebuild
 Future Defect Retrieval
 ````
 
----
 
 ## Defect Pattern Analytics
 
@@ -218,7 +213,6 @@ The analytics module helps identify frequently affected components and recurring
 
 ## System Architecture
 
-```text
                     +----------------------+
                     |    Bug Submission    |
                     +----------+-----------+
@@ -318,7 +312,6 @@ The analytics module helps identify frequently affected components and recurring
 
 ## Project Structure
 
-```text
 Creation-of-Intelligent-Bug-Diagnosis-Platform/
 |
 +-- app.py
@@ -370,7 +363,7 @@ Make sure the following are installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR-GITHUB-REPOSITORY-URL>
+git clone <https://github.com/Vyshu222005/Creation-of-Intelligent-Bug-Diagnosis-Platform>
 ```
 
 Navigate to the project:
@@ -440,7 +433,6 @@ Open the URL in a web browser.
 Enter the:
 
 * Bug title
-* Bug description
 * Stack trace or error information
 
 ### Step 2 — Start Analysis
@@ -514,7 +506,6 @@ The platform was tested using five distinct bug submissions covering different d
 
 The testing process validates the complete pipeline:
 
-```text
 Bug Submission
       |
       v
