@@ -1464,8 +1464,6 @@ def load_ml_resources():
             )
 
 
-load_ml_resources()
-
 
 def prepare_historical_bugs(
     bugs,
